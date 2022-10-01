@@ -11,3 +11,7 @@ void Player::drawCard(ImmutableCard& card) {
 bool Player::hasNoCards() {
     return cards.empty();
 }
+
+Action Player::performAction() {
+    return {play(), act(), this};
+}

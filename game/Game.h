@@ -15,8 +15,13 @@ private:
     std::vector<Player*> players;
     std::queue<ImmutableCard*> pile;
     std::stack<Action> played;
+    std::vector<Action> temp_played;
 
     ImmutableCard& drawNewCard();
+    /**
+     * Move the temp actions to the played stack
+     */
+    void flushTempActions();
 
 public:
 

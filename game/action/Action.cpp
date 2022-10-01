@@ -5,10 +5,11 @@
 #include "Action.h"
 
 
-Action::Action(ImmutableCard& card_ptr, const Act act) : act(act) {
+Action::Action(ImmutableCard& card, const Act act, Player* player) : act(act) {
     if(act != DRAW_CARD){
-        this->card = &card_ptr;
+        this->card = &card;
     }
+    this->player = player;
 }
 
 ImmutableCard& Action::getCard() {
@@ -18,5 +19,14 @@ ImmutableCard& Action::getCard() {
 Act Action::getAct() {
     return act;
 }
+
+Player &Action::getPlayer() {
+    return *this->player;
+}
+
+
+
+
+
 
 

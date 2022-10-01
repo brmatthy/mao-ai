@@ -6,14 +6,11 @@
 #define MAO_AI_ACTION_H
 
 #include "../card/ImmutableCard.h"
+#include "../../player/Player.h"
+#include "Act.h"
 
-/**
- * All the possible acts
- */
-enum Act{
-    NONE,
-    DRAW_CARD
-};
+
+class Player;
 
 
 /**
@@ -26,12 +23,17 @@ private:
      */
     ImmutableCard* card;
     /**
-     * The act of the action.
+     * The action of the action.
      */
     Act act;
+    /**
+     * The player who did this action
+     */
+     Player* player;
 
 public:
-    Action(ImmutableCard& card_ptr, Act act);
+    Action(ImmutableCard& card, Act act, Player* player);
+    Action(ImmutableCard& card, Act act){}
 
     /**
      * Get a reference to the card
@@ -40,11 +42,16 @@ public:
     ImmutableCard& getCard();
 
     /**
-     * Get the act
-     * @return the act
+     * Get the action
+     * @return the action
      */
     Act getAct();
 
+    /**
+     * Get a reference to the player
+     * @return A reference to the player
+     */
+    Player& getPlayer();
 
 };
 

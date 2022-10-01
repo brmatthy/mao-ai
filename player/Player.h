@@ -7,14 +7,31 @@
 
 #include <vector>
 #include "../game/card/ImmutableCard.h"
-#include "../game/act/Action.h"
+#include "../game/action/Action.h"
+#include "../game/action/Act.h"
+
+class Action;
 
 /**
  * This is an abstract base class for any player.
  */
 class Player {
+private:
+    /**
+     * Let the player play a card
+     * @return A reference to the card
+     */
+    virtual ImmutableCard& play() = 0;
+
+    /**
+     * Let the player do an action after playing a card
+     * @return The action
+     */
+    virtual Act act() = 0;
+
 protected:
     std::vector<ImmutableCard*> cards;
+
 public:
     /**
      * Ask the player if he thinks it's his turn
@@ -28,23 +45,14 @@ public:
      */
     virtual bool wantsCard() = 0;
 
-    /**
-     * Let the player play a card
-     * @return A reference to the card
-     */
-    virtual ImmutableCard& play() = 0;
-
-    /**
-     * Let the player do an action after playing a card
-     * @return The action
-     */
-    virtual Act act() = 0;
 
     /**
      * Ask the player if he thinks the last played move was incorrect
      * @return `True` if the player wants to correct the last move, `false` otherwise
      */
-    virtual bool correctLastMove() = 0;
+    virtual bool correctLastMove(Action& action) = 0;
+
+    Action performAction();
 
     /**
      * Let the player draw a card. The card will be added to the player's card collection
