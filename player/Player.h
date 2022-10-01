@@ -13,7 +13,7 @@
  * This is an abstract base class for any player.
  */
 class Player {
-private:
+protected:
     std::vector<ImmutableCard> cards;
 public:
     /**
