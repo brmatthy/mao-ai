@@ -5,7 +5,9 @@
 #ifndef MAO_AI_CARDDETAIL_H
 #define MAO_AI_CARDDETAIL_H
 
-
+/**
+ * All possible card types
+ */
 enum CardType{
     HEARTS,
     CLOVERS,
@@ -13,9 +15,11 @@ enum CardType{
     SPADES
 };
 
-
 const char* CardTypeToString(CardType ct);
 
+/**
+ * All possible card numbers or figures
+ */
 enum CardNumber{
     ACE,
     TWO,

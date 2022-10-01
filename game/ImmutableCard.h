@@ -8,16 +8,39 @@
 #include "CardDetail.h"
 #include <iostream>
 
+/**
+ * This class represents an immutable card. Jokers not included.
+ */
 class ImmutableCard {
 private:
+    /**
+     * Representation of the type of the card
+     */
     const CardType m_type;
+
+    /**
+     * Representation of the number of the card
+     */
     const CardNumber m_number;
 
 public:
+    /**
+     * Constructor, creates the card
+     * @param mType The type of the card
+     * @param mNumber The number of the card
+     */
     ImmutableCard(CardType mType, CardNumber mNumber);
 
+    /**
+     * Return the type of the card
+     * @return The type of the card
+     */
     CardType getCardType();
 
+    /**
+     * Return the number of the card
+     * @return The number of the card
+     */
     CardNumber getCardNumber();
 
     friend std::ostream& operator<<(std::ostream& os, const ImmutableCard& ic);
