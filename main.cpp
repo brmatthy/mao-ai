@@ -5,7 +5,7 @@
 
 
 #include <iostream>
-#include "game/ImmutableCard.h"
+#include "game/card/ImmutableCard.h"
 
 int main(){
     ImmutableCard card = ImmutableCard(HEARTS, ACE);

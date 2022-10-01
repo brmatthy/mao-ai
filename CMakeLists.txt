@@ -4,4 +4,4 @@ project(mao_ai)
 set(CMAKE_CXX_STANDARD 14)
 
 add_executable(mao_ai
-        main.cpp game/ImmutableCard.cpp game/ImmutableCard.h game/CardDetail.cpp game/CardDetail.h)
+        main.cpp game/card/ImmutableCard.cpp game/card/ImmutableCard.h game/card/CardDetail.cpp game/card/CardDetail.h)
