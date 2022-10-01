@@ -11,4 +11,6 @@ add_executable(mao_ai
         player/Player.cpp
         player/Player.h
         game/act/Action.cpp
-        game/act/Action.h)
+        game/act/Action.h
+        game/Game.cpp
+        game/Game.h)
