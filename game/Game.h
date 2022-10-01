@@ -12,13 +12,18 @@
 
 class Game {
 private:
-    std::vector<Player> players;
-    std::queue<ImmutableCard> pile;
-    std::stack<ImmutableCard> played;
+    std::vector<Player*> players;
+    std::queue<ImmutableCard*> pile;
+    std::stack<Action> played;
 
-    ImmutableCard drawNewCard();
-    void playNewCard(ImmutableCard card);
+    ImmutableCard& drawNewCard();
+
 public:
+
+    /**
+     * Simulates one turn of the game
+     */
+    void step();
 
 
 
