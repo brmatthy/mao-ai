@@ -20,6 +20,7 @@ void Game::flushTempActions() {
 
 
 void Game::step() {
+/*
     for(Player* p : players){
         // ask each player if he wants to move
         if(p->myTurn()){
@@ -38,7 +39,7 @@ void Game::step() {
                 //TODO check if the move was indeed wrong and hand cards
             }
         }
-    }
+    }*/
 }
 
 

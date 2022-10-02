@@ -8,11 +8,12 @@
 #include <queue>
 #include <stack>
 #include "../player/Player.h"
+#include "../datastructures/circlelist/CircleList.h"
 
 
 class Game {
 private:
-    std::vector<Player*> players;
+    //CircleList<Player*> players;
     std::queue<ImmutableCard*> pile;
     std::stack<Action> played;
     std::vector<Action> temp_played;
@@ -31,8 +32,9 @@ public:
     void step();
 
 
-
 };
+
+
 
 
 #endif //MAO_AI_GAME_H

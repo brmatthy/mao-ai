@@ -14,4 +14,6 @@ add_executable(mao_ai
         player/Player.h
         game/Game.cpp
         game/Game.h
-        game/action/Act.h)
+        game/action/Act.h
+        datastructures/circlelist/CircleList.cpp
+        datastructures/circlelist/CircleList.h)

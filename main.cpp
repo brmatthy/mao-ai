@@ -5,9 +5,16 @@
 
 
 #include <iostream>
-#include "game/card/ImmutableCard.h"
+#include "datastructures/circlelist/CircleList.h"
 
 int main(){
-    ImmutableCard card = ImmutableCard(HEARTS, ACE);
-    std::cout << card;
+    CircleList<int> cijfers;
+    cijfers.push_back(0);
+    cijfers.push_back(1);
+    cijfers.push_back(2);
+    cijfers.push_back(3);
+    for(int c: cijfers){
+        std::cout << c << "\n ";
+    }
+    std::cout << cijfers.getRoot();
 }
