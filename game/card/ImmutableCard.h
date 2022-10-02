@@ -16,12 +16,12 @@ private:
     /**
      * Representation of the type of the card
      */
-    const CardType m_type;
+    const CardType type;
 
     /**
      * Representation of the number of the card
      */
-    const CardNumber m_number;
+    const CardNumber number;
 
 public:
     /**

@@ -5,5 +5,13 @@
 #include "Player.h"
 
 void Player::drawCard(ImmutableCard& card) {
-    cards.push_back(card);
+    cards.push_back(&card);
+}
+
+bool Player::hasNoCards() {
+    return cards.empty();
+}
+
+Action Player::performAction() {
+    return {play(), act(), this};
 }
