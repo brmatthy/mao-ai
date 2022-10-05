@@ -5,9 +5,7 @@
 
 
 #include <iostream>
-#include "game/card/ImmutableCard.h"
 
 int main(){
-    ImmutableCard card = ImmutableCard(HEARTS, ACE);
-    std::cout << card;
+    std::cout << "Hello world";
 }

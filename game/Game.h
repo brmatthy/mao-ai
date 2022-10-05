@@ -17,11 +17,17 @@ private:
     std::stack<Action> played;
     std::vector<Action> temp_played;
 
+    int currentPlayer = 0;
+    int direction = 1;
+
     ImmutableCard& drawNewCard();
     /**
      * Move the temp actions to the played stack
      */
     void flushTempActions();
+
+    void switchDirection();
+    void nextRoot();
 
 public:
 
@@ -30,9 +36,12 @@ public:
      */
     void step();
 
+    Player& getCurrentPlayer();
 
 
 };
+
+
 
 
 #endif //MAO_AI_GAME_H
