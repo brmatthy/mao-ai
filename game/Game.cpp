@@ -18,9 +18,25 @@ void Game::flushTempActions() {
     temp_played.clear();
 }
 
+void Game::switchDirection() {
+    switch(this->direction){
+        case 1: this->direction = -1;
+        default: this->direction = 1;
+    }
+}
+
+void Game::nextRoot() {
+    this->currentPlayer += this->direction;
+    if(this->currentPlayer < 0){
+        this->currentPlayer = this->players.size() - 1;
+    }else if(this->currentPlayer >= this->players.size()){
+        this->currentPlayer = 0;
+    }
+}
+
 
 void Game::step() {
-/*
+
     for(Player* p : players){
         // ask each player if he wants to move
         if(p->myTurn()){
@@ -39,8 +55,14 @@ void Game::step() {
                 //TODO check if the move was indeed wrong and hand cards
             }
         }
-    }*/
+    }
 }
+
+Player &Game::getCurrentPlayer() {
+    return *players.at(this->currentPlayer);
+}
+
+
 
 
 

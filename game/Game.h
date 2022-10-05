@@ -8,15 +8,17 @@
 #include <queue>
 #include <stack>
 #include "../player/Player.h"
-#include "../datastructures/circlelist/CircleList.h"
 
 
 class Game {
 private:
-    //CircleList<Player*> players;
+    std::vector<Player*> players;
     std::queue<ImmutableCard*> pile;
     std::stack<Action> played;
     std::vector<Action> temp_played;
+
+    int currentPlayer = 0;
+    int direction = 1;
 
     ImmutableCard& drawNewCard();
     /**
@@ -24,12 +26,17 @@ private:
      */
     void flushTempActions();
 
+    void switchDirection();
+    void nextRoot();
+
 public:
 
     /**
      * Simulates one turn of the game
      */
     void step();
+
+    Player& getCurrentPlayer();
 
 
 };
