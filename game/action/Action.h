@@ -21,25 +21,24 @@ private:
     /**
      * Pointer to the card played in this action, this should be nullptr if no card was played.
      */
-    ImmutableCard* card;
+    const ImmutableCard* _card;
     /**
      * The action of the action.
      */
-    Act act;
+    Act _act;
     /**
      * The player who did this action
      */
-     Player* player;
+     const Player* _player;
 
 public:
-    Action(ImmutableCard& card, Act act, Player* player);
-    Action(ImmutableCard& card, Act act){}
+    Action(const ImmutableCard* card, Act act, const Player* player);
 
     /**
      * Get a reference to the card
      * @return A reference to the card
      */
-    ImmutableCard& getCard();
+    const ImmutableCard* getCard();
 
     /**
      * Get the action
@@ -51,7 +50,7 @@ public:
      * Get a reference to the player
      * @return A reference to the player
      */
-    Player& getPlayer();
+    const Player* getPlayer();
 
 };
 

@@ -12,23 +12,21 @@
 
 class Game {
 private:
-    std::vector<Player*> players;
-    std::queue<ImmutableCard*> pile;
-    std::stack<Action> played;
-    std::vector<Action> temp_played;
+    std::vector<Player*> _players;
+    std::queue<ImmutableCard*> _pile;
+    std::stack<Action> _played;
+    std::vector<Action> _temp_played;
 
-    int currentPlayer = 0;
-    int direction = 1;
+    int _currentPlayer = 0;
+    int _direction = 1;
 
     ImmutableCard& drawNewCard();
     /**
      * Move the temp actions to the played stack
      */
     void flushTempActions();
-
     void switchDirection();
     void nextRoot();
-    Player& getCurrentPlayer();
 
 public:
 
@@ -36,10 +34,6 @@ public:
      * Simulates one turn of the game
      */
     void step();
-
-
-
-
 };
 
 

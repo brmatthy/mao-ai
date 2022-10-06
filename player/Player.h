@@ -16,21 +16,21 @@ class Action;
  * This is an abstract base class for any player.
  */
 class Player {
-private:
+protected:
+
+    std::vector<ImmutableCard*> cards;
+
     /**
-     * Let the player play a card
+     * Let the player play a card, remove the pointer from the card vector
      * @return A reference to the card
      */
-    virtual ImmutableCard& play() = 0;
+    virtual ImmutableCard* play() = 0;
 
     /**
      * Let the player do an action after playing a card
      * @return The action
      */
     virtual Act act() = 0;
-
-protected:
-    std::vector<ImmutableCard*> cards;
 
 public:
     /**
@@ -45,21 +45,12 @@ public:
      */
     virtual bool wantsCard() = 0;
 
-
-    /**
-     * Ask the player if he thinks the last played move was incorrect
-     * @return `True` if the player wants to correct the last move, `false` otherwise
-     */
-    virtual bool correctLastMove(Action& action) = 0;
-
     /**
      * If the player played out of turn or made an error in it's action, he receives a Correction
      * This function takes a Correction, and handles it.
-     * Note that the Correction will be stored on the heap, and the player must delete it after
-     * processing.
      * @param correction The Correction
      */
-    virtual void acceptCorrection(Correction& correction) = 0;
+    virtual void acceptCorrection(const Correction& correction) = 0;
 
     /**
      * Return the action the player wants to do

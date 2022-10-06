@@ -4,6 +4,6 @@
 
 #include "Correction.h"
 
-Correction::Correction(CorrectionStatus status, Action &action, std::vector<Act> correctActs) {
+#include <utility>
 
-}
+Correction::Correction(CorrectionStatus status, const Action *action, std::vector<Act> correctActs) :_status(status), _action(action), _correctActs(std::move(correctActs)){}

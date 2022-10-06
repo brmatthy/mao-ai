@@ -5,23 +5,23 @@
 #include "Action.h"
 
 
-Action::Action(ImmutableCard& card, const Act act, Player* player) : act(act) {
+Action::Action(const ImmutableCard* card, Act act, const Player* player) : _act(act) {
     if(act != DRAW_CARD){
-        this->card = &card;
+        _card = card;
     }
-    this->player = player;
+    _player = player;
 }
 
-ImmutableCard& Action::getCard() {
-    return *this->card;
+const ImmutableCard* Action::getCard() {
+    return _card;
 }
 
 Act Action::getAct() {
-    return act;
+    return _act;
 }
 
-Player &Action::getPlayer() {
-    return *this->player;
+const Player* Action::getPlayer() {
+    return _player;
 }
 
 
