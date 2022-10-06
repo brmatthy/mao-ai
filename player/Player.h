@@ -52,6 +52,19 @@ public:
      */
     virtual bool correctLastMove(Action& action) = 0;
 
+    /**
+     * If the player played out of turn or made an error in it's action, he receives a Correction
+     * This function takes a Correction, and handles it.
+     * Note that the Correction will be stored on the heap, and the player must delete it after
+     * processing.
+     * @param correction The Correction
+     */
+    virtual void acceptCorrection(Correction& correction) = 0;
+
+    /**
+     * Return the action the player wants to do
+     * @return The action
+     */
     Action performAction();
 
     /**

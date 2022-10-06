@@ -36,14 +36,24 @@ void Game::nextRoot() {
 
 
 void Game::step() {
-
-    for(Player* p : players){
+    for(int i = 0; i < this->players.size(); i++){
+        Player* p = this->players.at(i);
         // ask each player if he wants to move
         if(p->myTurn()){
-            // if the player wants to move let him drawCard(...) or performAction()
+            // let the player draw a card if he wants
             if(p->wantsCard()){
                 p->drawCard(drawNewCard());
-            }else{
+            }
+            // if the player is not at turn correct him and continue
+            if(this->currentPlayer != i){
+                p->drawCard(drawNewCard());
+                // TODO: actually pass correction
+                p->acceptCorrection(nullptr);
+                continue;
+            }
+            // Now the player wants to move and is at turn, let him move,
+            // if he thinks he can move
+            if(!p->wantsCard()){
                 temp_played.push_back(p->performAction());
             }
         }

@@ -28,6 +28,7 @@ private:
 
     void switchDirection();
     void nextRoot();
+    Player& getCurrentPlayer();
 
 public:
 
@@ -36,7 +37,7 @@ public:
      */
     void step();
 
-    Player& getCurrentPlayer();
+
 
 
 };
