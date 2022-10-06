@@ -41,28 +41,30 @@ void Game::step() {
     for(int i = 0; i < _players.size(); i++){
         Player* p = _players.at(i);
 
-        if(_currentPlayer == i){
-
-        }
-
-
-        // ask each player if he wants to move
-        if(p->myTurn()){
-            // let the player draw a card if he wants
+        if(_currentPlayer == i){ // player at turn
+            // hand cards until player realizes it's his turn
+            while (!p->myTurn()){
+                p->drawCard(drawNewCard());
+                Correction correction = Correction(NOT_PLAYED_AT_TURN, nullptr, {});
+                p->acceptCorrection(correction);
+            }
+            // now player wants to move
             if(p->wantsCard()){
                 p->drawCard(drawNewCard());
-            }
-            // if the player is not at turn correct him and continue
-            if(_currentPlayer != i){
-                p->drawCard(drawNewCard());
-                Correction correction = Correction(PLAYED_OUT_OF_TURN, nullptr, nullptr);
-                p->acceptCorrection(correction);
-                continue;
-            }
-            // Now the player wants to move and is at turn, let him move,
-            // if he thinks he can move
-            if(!p->wantsCard()){
+            }else{
                 _temp_played.push_back(p->performAction());
+                // TODO: check if the action was correct
+            }
+        }else{ // player not at turn
+            if(p->myTurn()){
+                // let the player draw a card if he wants
+                if(p->wantsCard()){
+                    p->drawCard(drawNewCard());
+                }
+                // Tell the player it is not his turn
+                p->drawCard(drawNewCard());
+                Correction correction = Correction(PLAYED_OUT_OF_TURN, nullptr, {});
+                p->acceptCorrection(correction);
             }
         }
     }

@@ -13,7 +13,7 @@
 class Game {
 private:
     std::vector<Player*> _players;
-    std::queue<ImmutableCard*> _pile;
+    std::queue<const ImmutableCard*> _pile;
     std::stack<Action> _played;
     std::vector<Action> _temp_played;
 
