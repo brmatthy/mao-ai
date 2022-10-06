@@ -3,11 +3,13 @@
 //
 
 #include "Game.h"
+#include "./validation/CorrectionStatus.h"
+#include "validation/Correction.h"
 
-ImmutableCard& Game::drawNewCard() {
+const ImmutableCard* Game::drawNewCard() {
     ImmutableCard* card = _pile.front();
     _pile.pop();
-    return *card;
+    return card;
 }
 
 
@@ -38,6 +40,12 @@ void Game::nextRoot() {
 void Game::step() {
     for(int i = 0; i < _players.size(); i++){
         Player* p = _players.at(i);
+
+        if(_currentPlayer == i){
+
+        }
+
+
         // ask each player if he wants to move
         if(p->myTurn()){
             // let the player draw a card if he wants
@@ -47,8 +55,8 @@ void Game::step() {
             // if the player is not at turn correct him and continue
             if(_currentPlayer != i){
                 p->drawCard(drawNewCard());
-                // TODO: actually pass correction
-                p->acceptCorrection(nullptr);
+                Correction correction = Correction(PLAYED_OUT_OF_TURN, nullptr, nullptr);
+                p->acceptCorrection(correction);
                 continue;
             }
             // Now the player wants to move and is at turn, let him move,

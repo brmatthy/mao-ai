@@ -7,6 +7,7 @@
 
 enum CorrectionStatus{
     PLAYED_OUT_OF_TURN,
+    NOT_PLAYED_AT_TURN,
     INVALID_CARD,
     INVALID_ACT
 };

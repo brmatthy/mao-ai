@@ -4,8 +4,8 @@
 
 #include "Player.h"
 
-void Player::drawCard(ImmutableCard& card) {
-    cards.push_back(&card);
+void Player::drawCard(const ImmutableCard* card) {
+    cards.push_back(card);
 }
 
 bool Player::hasNoCards() {

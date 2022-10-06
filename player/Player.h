@@ -18,7 +18,7 @@ class Action;
 class Player {
 protected:
 
-    std::vector<ImmutableCard*> cards;
+    std::vector<const ImmutableCard*> cards;
 
     /**
      * Let the player play a card, remove the pointer from the card vector
@@ -62,7 +62,7 @@ public:
      * Let the player draw a card. The card will be added to the player's card collection
      * @param card The drawn card
      */
-    void drawCard(ImmutableCard& card);
+    void drawCard(const ImmutableCard* card);
 
     /**
      * Check if the player has no cards left

@@ -20,7 +20,7 @@ private:
     int _currentPlayer = 0;
     int _direction = 1;
 
-    ImmutableCard& drawNewCard();
+    const ImmutableCard* drawNewCard();
     /**
      * Move the temp actions to the played stack
      */
