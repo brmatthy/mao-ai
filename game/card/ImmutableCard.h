@@ -35,13 +35,13 @@ public:
      * Return the type of the card
      * @return The type of the card
      */
-    CardType getCardType();
+    const CardType getCardType();
 
     /**
      * Return the number of the card
      * @return The number of the card
      */
-    CardNumber getCardNumber();
+    const CardNumber getCardNumber();
 
     friend std::ostream& operator<<(std::ostream& os, const ImmutableCard& ic);
 };
