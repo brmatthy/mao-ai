@@ -9,8 +9,8 @@
  * All the possible acts
  */
 enum Act{
-    NONE,
-    DRAW_CARD
+    CHNAR,
+    BONG
 };
 
 

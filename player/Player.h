@@ -6,6 +6,7 @@
 #define MAO_AI_PLAYER_H
 
 #include <vector>
+#include <unordered_set>
 #include "../game/card/ImmutableCard.h"
 #include "../game/action/Action.h"
 #include "../game/action/Act.h"
@@ -32,7 +33,7 @@ protected:
      * Let the player do an action after playing a card
      * @return The action
      */
-    virtual Act act() = 0;
+    virtual const std::unordered_set<Act> act() = 0;
 
 public:
     /**

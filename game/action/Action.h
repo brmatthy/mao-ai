@@ -8,6 +8,7 @@
 #include "../card/ImmutableCard.h"
 #include "../../player/Player.h"
 #include "Act.h"
+#include <unordered_set>
 
 
 class Player;
@@ -23,16 +24,16 @@ private:
      */
     const ImmutableCard* _card;
     /**
-     * The action of the action.
+     * The acts of the action.
      */
-    Act _act;
+    const std::unordered_set<Act> _acts;
     /**
      * The player who did this action
      */
      const Player* _player;
 
 public:
-    Action(const ImmutableCard* card, Act act, const Player* player);
+    Action(const ImmutableCard* card, const std::unordered_set<Act> acts, const Player* player);
 
     /**
      * Get a reference to the card
@@ -44,7 +45,7 @@ public:
      * Get the action
      * @return the action
      */
-    Act getAct() const;
+    const std::unordered_set<Act>& getAct() const;
 
     /**
      * Get a reference to the player

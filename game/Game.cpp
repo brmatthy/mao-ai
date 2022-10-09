@@ -12,14 +12,6 @@ const ImmutableCard* Game::drawNewCard() {
     return card;
 }
 
-
-void Game::flushTempActions() {
-    for (Action &action: _temp_played){
-        _played.push(action);
-    }
-    _temp_played.clear();
-}
-
 void Game::switchDirection() {
     switch(_direction){
         case 1: _direction = -1;
@@ -52,7 +44,7 @@ void Game::step() {
             if(p->wantsCard()){
                 p->drawCard(drawNewCard());
             }else{
-                _temp_played.push_back(p->performAction());
+                // TODO: performaction
                 // TODO: check if the action was correct
             }
         }else{ // player not at turn
