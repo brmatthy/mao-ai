@@ -6,31 +6,34 @@
 #define MAO_AI_PLAYER_H
 
 #include <vector>
+#include <unordered_set>
 #include "../game/card/ImmutableCard.h"
 #include "../game/action/Action.h"
 #include "../game/action/Act.h"
+#include "../game/validation/Correction.h"
 
 class Action;
+class Correction;
 
 /**
  * This is an abstract base class for any player.
  */
 class Player {
-private:
+protected:
+
+    std::vector<const ImmutableCard*> cards;
+
     /**
-     * Let the player play a card
+     * Let the player play a card, remove the pointer from the card vector
      * @return A reference to the card
      */
-    virtual ImmutableCard& play() = 0;
+    virtual ImmutableCard* play() = 0;
 
     /**
      * Let the player do an action after playing a card
      * @return The action
      */
-    virtual Act act() = 0;
-
-protected:
-    std::vector<ImmutableCard*> cards;
+    virtual const std::unordered_set<Act> act() = 0;
 
 public:
     /**
@@ -45,20 +48,24 @@ public:
      */
     virtual bool wantsCard() = 0;
 
+    /**
+     * If the player played out of turn or made an error in it's action, he receives a Correction
+     * This function takes a Correction, and handles it.
+     * @param correction The Correction
+     */
+    virtual void acceptCorrection(const Correction& correction) = 0;
 
     /**
-     * Ask the player if he thinks the last played move was incorrect
-     * @return `True` if the player wants to correct the last move, `false` otherwise
+     * Return the action the player wants to do
+     * @return The action
      */
-    virtual bool correctLastMove(Action& action) = 0;
-
     Action performAction();
 
     /**
      * Let the player draw a card. The card will be added to the player's card collection
      * @param card The drawn card
      */
-    void drawCard(ImmutableCard& card);
+    void drawCard(const ImmutableCard* card);
 
     /**
      * Check if the player has no cards left

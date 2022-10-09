@@ -8,6 +8,7 @@
 #include "../card/ImmutableCard.h"
 #include "../../player/Player.h"
 #include "Act.h"
+#include <unordered_set>
 
 
 class Player;
@@ -21,37 +22,36 @@ private:
     /**
      * Pointer to the card played in this action, this should be nullptr if no card was played.
      */
-    ImmutableCard* card;
+    const ImmutableCard* _card;
     /**
-     * The action of the action.
+     * The acts of the action.
      */
-    Act act;
+    const std::unordered_set<Act> _acts;
     /**
      * The player who did this action
      */
-     Player* player;
+     const Player* _player;
 
 public:
-    Action(ImmutableCard& card, Act act, Player* player);
-    Action(ImmutableCard& card, Act act){}
+    Action(const ImmutableCard* card, const std::unordered_set<Act> acts, const Player* player);
 
     /**
      * Get a reference to the card
      * @return A reference to the card
      */
-    ImmutableCard& getCard();
+    const ImmutableCard* getCard() const;
 
     /**
      * Get the action
      * @return the action
      */
-    Act getAct();
+    const std::unordered_set<Act>& getAct() const;
 
     /**
      * Get a reference to the player
      * @return A reference to the player
      */
-    Player& getPlayer();
+    const Player* getPlayer() const;
 
 };
 

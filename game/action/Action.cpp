@@ -2,26 +2,22 @@
 // Created by brent on 1/10/22.
 //
 
+#include <unordered_set>
 #include "Action.h"
 
 
-Action::Action(ImmutableCard& card, const Act act, Player* player) : act(act) {
-    if(act != DRAW_CARD){
-        this->card = &card;
-    }
-    this->player = player;
+Action::Action(const ImmutableCard* card, const std::unordered_set<Act> acts, const Player* player) : _acts(acts), _card(card), _player(player) {}
+
+const ImmutableCard* Action::getCard() const {
+    return _card;
 }
 
-ImmutableCard& Action::getCard() {
-    return *this->card;
+const std::unordered_set<Act>& Action::getAct() const{
+    return _acts;
 }
 
-Act Action::getAct() {
-    return act;
-}
-
-Player &Action::getPlayer() {
-    return *this->player;
+const Player* Action::getPlayer() const{
+    return _player;
 }
 
 

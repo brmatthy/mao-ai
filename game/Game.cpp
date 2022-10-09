@@ -3,64 +3,65 @@
 //
 
 #include "Game.h"
+#include "./validation/CorrectionStatus.h"
+#include "validation/Correction.h"
 
-ImmutableCard& Game::drawNewCard() {
-    ImmutableCard* card = pile.front();
-    pile.pop();
-    return *card;
-}
-
-
-void Game::flushTempActions() {
-    for (Action &action: temp_played){
-        played.push(action);
-    }
-    temp_played.clear();
+const ImmutableCard* Game::drawNewCard() {
+    const ImmutableCard* card = _pile.front();
+    _pile.pop();
+    return card;
 }
 
 void Game::switchDirection() {
-    switch(this->direction){
-        case 1: this->direction = -1;
-        default: this->direction = 1;
+    switch(_direction){
+        case 1: _direction = -1;
+        default: _direction = 1;
     }
 }
 
 void Game::nextRoot() {
-    this->currentPlayer += this->direction;
-    if(this->currentPlayer < 0){
-        this->currentPlayer = this->players.size() - 1;
-    }else if(this->currentPlayer >= this->players.size()){
-        this->currentPlayer = 0;
+    _currentPlayer += _direction;
+    if(_currentPlayer < 0){
+        _currentPlayer = _players.size() - 1;
+    }else if(_currentPlayer >= _players.size()){
+        _currentPlayer = 0;
     }
 }
 
 
 void Game::step() {
+    for(int i = 0; i < _players.size(); i++){
+        Player* p = _players.at(i);
 
-    for(Player* p : players){
-        // ask each player if he wants to move
-        if(p->myTurn()){
-            // if the player wants to move let him drawCard(...) or performAction()
+        if(_currentPlayer == i){ // player at turn
+            // hand cards until player realizes it's his turn
+            while (!p->myTurn()){
+                p->drawCard(drawNewCard());
+                const Correction correction = Correction(NOT_PLAYED_AT_TURN, nullptr, {});
+                p->acceptCorrection(correction);
+            }
+            // now player wants to move
             if(p->wantsCard()){
                 p->drawCard(drawNewCard());
             }else{
-                temp_played.push_back(p->performAction());
+                // TODO: performaction
+                // TODO: check if the action was correct
             }
-        }
-    }
-    // show all the made moves of the other players and let each player correctLastMove()
-    for(Player* p: players){
-        for(Action a: temp_played){
-            if(p->correctLastMove(a)){
-                //TODO check if the move was indeed wrong and hand cards
+        }else{ // player not at turn
+            if(p->myTurn()){
+                // let the player draw a card if he wants
+                if(p->wantsCard()){
+                    p->drawCard(drawNewCard());
+                }
+                // Tell the player it is not his turn
+                p->drawCard(drawNewCard());
+                const Correction correction = Correction(PLAYED_OUT_OF_TURN, nullptr, {});
+                p->acceptCorrection(correction);
             }
         }
     }
 }
 
-Player &Game::getCurrentPlayer() {
-    return *players.at(this->currentPlayer);
-}
 
 
 

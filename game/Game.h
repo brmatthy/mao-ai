@@ -6,26 +6,19 @@
 #define MAO_AI_GAME_H
 
 #include <queue>
-#include <stack>
 #include "../player/Player.h"
 
 
 class Game {
 private:
-    std::vector<Player*> players;
-    std::queue<ImmutableCard*> pile;
-    std::stack<Action> played;
-    std::vector<Action> temp_played;
+    std::vector<Player*> _players;
+    std::queue<const ImmutableCard*> _pile;
+    std::vector<Action> _played;
 
-    int currentPlayer = 0;
-    int direction = 1;
+    int _currentPlayer = 0;
+    int _direction = 1;
 
-    ImmutableCard& drawNewCard();
-    /**
-     * Move the temp actions to the played stack
-     */
-    void flushTempActions();
-
+    const ImmutableCard* drawNewCard();
     void switchDirection();
     void nextRoot();
 
@@ -35,10 +28,6 @@ public:
      * Simulates one turn of the game
      */
     void step();
-
-    Player& getCurrentPlayer();
-
-
 };
 
 
