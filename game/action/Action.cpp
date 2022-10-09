@@ -12,15 +12,15 @@ Action::Action(const ImmutableCard* card, Act act, const Player* player) : _act(
     _player = player;
 }
 
-const ImmutableCard* Action::getCard() {
+const ImmutableCard* Action::getCard() const {
     return _card;
 }
 
-Act Action::getAct() {
+Act Action::getAct() const{
     return _act;
 }
 
-const Player* Action::getPlayer() {
+const Player* Action::getPlayer() const{
     return _player;
 }
 

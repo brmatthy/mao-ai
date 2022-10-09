@@ -5,5 +5,5 @@
 #include "PlayValidation.h"
 
 bool playedCorrectCard(const ImmutableCard* lastCard, const ImmutableCard* newCard){
-    return lastCard->getCardNumber() == newCard->getCardNumber();
+    return lastCard->getCardNumber() == newCard->getCardNumber() || lastCard->getCardType() == newCard->getCardType();
 }

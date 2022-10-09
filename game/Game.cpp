@@ -7,7 +7,7 @@
 #include "validation/Correction.h"
 
 const ImmutableCard* Game::drawNewCard() {
-    ImmutableCard* card = _pile.front();
+    const ImmutableCard* card = _pile.front();
     _pile.pop();
     return card;
 }
@@ -45,7 +45,7 @@ void Game::step() {
             // hand cards until player realizes it's his turn
             while (!p->myTurn()){
                 p->drawCard(drawNewCard());
-                Correction correction = Correction(NOT_PLAYED_AT_TURN, nullptr, {});
+                const Correction correction = Correction(NOT_PLAYED_AT_TURN, nullptr, {});
                 p->acceptCorrection(correction);
             }
             // now player wants to move
@@ -63,7 +63,7 @@ void Game::step() {
                 }
                 // Tell the player it is not his turn
                 p->drawCard(drawNewCard());
-                Correction correction = Correction(PLAYED_OUT_OF_TURN, nullptr, {});
+                const Correction correction = Correction(PLAYED_OUT_OF_TURN, nullptr, {});
                 p->acceptCorrection(correction);
             }
         }

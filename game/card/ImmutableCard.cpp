@@ -6,11 +6,11 @@
 
 ImmutableCard::ImmutableCard(CardType mType, CardNumber mNumber) : _type(mType), _number(mNumber) {}
 
-const CardType ImmutableCard::getCardType() {
+CardType ImmutableCard::getCardType() const {
     return _type;
 }
 
-const CardNumber ImmutableCard::getCardNumber() {
+CardNumber ImmutableCard::getCardNumber() const{
     return _number;
 }
 

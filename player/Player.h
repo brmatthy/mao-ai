@@ -9,8 +9,10 @@
 #include "../game/card/ImmutableCard.h"
 #include "../game/action/Action.h"
 #include "../game/action/Act.h"
+#include "../game/validation/Correction.h"
 
 class Action;
+class Correction;
 
 /**
  * This is an abstract base class for any player.

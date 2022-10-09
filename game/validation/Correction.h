@@ -9,6 +9,8 @@
 #include "CorrectionStatus.h"
 #include "../action/Action.h"
 
+class Action;
+
 class Correction {
 private:
 

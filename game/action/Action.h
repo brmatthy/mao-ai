@@ -38,19 +38,19 @@ public:
      * Get a reference to the card
      * @return A reference to the card
      */
-    const ImmutableCard* getCard();
+    const ImmutableCard* getCard() const;
 
     /**
      * Get the action
      * @return the action
      */
-    Act getAct();
+    Act getAct() const;
 
     /**
      * Get a reference to the player
      * @return A reference to the player
      */
-    const Player* getPlayer();
+    const Player* getPlayer() const;
 
 };
 
