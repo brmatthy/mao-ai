@@ -6,15 +6,18 @@
 #define MAO_AI_ACTVALIDATION_H
 
 #include <vector>
-#include <unordered_set>
 #include "../action/Action.h"
 
 bool performedCorrectAct(const std::vector<Action>& played, const Action& action);
 
-std::unordered_set<Act> getActsForCard(const std::vector<Action>& played, const ImmutableCard* newCard);
+std::unordered_multiset<Act> getActsForCard(const std::vector<Action>& played, const ImmutableCard* newCard);
 
-void chnar(std::unordered_set<Act>& acts, const std::vector<Action>& played, const ImmutableCard* newCard);
+void chnar(std::unordered_multiset<Act>& acts, const std::vector<Action>& played, const ImmutableCard* newCard);
 
-void bong(std::unordered_set<Act>& acts, const std::vector<Action>& played, const ImmutableCard* newCard);
+void bong(std::unordered_multiset<Act>& acts, const std::vector<Action>& played, const ImmutableCard* newCard);
+
+void spades(std::unordered_multiset<Act>& acts, const ImmutableCard* newCard);
+
+void pleasantDay(std::unordered_multiset<Act>& acts, const std::vector<Action>& played, const ImmutableCard* newCard);
 
 #endif //MAO_AI_ACTVALIDATION_H

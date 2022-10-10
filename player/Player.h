@@ -72,6 +72,12 @@ public:
      * @return True` if the player has no cards left, `false` otherwise
      */
     bool hasNoCards();
+
+    /**
+     * Get the number of cards the player is holding
+     * @return The number of cards the player is holding
+     */
+    int cardCount();
 };
 
 

@@ -15,3 +15,7 @@ bool Player::hasNoCards() {
 Action Player::performAction() {
     return {play(), act(), this};
 }
+
+int Player::cardCount() {
+    return cards.size();
+}

@@ -5,12 +5,21 @@
 #include "Game.h"
 #include "./validation/CorrectionStatus.h"
 #include "validation/Correction.h"
+#include "validation/PlayValidation.h"
 
-const ImmutableCard* Game::drawNewCard() {
+void Game::drawNewCard(Player* player) {
+    if(player->cardCount() < _maxCcards || _maxCcards < 3){
+        player->drawCard(getTopCard());
+        return;
+    }
+}
+
+const ImmutableCard* Game::getTopCard() {
     const ImmutableCard* card = _pile.front();
     _pile.pop();
     return card;
 }
+
 
 void Game::switchDirection() {
     switch(_direction){
@@ -36,31 +45,44 @@ void Game::step() {
         if(_currentPlayer == i){ // player at turn
             // hand cards until player realizes it's his turn
             while (!p->myTurn()){
-                p->drawCard(drawNewCard());
+                drawNewCard(p);
                 const Correction correction = Correction(NOT_PLAYED_AT_TURN, nullptr, {});
                 p->acceptCorrection(correction);
             }
             // now player wants to move
-            if(p->wantsCard()){
-                p->drawCard(drawNewCard());
-            }else{
-                // TODO: performaction
-                // TODO: check if the action was correct
+            bool hasActed = false;
+            while (!hasActed){
+                if(p->wantsCard()){
+                    drawNewCard(p);
+                    hasActed = true;
+                }else{
+                    Action action = p->performAction();
+                    if(playedCorrectCard(_played.at(_played.size() - 1).getCard(), action.getCard())){ // played a correct card
+                        // TODO: check if act was correct
+                        hasActed = true;
+                    }else { // played a wrong card
+                        // give wrong card back to player
+                        p->drawCard(action.getCard());
+                        // punish with extra card
+                        drawNewCard(p);
+                    }
+                }
             }
         }else{ // player not at turn
             if(p->myTurn()){
                 // let the player draw a card if he wants
                 if(p->wantsCard()){
-                    p->drawCard(drawNewCard());
+                    drawNewCard(p);
                 }
                 // Tell the player it is not his turn
-                p->drawCard(drawNewCard());
+                drawNewCard(p);
                 const Correction correction = Correction(PLAYED_OUT_OF_TURN, nullptr, {});
                 p->acceptCorrection(correction);
             }
         }
     }
 }
+
 
 
 

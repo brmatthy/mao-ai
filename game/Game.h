@@ -15,10 +15,12 @@ private:
     std::queue<const ImmutableCard*> _pile;
     std::vector<Action> _played;
 
+    short _maxCcards = 5;
     int _currentPlayer = 0;
     int _direction = 1;
 
-    const ImmutableCard* drawNewCard();
+    void drawNewCard(Player* player);
+    const ImmutableCard* getTopCard();
     void switchDirection();
     void nextRoot();
 
