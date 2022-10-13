@@ -4,27 +4,39 @@
 
 #include "ActValidation.h"
 
-bool performedCorrectAct(const std::deque<Action>& played, const Action& action){
-    if(action.getCard() == nullptr){ // draw card
-
+void getCorrectActs(std::unordered_multiset<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard){
+    if(newCard == nullptr){ // draw card
+        getActsForDraw(acts, played);
     }else{ // played a card
-
+        getActsForCard(acts, played, newCard);
     }
-
 }
 
-std::unordered_multiset<Act> getActsForDraw(const std::deque<Action>& played){
-    std::unordered_multiset<Act> acts;
+bool compareMultisets(const std::unordered_multiset<Act>& correctActs, const std::unordered_multiset<Act>& acts){
+    // verry sad way to check if 2 multisets are equal
+    auto notFound = acts.end();
+    for(Act act : correctActs){
+        if(acts.find(act) == notFound){
+            return false;
+        }
+    }
+    notFound = correctActs.end();
+    for(Act act : acts){
+        if(correctActs.find(act) == notFound){
+            return false;
+        }
+    }
+    return true;
+}
+
+void getActsForDraw(std::unordered_multiset<Act>& acts, const std::deque<Action>& played){
     if(played.front().getCard()->getCardNumber() == SEVEN){
         acts.insert(ACT_THANK_YOU);
     }
-    return acts;
 }
 
 
-std::unordered_multiset<Act> getActsForCard(const std::deque<Action>& played, const ImmutableCard* newCard){
-    std::unordered_multiset<Act> acts;
-
+void getActsForCard(std::unordered_multiset<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard){
     // let all the rules say what acts must be performed
     chnar(acts, played, newCard);
     bong(acts, played, newCard);

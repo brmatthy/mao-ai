@@ -12,10 +12,6 @@ bool Player::hasNoCards() {
     return cards.empty();
 }
 
-Action Player::performAction() {
-    return {play(), act(), this};
-}
-
 int Player::cardCount() {
     return cards.size();
 }

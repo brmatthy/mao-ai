@@ -24,6 +24,8 @@ private:
     const ImmutableCard* getTopCard();
     void switchDirection();
     void nextRoot();
+    void pushAction(Action& action);
+    void actionActCorrection(Player* p, const ImmutableCard* card);
 
 public:
 

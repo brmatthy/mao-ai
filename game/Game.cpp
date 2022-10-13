@@ -23,10 +23,7 @@ const ImmutableCard* Game::getTopCard() {
 
 
 void Game::switchDirection() {
-    switch(_direction){
-        case 1: _direction = -1;
-        default: _direction = 1;
-    }
+    _direction = _direction == 1 ? -1 : 1;
 }
 
 void Game::nextRoot() {
@@ -38,6 +35,23 @@ void Game::nextRoot() {
     }
 }
 
+void Game::pushAction(Action& action) {
+    _played.push_back(action);
+}
+
+
+void Game::actionActCorrection(Player *p, const ImmutableCard *card) {
+    std::unordered_multiset<Act> acts = p->act(_played, card);
+    std::unordered_multiset<Act> correctActs;
+    getCorrectActs(acts, _played, card);
+    Action action = {card, correctActs, p};
+    if(!compareMultisets(correctActs, acts)){
+        drawNewCard(p);
+        const Correction correction = Correction(INVALID_ACT, &action);
+        p->acceptCorrection(correction);
+    }
+    pushAction(action);
+}
 
 void Game::step() {
     for(int i = 0; i < _players.size(); i++){
@@ -55,19 +69,25 @@ void Game::step() {
             while (!hasActed){
                 if(p->wantsCard()){
                     drawNewCard(p);
-                    // TODO: action card draw + potential acts + correction
-                    Action action = {nullptr, {}, p};
+                    ImmutableCard* card = nullptr;
+                    actionActCorrection(p,card);
                     hasActed = true;
                 }else{
-                    Action action = p->performAction();
-                    if(playedCorrectCard(_played.at(_played.size() - 1).getCard(), action.getCard())){ // played a correct card
-                        // TODO: check if act was incorrect
+                    ImmutableCard* card = p->play();
+                    if(playedCorrectCard(_played.at(_played.size() - 1).getCard(), card)){ // played a correct card
+                        actionActCorrection(p,card);
+                        if(card->getCardNumber() == TEN){
+                            switchDirection();
+                        }
                         hasActed = true;
                     }else { // played a wrong card
                         // give wrong card back to player
-                        p->drawCard(action.getCard());
+                        p->drawCard(card);
                         // punish with extra card
                         drawNewCard(p);
+                        // create and tell the correction to the player
+                        const Correction correction = Correction(INVALID_CARD, nullptr);
+                        p->acceptCorrection(correction);
                     }
                 }
             }
@@ -84,7 +104,11 @@ void Game::step() {
             }
         }
     }
+    // update the index of the current player
+    nextRoot();
 }
+
+
 
 
 
