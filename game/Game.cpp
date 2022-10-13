@@ -6,6 +6,7 @@
 #include "./validation/CorrectionStatus.h"
 #include "validation/Correction.h"
 #include "validation/PlayValidation.h"
+#include "validation/ActValidation.h"
 
 void Game::drawNewCard(Player* player) {
     if(player->cardCount() < _maxCcards || _maxCcards < 3){
@@ -46,7 +47,7 @@ void Game::step() {
             // hand cards until player realizes it's his turn
             while (!p->myTurn()){
                 drawNewCard(p);
-                const Correction correction = Correction(NOT_PLAYED_AT_TURN, nullptr, {});
+                const Correction correction = Correction(NOT_PLAYED_AT_TURN, nullptr);
                 p->acceptCorrection(correction);
             }
             // now player wants to move
@@ -54,11 +55,13 @@ void Game::step() {
             while (!hasActed){
                 if(p->wantsCard()){
                     drawNewCard(p);
+                    // TODO: action card draw + potential acts + correction
+                    Action action = {nullptr, {}, p};
                     hasActed = true;
                 }else{
                     Action action = p->performAction();
                     if(playedCorrectCard(_played.at(_played.size() - 1).getCard(), action.getCard())){ // played a correct card
-                        // TODO: check if act was correct
+                        // TODO: check if act was incorrect
                         hasActed = true;
                     }else { // played a wrong card
                         // give wrong card back to player
@@ -76,7 +79,7 @@ void Game::step() {
                 }
                 // Tell the player it is not his turn
                 drawNewCard(p);
-                const Correction correction = Correction(PLAYED_OUT_OF_TURN, nullptr, {});
+                const Correction correction = Correction(PLAYED_OUT_OF_TURN, nullptr);
                 p->acceptCorrection(correction);
             }
         }

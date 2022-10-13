@@ -33,7 +33,7 @@ protected:
      * Let the player do an action after playing a card
      * @return The action
      */
-    virtual const std::unordered_set<Act> act() = 0;
+    virtual const std::unordered_multiset<Act> act() = 0;
 
 public:
     /**

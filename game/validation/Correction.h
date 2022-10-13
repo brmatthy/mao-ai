@@ -16,10 +16,9 @@ private:
 
     CorrectionStatus _status;
     const Action* _action;
-    std::vector<Act> _correctActs;
 
 public:
-    Correction(CorrectionStatus status, const Action* action, std::vector<Act> correctActs);
+    Correction(CorrectionStatus status, const Action* action);
 
 };
 

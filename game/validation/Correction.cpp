@@ -6,4 +6,4 @@
 
 #include <utility>
 
-Correction::Correction(CorrectionStatus status, const Action *action, std::vector<Act> correctActs) :_status(status), _action(action), _correctActs(std::move(correctActs)){}
+Correction::Correction(CorrectionStatus status, const Action *action) :_status(status), _action(action) {}
