@@ -6,6 +6,7 @@
 #define MAO_AI_PLAYER_H
 
 #include <vector>
+#include <deque>
 #include <unordered_set>
 #include "../game/card/ImmutableCard.h"
 #include "../game/action/Action.h"
@@ -23,19 +24,24 @@ protected:
 
     std::vector<const ImmutableCard*> cards;
 
+
+public:
+
     /**
      * Let the player play a card, remove the pointer from the card vector
+     * This function will only be called if the player thinks he can make
+     * a correct move. (when the wantsCard() function returns `false`)
      * @return A reference to the card
      */
     virtual ImmutableCard* play() = 0;
 
     /**
      * Let the player do an action after playing a card
-     * @return The action
+     * If the card is nullptr than it means you just drew a card instead of playing
+     * @return The acts
      */
-    virtual const std::unordered_set<Act> act() = 0;
+    virtual const std::unordered_multiset<Act> act(const std::deque<Action>& played, const ImmutableCard* played_card) = 0;
 
-public:
     /**
      * Ask the player if he thinks it's his turn
      * @return `True` if the player thinks it's his turn, `false` otherwise
@@ -56,12 +62,6 @@ public:
     virtual void acceptCorrection(const Correction& correction) = 0;
 
     /**
-     * Return the action the player wants to do
-     * @return The action
-     */
-    Action performAction();
-
-    /**
      * Let the player draw a card. The card will be added to the player's card collection
      * @param card The drawn card
      */
@@ -72,6 +72,12 @@ public:
      * @return True` if the player has no cards left, `false` otherwise
      */
     bool hasNoCards();
+
+    /**
+     * Get the number of cards the player is holding
+     * @return The number of cards the player is holding
+     */
+    int cardCount();
 };
 
 

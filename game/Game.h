@@ -6,6 +6,7 @@
 #define MAO_AI_GAME_H
 
 #include <queue>
+#include <deque>
 #include "../player/Player.h"
 
 
@@ -13,14 +14,18 @@ class Game {
 private:
     std::vector<Player*> _players;
     std::queue<const ImmutableCard*> _pile;
-    std::vector<Action> _played;
+    std::deque<Action> _played;
 
+    short _maxCcards = 5;
     int _currentPlayer = 0;
     int _direction = 1;
 
-    const ImmutableCard* drawNewCard();
+    void drawNewCard(Player* player);
+    const ImmutableCard* getTopCard();
     void switchDirection();
     void nextRoot();
+    void pushAction(Action& action);
+    void actionActCorrection(Player* p, const ImmutableCard* card);
 
 public:
 

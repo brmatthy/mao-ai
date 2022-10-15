@@ -5,18 +5,25 @@
 #include "Game.h"
 #include "./validation/CorrectionStatus.h"
 #include "validation/Correction.h"
+#include "validation/PlayValidation.h"
+#include "validation/ActValidation.h"
 
-const ImmutableCard* Game::drawNewCard() {
+void Game::drawNewCard(Player* player) {
+    if(player->cardCount() < _maxCcards || _maxCcards < 3){
+        player->drawCard(getTopCard());
+        return;
+    }
+}
+
+const ImmutableCard* Game::getTopCard() {
     const ImmutableCard* card = _pile.front();
     _pile.pop();
     return card;
 }
 
+
 void Game::switchDirection() {
-    switch(_direction){
-        case 1: _direction = -1;
-        default: _direction = 1;
-    }
+    _direction = _direction == 1 ? -1 : 1;
 }
 
 void Game::nextRoot() {
@@ -28,6 +35,23 @@ void Game::nextRoot() {
     }
 }
 
+void Game::pushAction(Action& action) {
+    _played.push_back(action);
+}
+
+
+void Game::actionActCorrection(Player *p, const ImmutableCard *card) {
+    std::unordered_multiset<Act> acts = p->act(_played, card);
+    std::unordered_multiset<Act> correctActs;
+    getCorrectActs(acts, _played, card);
+    Action action = {card, correctActs, p};
+    if(!compareMultisets(correctActs, acts)){
+        drawNewCard(p);
+        const Correction correction = Correction(INVALID_ACT, &action);
+        p->acceptCorrection(correction);
+    }
+    pushAction(action);
+}
 
 void Game::step() {
     for(int i = 0; i < _players.size(); i++){
@@ -36,31 +60,59 @@ void Game::step() {
         if(_currentPlayer == i){ // player at turn
             // hand cards until player realizes it's his turn
             while (!p->myTurn()){
-                p->drawCard(drawNewCard());
-                const Correction correction = Correction(NOT_PLAYED_AT_TURN, nullptr, {});
+                drawNewCard(p);
+                const Correction correction = Correction(NOT_PLAYED_AT_TURN, nullptr);
                 p->acceptCorrection(correction);
             }
             // now player wants to move
-            if(p->wantsCard()){
-                p->drawCard(drawNewCard());
-            }else{
-                // TODO: performaction
-                // TODO: check if the action was correct
+            bool hasActed = false;
+            while (!hasActed){
+                if(p->wantsCard()){ // draw a card
+                    drawNewCard(p);
+                    ImmutableCard* card = nullptr;
+                    actionActCorrection(p,card);
+                    hasActed = true;
+                }else{ // play a card
+                    ImmutableCard* card = p->play();
+                    if(playedCorrectCard(_played.at(_played.size() - 1).getCard(), card)){ // played a correct card
+                        actionActCorrection(p,card);
+                        if(card->getCardNumber() == TEN){
+                            switchDirection();
+                        }
+                        hasActed = true;
+                    }else { // played a wrong card
+                        // give wrong card back to player
+                        p->drawCard(card);
+                        // punish with extra card
+                        drawNewCard(p);
+                        // create and tell the correction to the player
+                        const Correction correction = Correction(INVALID_CARD, nullptr);
+                        p->acceptCorrection(correction);
+                    }
+                }
             }
         }else{ // player not at turn
             if(p->myTurn()){
-                // let the player draw a card if he wants
-                if(p->wantsCard()){
-                    p->drawCard(drawNewCard());
+                CorrectionStatus status;
+                if(p->wantsCard()){ // drew card out of turn
+                    drawNewCard(p);
+                    status = DREW_CARD_OUT_OF_TURN;
+                }else{ // wanted to play out of turn
+                    status = PLAYED_OUT_OF_TURN;
                 }
                 // Tell the player it is not his turn
-                p->drawCard(drawNewCard());
-                const Correction correction = Correction(PLAYED_OUT_OF_TURN, nullptr, {});
+                drawNewCard(p);
+                const Correction correction = {status, nullptr};
                 p->acceptCorrection(correction);
             }
         }
     }
+    // update the index of the current player
+    nextRoot();
 }
+
+
+
 
 
 
