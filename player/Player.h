@@ -6,6 +6,7 @@
 #define MAO_AI_PLAYER_H
 
 #include <vector>
+#include <deque>
 #include <unordered_set>
 #include "../game/card/ImmutableCard.h"
 #include "../game/action/Action.h"
