@@ -93,13 +93,16 @@ void Game::step() {
             }
         }else{ // player not at turn
             if(p->myTurn()){
-                // let the player draw a card if he wants
-                if(p->wantsCard()){
+                CorrectionStatus status;
+                if(p->wantsCard()){ // drew card out of turn
                     drawNewCard(p);
+                    status = DREW_CARD_OUT_OF_TURN;
+                }else{ // wanted to play out of turn
+                    status = PLAYED_OUT_OF_TURN;
                 }
                 // Tell the player it is not his turn
                 drawNewCard(p);
-                const Correction correction = Correction(PLAYED_OUT_OF_TURN, nullptr);
+                Correction correction = {status, nullptr};
                 p->acceptCorrection(correction);
             }
         }
