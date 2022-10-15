@@ -67,12 +67,12 @@ void Game::step() {
             // now player wants to move
             bool hasActed = false;
             while (!hasActed){
-                if(p->wantsCard()){
+                if(p->wantsCard()){ // draw a card
                     drawNewCard(p);
                     ImmutableCard* card = nullptr;
                     actionActCorrection(p,card);
                     hasActed = true;
-                }else{
+                }else{ // play a card
                     ImmutableCard* card = p->play();
                     if(playedCorrectCard(_played.at(_played.size() - 1).getCard(), card)){ // played a correct card
                         actionActCorrection(p,card);
@@ -102,7 +102,7 @@ void Game::step() {
                 }
                 // Tell the player it is not his turn
                 drawNewCard(p);
-                Correction correction = {status, nullptr};
+                const Correction correction = {status, nullptr};
                 p->acceptCorrection(correction);
             }
         }

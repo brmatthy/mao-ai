@@ -17,6 +17,8 @@ void getActsForDraw(std::unordered_multiset<Act>& acts, const std::deque<Action>
 
 void getActsForCard(std::unordered_multiset<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard);
 
+int getTopCardReversedIndex(const std::deque<Action>& played);
+
 void chnar(std::unordered_multiset<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard);
 
 void bong(std::unordered_multiset<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard);

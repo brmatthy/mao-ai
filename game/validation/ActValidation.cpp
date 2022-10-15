@@ -45,18 +45,33 @@ void getActsForCard(std::unordered_multiset<Act>& acts, const std::deque<Action>
 
 }
 
+int getTopCardReversedIndex(const std::deque<Action>& played){
+    const ImmutableCard* topcard = nullptr;
+    int i = 0;
+    while (topcard == nullptr){
+        i++;
+        topcard = played.at(played.size() -i).getCard();
+    }
+    return i;
+}
+
 
 void chnar(std::unordered_multiset<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard){
-    if(newCard->getCardType() == HEARTS || played.at(played.size() - 1).getCard()->getCardType() == HEARTS){
+    if(newCard->getCardType() == HEARTS
+        || played.at(played.size() - getTopCardReversedIndex(played)).getCard()->getCardType() == HEARTS){
         acts.insert(ACT_CHNAR);
     }
 }
 
 void bong(std::unordered_multiset<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard){
     const ImmutableCard* current = newCard;
-    for (int i = 0; current->getCardNumber() == EIGHT; i++){
+    for (int i = getTopCardReversedIndex(played); current->getCardNumber() == EIGHT; i++){
         acts.insert(ACT_BONG);
         current = played.at(played.size() - i).getCard();
+        while (current == nullptr){
+            i++;
+            current = played.at(played.size() - i).getCard();
+        }
     }
 }
 
@@ -72,7 +87,8 @@ void pleasantDay(std::unordered_multiset<Act>& acts, const std::deque<Action>& p
     if(newCard->getCardNumber() == SEVEN){
         acts.insert(ACT_HAVE_A_PLEASANT_DAY);
     }
-    if(played.at(played.size() - 1).getCard()->getCardNumber() == SEVEN){
+    const ImmutableCard* card = played.back().getCard();
+    if(card != nullptr && card->getCardNumber() == SEVEN){
         acts.insert(ACT_THANK_YOU);
     }
 }
