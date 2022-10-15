@@ -5,13 +5,17 @@
 #include "Player.h"
 
 void Player::drawCard(const ImmutableCard* card) {
-    cards.push_back(card);
+    _cards.push_back(card);
 }
 
 bool Player::hasNoCards() {
-    return cards.empty();
+    return _cards.empty();
 }
 
 int Player::cardCount() {
-    return cards.size();
+    return _cards.size();
+}
+
+void Player::setGame(Game *game) {
+    _game = game;
 }

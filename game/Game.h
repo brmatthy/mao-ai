@@ -8,7 +8,10 @@
 #include <queue>
 #include <deque>
 #include "../player/Player.h"
+#include "action/Action.h"
 
+class Player;
+class Action;
 
 class Game {
 private:
@@ -33,6 +36,15 @@ public:
      * Simulates one turn of the game
      */
     void step();
+
+    /**
+     * Checks if the given player is at turn
+     * @param player The player to check
+     * @return `true` if the player is at turn, `false` otherwise
+     */
+    bool isAtTurn(const Player* player) const;
+
+    const std::deque<Action>& getPlayed() const;
 };
 
 

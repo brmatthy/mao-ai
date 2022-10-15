@@ -3,7 +3,6 @@
 //
 
 #include "Game.h"
-#include "./validation/CorrectionStatus.h"
 #include "validation/Correction.h"
 #include "validation/PlayValidation.h"
 #include "validation/ActValidation.h"
@@ -43,7 +42,7 @@ void Game::pushAction(Action& action) {
 void Game::actionActCorrection(Player *p, const ImmutableCard *card) {
     std::unordered_multiset<Act> acts = p->act(_played, card);
     std::unordered_multiset<Act> correctActs;
-    getCorrectActs(acts, _played, card);
+    getCorrectActs(correctActs, _played, card);
     Action action = {card, correctActs, p};
     if(!compareMultisets(correctActs, acts)){
         drawNewCard(p);
@@ -73,7 +72,7 @@ void Game::step() {
                     actionActCorrection(p,card);
                     hasActed = true;
                 }else{ // play a card
-                    ImmutableCard* card = p->play();
+                    const ImmutableCard* card = p->play();
                     if(playedCorrectCard(_played.at(_played.size() - 1).getCard(), card)){ // played a correct card
                         actionActCorrection(p,card);
                         if(card->getCardNumber() == TEN){
@@ -109,6 +108,14 @@ void Game::step() {
     }
     // update the index of the current player
     nextRoot();
+}
+
+bool Game::isAtTurn(const Player *player) const {
+    return player == _players.at(_currentPlayer);
+}
+
+const std::deque<Action> &Game::getPlayed() const {
+    return _played;
 }
 
 
