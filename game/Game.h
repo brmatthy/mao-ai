@@ -20,6 +20,9 @@ private:
      * The pile of cards, push cards to the front and pop them from the back
      */
     std::deque<const ImmutableCard*> _pile;
+    /**
+     * The stack of actions, push to the back and pop from the front
+     */
     std::deque<Action> _played;
 
     short _maxCards;
@@ -33,6 +36,8 @@ private:
     void pushAction(Action& action);
     void actionActCorrection(Player* p, const ImmutableCard* card);
     void takeAllCardsFromPlayer(Player* p);
+    void flushActionsToPileAndShuffle();
+    void shufflePile();
 
 public:
 

@@ -24,10 +24,7 @@ Game::Game(short maxCards) {
         }
     }
     // shuffle them
-    std::random_device rd;
-    std::mt19937 g(rd());
-    std::shuffle(_pile.begin(), _pile.end(),g);
-
+    shufflePile();
 }
 
 Game::~Game() {
@@ -52,6 +49,9 @@ void Game::drawNewCard(Player* player) {
 const ImmutableCard* Game::getTopCard() {
     const ImmutableCard* card = _pile.back();
     _pile.pop_back();
+    if(_pile.empty()){
+        flushActionsToPileAndShuffle();
+    }
     return card;
 }
 
@@ -93,6 +93,21 @@ void Game::takeAllCardsFromPlayer(Player *p) {
     }
     p->clearCards();
 }
+void Game::flushActionsToPileAndShuffle() {
+    while (_played.size() > 5){
+        _pile.push_front(_played.front().getCard());
+        _played.pop_front();
+    }
+    shufflePile();
+
+}
+
+void Game::shufflePile() {
+    std::random_device rd;
+    std::mt19937 g(rd());
+    std::shuffle(_pile.begin(), _pile.end(),g);
+}
+
 
 void Game::step() {
     for(int i = 0; i < _players.size(); i++){
@@ -163,20 +178,3 @@ const std::deque<Action> &Game::getPlayed() const {
 void Game::addPlayer(Player *player) {
     _players.push_back(player);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
