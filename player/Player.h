@@ -87,6 +87,17 @@ public:
      * @param game
      */
     void setGame(Game* game);
+
+    /**
+     * Return a reference to the vector that holds all the current cards of the player
+     * @return A reference to the card vector
+     */
+    std::vector<const ImmutableCard*>& getCards();
+
+    /**
+     * Clears the card vector. Cards are stored on the heap, make sure to delete them beforehand
+     */
+     void clearCards();
 };
 
 

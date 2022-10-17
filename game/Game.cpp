@@ -14,7 +14,7 @@ Game::Game() : Game(5){}
 Game::Game(short maxCards) {
     _maxCards = maxCards;
 
-    // create 64 cards
+    // create all the cards
     for(int typeInt = HEARTS; typeInt < SPADES + 1; typeInt++){
         CardType type = static_cast<CardType>(typeInt);
         for(int numberInt = ACE; numberInt < KING + 1; numberInt++){
@@ -31,7 +31,15 @@ Game::Game(short maxCards) {
 }
 
 Game::~Game() {
+    // Get al the cards back from the players
+    for(Player* p : _players){
+        takeAllCardsFromPlayer(p);
+    }
 
+    // Delete all the cards
+    for(const ImmutableCard* card : _pile){
+        delete card;
+    }
 }
 
 void Game::drawNewCard(Player* player) {
@@ -77,6 +85,13 @@ void Game::actionActCorrection(Player *p, const ImmutableCard *card) {
         p->acceptCorrection(correction);
     }
     pushAction(action);
+}
+
+void Game::takeAllCardsFromPlayer(Player *p) {
+    for(const ImmutableCard* card: p->getCards()){
+        _pile.push_front(card);
+    }
+    p->clearCards();
 }
 
 void Game::step() {
@@ -144,6 +159,12 @@ bool Game::isAtTurn(const Player *player) const {
 const std::deque<Action> &Game::getPlayed() const {
     return _played;
 }
+
+void Game::addPlayer(Player *player) {
+    _players.push_back(player);
+}
+
+
 
 
 

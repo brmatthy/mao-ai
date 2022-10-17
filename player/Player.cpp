@@ -19,3 +19,11 @@ int Player::cardCount() {
 void Player::setGame(Game *game) {
     _game = game;
 }
+
+std::vector<const ImmutableCard *> &Player::getCards() {
+    return _cards;
+}
+
+void Player::clearCards() {
+    _cards.clear();
+}

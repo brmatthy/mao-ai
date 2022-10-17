@@ -32,6 +32,7 @@ private:
     void nextRoot();
     void pushAction(Action& action);
     void actionActCorrection(Player* p, const ImmutableCard* card);
+    void takeAllCardsFromPlayer(Player* p);
 
 public:
 
@@ -51,7 +52,17 @@ public:
      */
     bool isAtTurn(const Player* player) const;
 
+    /**
+     * Return the stack of actions
+     * @return A const reference to the deque of actions
+     */
     const std::deque<Action>& getPlayed() const;
+
+    /**
+     * Add a player to the game. The game is not responsible for the deletion of this object
+     * @param player The player to be added
+     */
+    void addPlayer(Player* player);
 };
 
 
