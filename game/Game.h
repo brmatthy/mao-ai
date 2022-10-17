@@ -16,7 +16,10 @@ class Action;
 class Game {
 private:
     std::vector<Player*> _players;
-    std::queue<const ImmutableCard*> _pile;
+    /**
+     * The pile of cards, push cards to the front and pop them from the back
+     */
+    std::deque<const ImmutableCard*> _pile;
     std::deque<Action> _played;
 
     short _maxCards;

@@ -6,6 +6,8 @@
 #include "validation/Correction.h"
 #include "validation/PlayValidation.h"
 #include "validation/ActValidation.h"
+#include <algorithm>
+#include <random>
 
 Game::Game() : Game(5){}
 
@@ -13,9 +15,19 @@ Game::Game(short maxCards) {
     _maxCards = maxCards;
 
     // create 64 cards
-    for(CardType type = HEARTS; type < SPADES; type = type + 1){
-
+    for(int typeInt = HEARTS; typeInt < SPADES + 1; typeInt++){
+        CardType type = static_cast<CardType>(typeInt);
+        for(int numberInt = ACE; numberInt < KING + 1; numberInt++){
+            CardNumber number = static_cast<CardNumber>(numberInt);
+            const ImmutableCard* card = new ImmutableCard(type, number);
+            _pile.push_front(card);
+        }
     }
+    // shuffle them
+    std::random_device rd;
+    std::mt19937 g(rd());
+    std::shuffle(_pile.begin(), _pile.end(),g);
+
 }
 
 Game::~Game() {
@@ -30,8 +42,8 @@ void Game::drawNewCard(Player* player) {
 }
 
 const ImmutableCard* Game::getTopCard() {
-    const ImmutableCard* card = _pile.front();
-    _pile.pop();
+    const ImmutableCard* card = _pile.back();
+    _pile.pop_back();
     return card;
 }
 
