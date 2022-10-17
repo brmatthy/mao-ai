@@ -7,8 +7,23 @@
 #include "validation/PlayValidation.h"
 #include "validation/ActValidation.h"
 
+Game::Game() : Game(5){}
+
+Game::Game(short maxCards) {
+    _maxCards = maxCards;
+
+    // create 64 cards
+    for(CardType type = HEARTS; type < SPADES; type = type + 1){
+
+    }
+}
+
+Game::~Game() {
+
+}
+
 void Game::drawNewCard(Player* player) {
-    if(player->cardCount() < _maxCcards || _maxCcards < 3){
+    if(player->cardCount() < _maxCards || _maxCards < 3){
         player->drawCard(getTopCard());
         return;
     }
@@ -117,6 +132,12 @@ bool Game::isAtTurn(const Player *player) const {
 const std::deque<Action> &Game::getPlayed() const {
     return _played;
 }
+
+
+
+
+
+
 
 
 

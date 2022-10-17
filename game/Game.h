@@ -19,7 +19,7 @@ private:
     std::queue<const ImmutableCard*> _pile;
     std::deque<Action> _played;
 
-    short _maxCcards = 5;
+    short _maxCards;
     int _currentPlayer = 0;
     int _direction = 1;
 
@@ -31,6 +31,10 @@ private:
     void actionActCorrection(Player* p, const ImmutableCard* card);
 
 public:
+
+    Game();
+    Game(short maxCards);
+    ~Game();
 
     /**
      * Simulates one turn of the game
