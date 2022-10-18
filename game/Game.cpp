@@ -28,10 +28,9 @@ Game::Game(short maxCards) {
 }
 
 Game::~Game() {
-    // Get al the cards back from the players
-    for(Player* p : _players){
-        takeAllCardsFromPlayer(p);
-    }
+    // cards are already taken from the players
+
+    // TODO: take cards from the actions
 
     // Delete all the cards
     for(const ImmutableCard* card : _pile){
@@ -167,6 +166,27 @@ void Game::step() {
     nextRoot();
 }
 
+void Game::playGame() {
+    if(_gameIsNotFinished){
+        // give the players cards
+        for(Player* p : _players){
+            for(int i = 0; i < 3; i++){
+                drawNewCard(p);
+            }
+        }
+
+        while (_gameIsNotFinished){
+            step();
+        }
+
+        // get the cards back from the players
+        for(Player* p : _players){
+            takeAllCardsFromPlayer(p);
+        }
+    }
+}
+
+
 bool Game::isAtTurn(const Player *player) const {
     return player == _players.at(_currentPlayer);
 }
@@ -178,3 +198,4 @@ const std::deque<Action> &Game::getPlayed() const {
 void Game::addPlayer(Player *player) {
     _players.push_back(player);
 }
+
