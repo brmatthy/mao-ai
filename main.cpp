@@ -5,41 +5,41 @@
 
 
 #include <iostream>
-#include "game/card/CardDetail.h"
-#include <algorithm>
-#include <random>
-#include <deque>
-#include "game/card/ImmutableCard.h"
+
+#include "ai/LayCardSimulator.h"
+#include "util/GeneticAi.h"
+#include "util/GeneticAlgorithm.h"
+#include "util/NeuralNetwork.h"
 
 int main(){
-    //create
-    std::deque<const ImmutableCard*> cards;
-    for(int typeInt = HEARTS; typeInt < SPADES + 1; typeInt++){
-        CardType type = static_cast<CardType>(typeInt);
-        for(int numberInt = ACE; numberInt < KING + 1; numberInt++){
-            CardNumber number = static_cast<CardNumber>(numberInt);
-            const ImmutableCard* card = new ImmutableCard(type, number);
-            cards.push_back(card);
-        }
-    }
-    //print
-    for(const ImmutableCard* card : cards){
-        std::cout << *card;
-    }
-    std::cout << std::endl;
 
-    //shuffle
-    std::random_device rd;
-    std::mt19937 g(rd());
-    std::shuffle(cards.begin(), cards.end(),g);
+    std::cout << "Starting simulation" << std::endl;
 
-    //print
-    for(const ImmutableCard* card : cards){
-        std::cout << *card;
+    //CREATE
+    int size = 100;
+    auto* network = new NeuralNetwork(52, 10, 10, 52);
+    auto** ais = new GeneticAi*[size];
+    for(int i = 0; i < size; i++)
+    {
+        ais[i] = new GeneticAi(52*10+10*10+52*10);
     }
+    LayCardSimulator* simulator = new LayCardSimulator(network);
+    GeneticAlgorithm* algorithm = new GeneticAlgorithm(ais, size, simulator);
 
-    //delete
-    for(const ImmutableCard* card : cards){
-        delete card;
+    // SIMULATION
+    algorithm->simulate(10000);
+    ais[0]->clean();
+    simulator->simulate(ais[0]);
+    std::cout << "FINAL ai faults: " << ais[0]->faults() << std::endl;
+
+    // DELETE
+    delete algorithm;
+    delete simulator;
+    for(int i = 0; i < size; i++)
+    {
+        delete ais[i];
     }
+    delete[] ais;
+    delete network;
+    std::cout << "Done!" << std::endl;
 }
