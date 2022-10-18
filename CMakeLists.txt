@@ -34,6 +34,6 @@ add_executable(mao_ai
         util/GeneticSimulator.h
         ai/LayCardSimulator.cpp
         ai/LayCardSimulator.h
-        
-        player/bot.cpp
-        player/bot.h)
+
+        player/Bot.cpp
+        player/Bot.h)

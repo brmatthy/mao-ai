@@ -7,7 +7,7 @@
 
 #include "Player.h"
 
-class bot : public Player{
+class Bot : public Player{
 private:
     int getGoodCardIndex();
 public:

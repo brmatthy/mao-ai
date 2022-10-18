@@ -2,13 +2,13 @@
 // Created by brent on 15/10/22.
 //
 
-#include "bot.h"
+#include "Bot.h"
 #include "../game/validation/PlayValidation.h"
 #include "../game/validation/ActValidation.h"
 
-int bot::getGoodCardIndex() {
+int Bot::getGoodCardIndex() {
     std::deque<Action> played = _game->getPlayed();
-    const ImmutableCard* lastCard = played.at(getTopCardReversedIndex(played)).getCard();
+    const ImmutableCard* lastCard = played.at(played.size() - getTopCardReversedIndex(played)).getCard();
     for(int i = 0; i < _cards.size(); i++){
         if(playedCorrectCard(lastCard, _cards.at(i))){
             return i;
@@ -18,7 +18,7 @@ int bot::getGoodCardIndex() {
 }
 
 
-const ImmutableCard *bot::play() {
+const ImmutableCard *Bot::play() {
     int i = getGoodCardIndex();
     const ImmutableCard* card;
     if(i == -1){ // should not occure
@@ -30,22 +30,22 @@ const ImmutableCard *bot::play() {
     return card;
 }
 
-const std::unordered_multiset<Act> bot::act(const std::deque<Action> &played, const ImmutableCard *played_card) {
+const std::unordered_multiset<Act> Bot::act(const std::deque<Action> &played, const ImmutableCard *played_card) {
     std::unordered_multiset<Act> acts;
     getCorrectActs(acts, played, played_card);
     return acts;
 }
 
-bool bot::myTurn() {
+bool Bot::myTurn() {
     return _game->isAtTurn(this);
 }
 
-bool bot::wantsCard() {
+bool Bot::wantsCard() {
     return getGoodCardIndex() == -1;
 }
 
-void bot::acceptCorrection(const Correction &correction) {
-    // bot is always correct
+void Bot::acceptCorrection(const Correction &correction) {
+    // Bot is always correct
 }
 
 
