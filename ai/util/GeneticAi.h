@@ -5,6 +5,7 @@
 #ifndef MAO_AI_GENETICAI_H
 #define MAO_AI_GENETICAI_H
 
+#include <string>
 #include "../../game/validation/Correction.h"
 
 class GeneticAi {
@@ -70,6 +71,12 @@ public:
       * @return the ai weight size
       */
      virtual int getSize();
+
+     /**
+      * Prints the AI state (weights) as a string representing the weights array
+      * @param out the output stream to write to.
+      */
+     virtual void print(std::ostream& out);
 };
 
 

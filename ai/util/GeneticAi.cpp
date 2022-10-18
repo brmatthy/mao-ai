@@ -87,3 +87,14 @@ void GeneticAi::mutate()
     _weights[index1] = _weights[index2];
     _weights[index2] = temp;
 }
+
+void GeneticAi::print(std::ostream& out)
+{
+    out << "[ ";
+    for(int i = 0; i < _size; i++)
+    {
+        if(i != 0) out << ", ";
+        out << "\"" << _weights[i] << "\"";
+    }
+    out << "]\n";
+}
