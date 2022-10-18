@@ -5,7 +5,7 @@
 #ifndef MAO_AI_GENETICAI_H
 #define MAO_AI_GENETICAI_H
 
-#include "../game/validation/Correction.h"
+#include "../../game/validation/Correction.h"
 
 class GeneticAi {
 protected:
@@ -70,13 +70,6 @@ public:
       * @return the ai weight size
       */
      virtual int getSize();
-
-     /**
-      * Compare function for sorting (based on faults)
-      * @param other other ai to compare with
-      * @return is the ai smaller?
-      */
-     virtual bool operator<(GeneticAi const &other);
 };
 
 

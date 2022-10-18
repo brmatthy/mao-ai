@@ -22,36 +22,46 @@ GeneticAlgorithm::~GeneticAlgorithm()
 void GeneticAlgorithm::simulate(int iterations)
 {
     int min = 52*52;
+    int avg = 52*52;
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dist(10, _aiSize-1);
-    std::uniform_int_distribution<> disthalve(0, 10);
+    std::uniform_int_distribution<> dist(0, 10);
     for(int generation = 1; generation <= iterations; generation++)
     {
         // simulate every AI
+        int newavg = 0;
         for(int i = 0; i < _aiSize; i++)
         {
             _simulator->simulate(_ais[i]);
+            newavg += _ais[i]->faults();
         }
+        newavg = newavg / _aiSize;
         //Sort array based on faults
-        std::sort(_ais, _ais + _aiSize);
-        if(_ais[0]->faults() < min)
-        {
-            min = _ais[0]->faults();
-            std::cout << "Generation: " << generation << " | " << min << " faults!" << std::endl;
-        }
+        std::sort(_ais, _ais + _aiSize,[] (GeneticAi *lhs, GeneticAi *rhs) {
+                     return lhs->faults() < rhs->faults();
+        });
         for(int i = _aiSize / 2; i < _aiSize; i++)
         {
             //delete the worst ais
             delete _ais[i];
             //crossover
-            _ais[i] = _ais[disthalve(gen)]->crossover(_ais[disthalve(gen)]);
+            _ais[i] = _ais[dist(gen)]->crossover(_ais[dist(gen)]);
+            //mutate
+            _ais[i]->mutate();
         }
-        // mutate random
-        for(int r = 0; r < 20; r++)
+
+        //PRINTS
+        if(_ais[0]->faults() < min)
         {
-            _ais[dist(gen)]->mutate();
+            min = _ais[0]->faults();
+            std::cout << "Generation: " << generation << " | " << min << " faults!" << std::endl;
         }
+        if(newavg < avg)
+        {
+            avg = newavg;
+            std::cout << "Generation: " << generation << " | " << avg << " average!" << std::endl;
+        }
+
         for(int i = 0; i < _aiSize; i++)
         {
             // clean the ais

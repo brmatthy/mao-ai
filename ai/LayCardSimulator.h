@@ -5,8 +5,8 @@
 #ifndef MAO_AI_LAYCARDSIMULATOR_H
 #define MAO_AI_LAYCARDSIMULATOR_H
 
-#include "../util/GeneticSimulator.h"
-#include "../util/NeuralNetwork.h"
+#include "util/GeneticSimulator.h"
+#include "util/NeuralNetwork.h"
 
 class LayCardSimulator: public GeneticSimulator {
 public:
