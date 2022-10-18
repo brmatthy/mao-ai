@@ -96,9 +96,13 @@ void Game::takeAllCardsFromPlayer(Player *p) {
     p->clearCards();
 }
 void Game::flushActionsToPileAndShuffle() {
-    // TODO: leave exact one actual card
-    while (_played.size() > 5){
-        _pile.push_front(_played.front().getCard());
+    // flush cards until only 1 card remains
+    int actions_to_leave = getTopCardReversedIndex(_played);
+    while (_played.size() > actions_to_leave){
+        const ImmutableCard* card = _played.front().getCard();
+        if(card != nullptr){
+            _pile.push_front(card);
+        }
         _played.pop_front();
     }
     shufflePile();
