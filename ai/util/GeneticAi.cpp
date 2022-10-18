@@ -96,5 +96,5 @@ void GeneticAi::print(std::ostream& out)
         if(i != 0) out << ", ";
         out << "\"" << _weights[i] << "\"";
     }
-    out << "]\n";
+    out << "]" << std::endl;
 }

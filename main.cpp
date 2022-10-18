@@ -23,8 +23,8 @@ int main(){
     {
         ais[i] = new GeneticAi(64*52*2);
     }
-    LayCardSimulator* simulator = new LayCardSimulator(network);
-    GeneticAlgorithm* algorithm = new GeneticAlgorithm(ais, size, simulator);
+    auto* simulator = new LayCardSimulator(network);
+    auto* algorithm = new GeneticAlgorithm(ais, size, simulator);
 
     // SIMULATION
     algorithm->simulate(100);

@@ -14,6 +14,8 @@ private:
     GeneticAi** _ais;
     int _aiSize;
     GeneticSimulator* _simulator;
+    int _best;
+    int _avg;
 public:
     /**
      * Initialize a genetic algoritm
@@ -33,6 +35,12 @@ public:
      * @param iterations number of iterations
      */
     void simulate(int iterations);
+
+    /**
+     * Print the current algorithm state (best and average)
+     * @param out the output stream to write to.
+     */
+    void print(std::ostream& out) const;
 };
 
 
