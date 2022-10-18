@@ -4,6 +4,7 @@
 
 #include "NeuralNetwork.h"
 #include <cmath>
+#include <iostream>
 
 NeuralNetwork::NeuralNetwork(int inputsize, int hiddensize, int hiddenlayersize, int outputsize)
 {

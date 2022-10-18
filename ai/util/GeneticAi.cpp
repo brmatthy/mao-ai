@@ -87,8 +87,3 @@ void GeneticAi::mutate()
     _weights[index1] = _weights[index2];
     _weights[index2] = temp;
 }
-
-bool GeneticAi::operator<(const GeneticAi &other)
-{
-    return _faults < other._faults;
-}
