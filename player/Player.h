@@ -6,14 +6,17 @@
 #define MAO_AI_PLAYER_H
 
 #include <vector>
+#include <deque>
 #include <unordered_set>
 #include "../game/card/ImmutableCard.h"
 #include "../game/action/Action.h"
 #include "../game/action/Act.h"
 #include "../game/validation/Correction.h"
+#include "../game/Game.h"
 
 class Action;
 class Correction;
+class Game;
 
 /**
  * This is an abstract base class for any player.
@@ -21,21 +24,27 @@ class Correction;
 class Player {
 protected:
 
-    std::vector<const ImmutableCard*> cards;
+    std::vector<const ImmutableCard*> _cards;
+    const Game* _game;
+
+
+public:
 
     /**
      * Let the player play a card, remove the pointer from the card vector
-     * @return A reference to the card
+     * This function will only be called if the player thinks he can make
+     * a correct move. (when the wantsCard() function returns `false`)
+     * @return A reference to the card, cannot be nullptr
      */
-    virtual ImmutableCard* play() = 0;
+    virtual const ImmutableCard* play() = 0;
 
     /**
      * Let the player do an action after playing a card
-     * @return The action
+     * If the card is nullptr than it means you just drew a card instead of playing
+     * @return The acts
      */
-    virtual const std::unordered_set<Act> act() = 0;
+    virtual const std::unordered_multiset<Act> act(const std::deque<Action>& played, const ImmutableCard* played_card) = 0;
 
-public:
     /**
      * Ask the player if he thinks it's his turn
      * @return `True` if the player thinks it's his turn, `false` otherwise
@@ -56,12 +65,6 @@ public:
     virtual void acceptCorrection(const Correction& correction) = 0;
 
     /**
-     * Return the action the player wants to do
-     * @return The action
-     */
-    Action performAction();
-
-    /**
      * Let the player draw a card. The card will be added to the player's card collection
      * @param card The drawn card
      */
@@ -72,6 +75,29 @@ public:
      * @return True` if the player has no cards left, `false` otherwise
      */
     bool hasNoCards();
+
+    /**
+     * Get the number of cards the player is holding
+     * @return The number of cards the player is holding
+     */
+    int cardCount();
+
+    /**
+     * Update the game that this player is playing
+     * @param game
+     */
+    void setGame(Game* game);
+
+    /**
+     * Return a reference to the vector that holds all the current cards of the player
+     * @return A reference to the card vector
+     */
+    std::vector<const ImmutableCard*>& getCards();
+
+    /**
+     * Clears the card vector. Cards are stored on the heap, make sure to delete them beforehand
+     */
+     void clearCards();
 };
 
 

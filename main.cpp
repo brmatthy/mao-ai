@@ -5,6 +5,7 @@
 
 
 #include <iostream>
+
 #include "ai/LayCardSimulator.h"
 #include "util/GeneticAi.h"
 #include "util/GeneticAlgorithm.h"
