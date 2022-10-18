@@ -36,4 +36,4 @@ add_executable(mao_ai
         ai/LayCardSimulator.h
 
         player/Bot.cpp
-        player/Bot.h)
+        player/Bot.h bench/SimpleBench.cpp bench/SimpleBench.h)
