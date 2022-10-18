@@ -11,7 +11,7 @@ LayCardSimulator::~LayCardSimulator() {}
 
 void LayCardSimulator::simulate(GeneticAi* ai)
 {
-    Correction correction(INVALID_CARD, nullptr, std::vector<Act>());
+    Correction correction(INVALID_CARD, nullptr);
     int index = 0;
     bool input[52];
     for(bool & i : input)
