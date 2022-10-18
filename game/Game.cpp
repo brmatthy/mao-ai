@@ -9,11 +9,9 @@
 #include <algorithm>
 #include <random>
 
-Game::Game() : Game(5){}
 
-Game::Game(short maxCards) {
-    _maxCards = maxCards;
 
+Game::Game() {
     // create all the cards
     for(int typeInt = HEARTS; typeInt < SPADES + 1; typeInt++){
         CardType type = static_cast<CardType>(typeInt);
@@ -28,9 +26,13 @@ Game::Game(short maxCards) {
 }
 
 Game::~Game() {
-    // Get al the cards back from the players
-    for(Player* p : _players){
-        takeAllCardsFromPlayer(p);
+    // cards are already taken from the players
+
+    for(const Action& action : _played){
+        const ImmutableCard* card = action.getCard();
+        if(card != nullptr){
+            _pile.push_front(card);
+        }
     }
 
     // Delete all the cards
@@ -40,10 +42,8 @@ Game::~Game() {
 }
 
 void Game::drawNewCard(Player* player) {
-    if(player->cardCount() < _maxCards || _maxCards < 3){
-        player->drawCard(getTopCard());
-        return;
-    }
+    player->drawCard(getTopCard());
+    return;
 }
 
 const ImmutableCard* Game::getTopCard() {
@@ -51,6 +51,8 @@ const ImmutableCard* Game::getTopCard() {
     _pile.pop_back();
     if(_pile.empty()){
         flushActionsToPileAndShuffle();
+        // if the pile is still empty, then all the cards are with the players: end the game
+        _gameIsNotFinished = false;
     }
     return card;
 }
@@ -94,8 +96,13 @@ void Game::takeAllCardsFromPlayer(Player *p) {
     p->clearCards();
 }
 void Game::flushActionsToPileAndShuffle() {
-    while (_played.size() > 5){
-        _pile.push_front(_played.front().getCard());
+    // flush cards until only 1 card remains
+    int actions_to_leave = getTopCardReversedIndex(_played);
+    while (_played.size() > actions_to_leave){
+        const ImmutableCard* card = _played.front().getCard();
+        if(card != nullptr){
+            _pile.push_front(card);
+        }
         _played.pop_front();
     }
     shufflePile();
@@ -130,10 +137,14 @@ void Game::step() {
                     hasActed = true;
                 }else{ // play a card
                     const ImmutableCard* card = p->play();
-                    if(playedCorrectCard(_played.at(_played.size() - 1).getCard(), card)){ // played a correct card
+                    if(playedCorrectCard(_played.at(_played.size() - getTopCardReversedIndex(_played)).getCard(), card)){ // played a correct card
                         actionActCorrection(p,card);
                         if(card->getCardNumber() == TEN){
                             switchDirection();
+                        }
+                        // check if player has won the game
+                        if(p->hasNoCards()){
+                            _gameIsNotFinished = false;
                         }
                         hasActed = true;
                     }else { // played a wrong card
@@ -167,6 +178,31 @@ void Game::step() {
     nextRoot();
 }
 
+void Game::playGame() {
+    if(_gameIsNotFinished){
+        // give the players cards
+        for(Player* p : _players){
+            for(int i = 0; i < 3; i++){
+                drawNewCard(p);
+            }
+        }
+        // put 1 card on the _played stack
+        Action action = Action(getTopCard(), {}, nullptr);
+        pushAction(action);
+
+        while (_gameIsNotFinished){
+            step();
+        }
+
+        // get the cards back from the players
+        for(Player* p : _players){
+            takeAllCardsFromPlayer(p);
+        }
+
+    }
+}
+
+
 bool Game::isAtTurn(const Player *player) const {
     return player == _players.at(_currentPlayer);
 }
@@ -176,5 +212,7 @@ const std::deque<Action> &Game::getPlayed() const {
 }
 
 void Game::addPlayer(Player *player) {
+    player->setGame(this);
     _players.push_back(player);
 }
+

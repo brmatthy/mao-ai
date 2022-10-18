@@ -30,7 +30,7 @@ bool compareMultisets(const std::unordered_multiset<Act>& correctActs, const std
 }
 
 void getActsForDraw(std::unordered_multiset<Act>& acts, const std::deque<Action>& played){
-    if(played.front().getCard()->getCardNumber() == SEVEN){
+    if(played.at(played.size() - getTopCardReversedIndex(played)).getCard()->getCardNumber() == SEVEN){
         acts.insert(ACT_THANK_YOU);
     }
 }
