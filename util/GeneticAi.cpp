@@ -80,10 +80,15 @@ void GeneticAi::mutate()
 {
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dist(0, _size);
+    std::uniform_int_distribution<> dist(0, _size-1);
     int index1 = dist(gen);
     int index2 = dist(gen);
     double temp = _weights[index1];
     _weights[index1] = _weights[index2];
     _weights[index2] = temp;
+}
+
+bool GeneticAi::operator<(const GeneticAi &other)
+{
+    return _faults < other._faults;
 }

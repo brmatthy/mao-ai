@@ -26,14 +26,10 @@ int main(){
     GeneticAlgorithm* algorithm = new GeneticAlgorithm(ais, size, simulator);
 
     // SIMULATION
-    algorithm->simulate(100);
+    algorithm->simulate(10000);
     ais[0]->clean();
     simulator->simulate(ais[0]);
-    for(int i = 0; i < 52; i++)
-    {
-        std::cout << network->getOutputs()[i] << std::endl;
-    }
-    std::cout << "end ai faults: " << ais[0]->faults() << std::endl;
+    std::cout << "FINAL ai faults: " << ais[0]->faults() << std::endl;
 
     // DELETE
     delete algorithm;
