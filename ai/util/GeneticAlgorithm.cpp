@@ -27,7 +27,7 @@ void GeneticAlgorithm::simulate(int iterations)
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dist(0, 10);
-    std::ofstream file ("geneticAI");
+    std::ofstream file ("out.csv");
     for(int generation = 1; generation <= iterations; generation++)
     {
         // simulate every AI

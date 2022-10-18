@@ -27,7 +27,7 @@ int main(){
     auto* algorithm = new GeneticAlgorithm(ais, size, simulator);
 
     // SIMULATION
-    algorithm->simulate(100);
+    algorithm->simulate(5000);
     ais[0]->clean();
     simulator->simulate(ais[0]);
     std::cout << "FINAL ai faults: " << ais[0]->faults() << std::endl;
