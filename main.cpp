@@ -16,17 +16,17 @@ int main(){
 
     //CREATE
     int size = 100;
-    auto* network = new NeuralNetwork(52, 10, 10, 52);
+    auto* network = new NeuralNetwork(52, 64, 64, 52);
     auto** ais = new GeneticAi*[size];
     for(int i = 0; i < size; i++)
     {
-        ais[i] = new GeneticAi(52*10+10*10+52*10);
+        ais[i] = new GeneticAi(64*52*2);
     }
     LayCardSimulator* simulator = new LayCardSimulator(network);
     GeneticAlgorithm* algorithm = new GeneticAlgorithm(ais, size, simulator);
 
     // SIMULATION
-    algorithm->simulate(10000);
+    algorithm->simulate(1000);
     ais[0]->clean();
     simulator->simulate(ais[0]);
     std::cout << "FINAL ai faults: " << ais[0]->faults() << std::endl;

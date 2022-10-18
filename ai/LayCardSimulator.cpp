@@ -31,14 +31,13 @@ void LayCardSimulator::simulate(GeneticAi* ai)
             {
                 for (int outnumber = ACE; outnumber <= KING; outnumber++) 
                 {
-                    if(output[outindex])
+                    ImmutableCard card(static_cast<CardType>(type), static_cast<CardNumber>(number));
+                    ImmutableCard played(static_cast<CardType>(outtype), static_cast<CardNumber>(outnumber));
+                    bool didplay = output[outindex];
+                    bool mustplay = playedCorrectCard(&card, &played);
+                    if(didplay != mustplay)
                     {
-                        ImmutableCard card(static_cast<CardType>(type), static_cast<CardNumber>(number));
-                        ImmutableCard played(static_cast<CardType>(outtype), static_cast<CardNumber>(outnumber));
-                        if(!playedCorrectCard(&card, &played))
-                        {
-                           ai->correct(&correction);
-                        }
+                       ai->correct(&correction);
                     }
                     outindex++;
                 }
