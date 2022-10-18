@@ -12,9 +12,11 @@
 #include "../game/action/Action.h"
 #include "../game/action/Act.h"
 #include "../game/validation/Correction.h"
+#include "../game/Game.h"
 
 class Action;
 class Correction;
+class Game;
 
 /**
  * This is an abstract base class for any player.
@@ -22,7 +24,8 @@ class Correction;
 class Player {
 protected:
 
-    std::vector<const ImmutableCard*> cards;
+    std::vector<const ImmutableCard*> _cards;
+    const Game* _game;
 
 
 public:
@@ -31,9 +34,9 @@ public:
      * Let the player play a card, remove the pointer from the card vector
      * This function will only be called if the player thinks he can make
      * a correct move. (when the wantsCard() function returns `false`)
-     * @return A reference to the card
+     * @return A reference to the card, cannot be nullptr
      */
-    virtual ImmutableCard* play() = 0;
+    virtual const ImmutableCard* play() = 0;
 
     /**
      * Let the player do an action after playing a card
@@ -78,6 +81,23 @@ public:
      * @return The number of cards the player is holding
      */
     int cardCount();
+
+    /**
+     * Update the game that this player is playing
+     * @param game
+     */
+    void setGame(Game* game);
+
+    /**
+     * Return a reference to the vector that holds all the current cards of the player
+     * @return A reference to the card vector
+     */
+    std::vector<const ImmutableCard*>& getCards();
+
+    /**
+     * Clears the card vector. Cards are stored on the heap, make sure to delete them beforehand
+     */
+     void clearCards();
 };
 
 
