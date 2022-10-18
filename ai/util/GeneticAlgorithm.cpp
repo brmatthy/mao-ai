@@ -51,15 +51,21 @@ void GeneticAlgorithm::simulate(int iterations)
         }
 
         //PRINTS
-        if(_ais[0]->faults() < min)
+        int newmin = _ais[0]->faults();
+        bool changed = false;
+        if(newmin < min)
         {
-            min = _ais[0]->faults();
-            std::cout << "Generation: " << generation << " | " << min << " faults!" << std::endl;
+            min = newmin;
+            changed = true;
         }
         if(newavg < avg)
         {
             avg = newavg;
-            std::cout << "Generation: " << generation << " | " << avg << " average!" << std::endl;
+            changed = true;
+        }
+        if(changed)
+        {
+            std::cout << "Generation: " << generation << " | " << min << " faults" <<  " | " << avg << " avg." << std::endl;
         }
 
         for(int i = 0; i < _aiSize; i++)
