@@ -4,6 +4,13 @@
 
 #include "Player.h"
 
+Player::Player(MoveInterface *mover, PlayInterface *cardPlayer, ActInterface *actor) {
+    _mover = mover;
+    _cardPlayer = cardPlayer;
+    _actor = actor;
+}
+
+
 void Player::drawCard(const ImmutableCard* card) {
     _cards.push_back(card);
 }
@@ -27,3 +34,28 @@ std::vector<const ImmutableCard *> &Player::getCards() {
 void Player::clearCards() {
     _cards.clear();
 }
+
+const ImmutableCard *Player::play() {
+    int i = _cardPlayer->play(_game->getPlayed(),_cards);
+    const ImmutableCard* card = _cards.at(i);
+    _cards.erase(_cards.begin() + i);
+    return card;
+}
+
+const std::unordered_multiset<Act> Player::act(const std::deque<Action> &played, const ImmutableCard *played_card) {
+    return _actor->act(played, played_card);
+}
+
+bool Player::myTurn() {
+    return _mover->atTurn();
+}
+
+bool Player::wantsCard() {
+    return _cardPlayer->wantsCard(_game->getPlayed(),_cards);
+}
+
+const Game* Player::getGame() {
+    return _game;
+}
+
+

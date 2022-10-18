@@ -3,9 +3,10 @@
 //
 
 #include "SimpleBench.h"
-#include "../player/Bot.h"
+#include "../player/bot/Bot.h"
 
 void threeBotsTest(){
+    /*
     // create bots
     Bot bot1 = Bot();
     Bot bot2 = Bot();
@@ -32,5 +33,5 @@ void threeBotsTest(){
         }else{
             std::cout << *card << std::endl;
         }
-    }
+    }*/
 }
