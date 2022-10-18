@@ -3,7 +3,7 @@
 //
 
 #include "NeuralNetwork.h"
-#include <math.h>
+#include <cmath>
 
 NeuralNetwork::NeuralNetwork(int inputsize, int hiddensize, int hiddenlayersize, int outputsize)
 {
@@ -62,6 +62,7 @@ void NeuralNetwork::calculate(const double* weights, const bool* inputs)
         }
         _outputs[i] = value > 0;
     }
+    delete[] hidden;
 }
 
 bool* NeuralNetwork::getOutputs()
