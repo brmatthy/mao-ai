@@ -23,15 +23,15 @@ add_executable(mao_ai
         game/validation/PlayValidation.h
         game/validation/ActValidation.cpp
         game/validation/ActValidation.h
-        
-        util/NeuralNetwork.cpp
-        util/NeuralNetwork.h
-        util/GeneticAlgorithm.cpp
-        util/GeneticAlgorithm.h
-        util/GeneticAi.cpp
-        util/GeneticAi.h
-        util/GeneticSimulator.cpp
-        util/GeneticSimulator.h
+
+        ai/util/NeuralNetwork.cpp
+        ai/util/NeuralNetwork.h
+        ai/util/GeneticAlgorithm.cpp
+        ai/util/GeneticAlgorithm.h
+        ai/util/GeneticAi.cpp
+        ai/util/GeneticAi.h
+        ai/util/GeneticSimulator.cpp
+        ai/util/GeneticSimulator.h
         ai/LayCardSimulator.cpp
         ai/LayCardSimulator.h
         

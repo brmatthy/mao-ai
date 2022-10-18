@@ -5,7 +5,7 @@
 #ifndef MAO_AI_GENETICAI_H
 #define MAO_AI_GENETICAI_H
 
-#include "../game/validation/Correction.h"
+#include "../../game/validation/Correction.h"
 
 class GeneticAi {
 protected:

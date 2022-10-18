@@ -7,9 +7,9 @@
 #include <iostream>
 
 #include "ai/LayCardSimulator.h"
-#include "util/GeneticAi.h"
-#include "util/GeneticAlgorithm.h"
-#include "util/NeuralNetwork.h"
+#include "ai/util/GeneticAi.h"
+#include "ai/util/GeneticAlgorithm.h"
+#include "ai/util/NeuralNetwork.h"
 
 int main(){
 
