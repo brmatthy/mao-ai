@@ -5,13 +5,25 @@
 #include "Player.h"
 
 void Player::drawCard(const ImmutableCard* card) {
-    cards.push_back(card);
+    _cards.push_back(card);
 }
 
 bool Player::hasNoCards() {
-    return cards.empty();
+    return _cards.empty();
 }
 
-Action Player::performAction() {
-    return {play(), act(), this};
+int Player::cardCount() {
+    return _cards.size();
+}
+
+void Player::setGame(Game *game) {
+    _game = game;
+}
+
+std::vector<const ImmutableCard *> &Player::getCards() {
+    return _cards;
+}
+
+void Player::clearCards() {
+    _cards.clear();
 }

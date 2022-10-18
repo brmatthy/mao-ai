@@ -15,11 +15,13 @@ class Correction {
 private:
 
     CorrectionStatus _status;
+    /**
+     * Contains the correct action. This will only be not nullptr when status is INVALID_ACT
+     */
     const Action* _action;
-    std::vector<Act> _correctActs;
 
 public:
-    Correction(CorrectionStatus status, const Action* action, std::vector<Act> correctActs);
+    Correction(CorrectionStatus status, const Action* action);
 
 };
 
