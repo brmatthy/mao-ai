@@ -3,21 +3,55 @@
 //
 
 #include "Game.h"
-#include "./validation/CorrectionStatus.h"
 #include "validation/Correction.h"
 #include "validation/PlayValidation.h"
 #include "validation/ActValidation.h"
+#include <algorithm>
+#include <random>
+
+Game::Game() : Game(5){}
+
+Game::Game(short maxCards) {
+    _maxCards = maxCards;
+
+    // create all the cards
+    for(int typeInt = HEARTS; typeInt < SPADES + 1; typeInt++){
+        CardType type = static_cast<CardType>(typeInt);
+        for(int numberInt = ACE; numberInt < KING + 1; numberInt++){
+            CardNumber number = static_cast<CardNumber>(numberInt);
+            const ImmutableCard* card = new ImmutableCard(type, number);
+            _pile.push_front(card);
+        }
+    }
+    // shuffle them
+    shufflePile();
+}
+
+Game::~Game() {
+    // Get al the cards back from the players
+    for(Player* p : _players){
+        takeAllCardsFromPlayer(p);
+    }
+
+    // Delete all the cards
+    for(const ImmutableCard* card : _pile){
+        delete card;
+    }
+}
 
 void Game::drawNewCard(Player* player) {
-    if(player->cardCount() < _maxCcards || _maxCcards < 3){
+    if(player->cardCount() < _maxCards || _maxCards < 3){
         player->drawCard(getTopCard());
         return;
     }
 }
 
 const ImmutableCard* Game::getTopCard() {
-    const ImmutableCard* card = _pile.front();
-    _pile.pop();
+    const ImmutableCard* card = _pile.back();
+    _pile.pop_back();
+    if(_pile.empty()){
+        flushActionsToPileAndShuffle();
+    }
     return card;
 }
 
@@ -43,7 +77,7 @@ void Game::pushAction(Action& action) {
 void Game::actionActCorrection(Player *p, const ImmutableCard *card) {
     std::unordered_multiset<Act> acts = p->act(_played, card);
     std::unordered_multiset<Act> correctActs;
-    getCorrectActs(acts, _played, card);
+    getCorrectActs(correctActs, _played, card);
     Action action = {card, correctActs, p};
     if(!compareMultisets(correctActs, acts)){
         drawNewCard(p);
@@ -52,6 +86,28 @@ void Game::actionActCorrection(Player *p, const ImmutableCard *card) {
     }
     pushAction(action);
 }
+
+void Game::takeAllCardsFromPlayer(Player *p) {
+    for(const ImmutableCard* card: p->getCards()){
+        _pile.push_front(card);
+    }
+    p->clearCards();
+}
+void Game::flushActionsToPileAndShuffle() {
+    while (_played.size() > 5){
+        _pile.push_front(_played.front().getCard());
+        _played.pop_front();
+    }
+    shufflePile();
+
+}
+
+void Game::shufflePile() {
+    std::random_device rd;
+    std::mt19937 g(rd());
+    std::shuffle(_pile.begin(), _pile.end(),g);
+}
+
 
 void Game::step() {
     for(int i = 0; i < _players.size(); i++){
@@ -73,7 +129,7 @@ void Game::step() {
                     actionActCorrection(p,card);
                     hasActed = true;
                 }else{ // play a card
-                    ImmutableCard* card = p->play();
+                    const ImmutableCard* card = p->play();
                     if(playedCorrectCard(_played.at(_played.size() - 1).getCard(), card)){ // played a correct card
                         actionActCorrection(p,card);
                         if(card->getCardNumber() == TEN){
@@ -111,11 +167,14 @@ void Game::step() {
     nextRoot();
 }
 
+bool Game::isAtTurn(const Player *player) const {
+    return player == _players.at(_currentPlayer);
+}
 
+const std::deque<Action> &Game::getPlayed() const {
+    return _played;
+}
 
-
-
-
-
-
-
+void Game::addPlayer(Player *player) {
+    _players.push_back(player);
+}
