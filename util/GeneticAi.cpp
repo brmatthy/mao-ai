@@ -12,7 +12,7 @@ GeneticAi::GeneticAi(int size)
     _weights = new double[size];
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_real_distribution<double> dist(0, 1);
+    std::uniform_real_distribution<double> dist(-1, 1); //TODO VERSLAG: -1 was een 0, dit gaf altijd output true
     for(int i = 0; i < _size; i++)
     {
         _weights[i] = dist(gen);

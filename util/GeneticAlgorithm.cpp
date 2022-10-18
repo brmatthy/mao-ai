@@ -29,8 +29,18 @@ void GeneticAlgorithm::simulate(int iterations)
         }
         //TODO
         // sort based on faults
-        // delete the worst
-        // crossover best
+        std::cout << "BEST ai faults: " << _ais[0]->faults() << std::endl;
+        for(int i = _aiSize / 2; i < _aiSize; i++)
+        {
+            //delete the worst ais
+            //delete _ais[i];
+            //crossover
+            //_ais[i] = ;
+        }
+        for(int i = 0; i < _aiSize; i++)
+        {
+
+        }
         // mutate random
         // clean the ais
     }
