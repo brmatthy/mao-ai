@@ -5,12 +5,15 @@
 #ifndef MAO_AI_PLAYINTERFACE_H
 #define MAO_AI_PLAYINTERFACE_H
 
-
+#include <deque>
+#include <vector>
 #include "CorrectionAccepter.h"
+#include "../../game/card/ImmutableCard.h"
+#include "../../game/action/Action.h"
 
 class PlayInterface : public CorrectionAccepter {
 public:
-    virtual ~PlayInterface() = default;
+    ~PlayInterface() override = default;
     /**
      * Suggest a card to play. This function will only be called when wantsCard() is `false`
      * @param playerCards The cards to choose from

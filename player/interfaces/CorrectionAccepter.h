@@ -5,7 +5,6 @@
 #ifndef MAO_AI_CORRECTIONACCEPTER_H
 #define MAO_AI_CORRECTIONACCEPTER_H
 
-#include "../../game/validation/Correction.h"
 class Correction;
 
 class CorrectionAccepter {

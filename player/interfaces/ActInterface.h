@@ -5,12 +5,15 @@
 #ifndef MAO_AI_ACTINTERFACE_H
 #define MAO_AI_ACTINTERFACE_H
 
-
+#include <unordered_set>
+#include <deque>
 #include "CorrectionAccepter.h"
+#include "../../game/action/Action.h"
+#include "../../game/action/Act.h"
 
 class ActInterface : public CorrectionAccepter {
 public:
-    virtual ~ActInterface() = default;
+    ~ActInterface() override = default;
     /**
      * Tell the player all acts that must be performed with this card on this stack.
      * @param played The stack of the game containing the played actions
