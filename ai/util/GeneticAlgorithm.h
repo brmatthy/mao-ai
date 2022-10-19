@@ -29,13 +29,13 @@ public:
     /**
      * Deletes a Genetic Algorithm and all its data
      */
-    ~GeneticAlgorithm();
+    virtual ~GeneticAlgorithm() = default;
 
     /**
      * Simulate n generations of the network
      * @param generations number of iterations
      */
-    void execute(int generations) override;
+    void execute(int generations) final;
 
     /**
      * Print the current algorithm state (best and average)

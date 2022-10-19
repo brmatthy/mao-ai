@@ -7,8 +7,6 @@
 
 LayCardSimulator::LayCardSimulator(NeuralNetwork* network): Simulator(network) {}
 
-LayCardSimulator::~LayCardSimulator() {}
-
 void LayCardSimulator::simulate(GeneticAi* ai)
 {
     Correction correction(INVALID_CARD, nullptr);

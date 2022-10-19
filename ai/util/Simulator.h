@@ -20,6 +20,8 @@ public:
             _network = network;
     }
 
+    virtual ~Simulator() = default;
+
     /**
      * Simulate a game for a single AI, and do the correct corrections
      * @param ai the ai for which to simulate.

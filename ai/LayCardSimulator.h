@@ -14,18 +14,13 @@ public:
     * Creat a Simulator to simulate games
     * @param network the network from which to get the AI data
     */
-    LayCardSimulator(NeuralNetwork* network);
-
-    /**
-     * Destroy this simulator
-     */
-    ~LayCardSimulator();
+    explicit LayCardSimulator(NeuralNetwork* network);
 
     /**
      * Simulate a game for a single AI, and do the correct corrections
      * @param ai the ai for which to simulate.
      */
-    virtual void simulate(GeneticAi* ai);
+    void simulate(GeneticAi* ai) final;
 };
 
 

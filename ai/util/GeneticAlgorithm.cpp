@@ -17,11 +17,6 @@ GeneticAlgorithm::GeneticAlgorithm(GeneticAi** startAis, int aiSize, Simulator* 
     _best = 52*52;
 }
 
-GeneticAlgorithm::~GeneticAlgorithm()
-{
-    // everything created at construction no need for deletion
-}
-
 void GeneticAlgorithm::execute(int generations) {
     std::random_device rd;
     std::mt19937 gen(rd());

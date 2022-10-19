@@ -9,7 +9,7 @@
 #include "../../game/validation/Correction.h"
 
 class GeneticAi {
-protected:
+private:
     int _faults;
     double* _weights;
     int _size;
@@ -35,48 +35,48 @@ public:
     /**
      * Correct a mistake from the AI
      */
-    virtual void correct(Correction* correction);
+    void correct(Correction* correction);
 
     /**
      * See the number off faults of the AI
      * @return the amount of faults
      */
-    virtual int faults();
+    int faults();
 
     /**
      * Clean the Ai for a new simulation
      */
-    virtual void clean();
+    void clean();
 
     /**
      * Crossover with another AI
      * @param other the other AI to crossover with
      * @return a new GeneticAI
      */
-    GeneticAi* crossover(GeneticAi* other);
+     GeneticAi* crossover(GeneticAi* other);
 
      /**
       * Mutate the AI slightly
       */
-     virtual void mutate();
+     void mutate();
 
      /**
       * Get the Ai weights
       * @return the weights as a double array
       */
-     virtual double* getWeights();
+     double* getWeights();
 
      /**
       * Get the Ai weight size
       * @return the ai weight size
       */
-     virtual int getSize();
+     int getSize();
 
      /**
       * Prints the AI state (weights) as a string representing the weights array
       * @param out the output stream to write to.
       */
-     virtual void print(std::ostream& out);
+     void print(std::ostream& out);
 };
 
 
