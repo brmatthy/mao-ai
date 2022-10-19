@@ -8,14 +8,11 @@
 #include <fstream>
 #include "GeneticAlgorithm.h"
 
-GeneticAlgorithm::GeneticAlgorithm(GeneticAi** startAis, int aiSize, Simulator* simulator)
-{
-    _ais = startAis;
-    _aiSize = aiSize;
-    _simulator = simulator;
-    _avg = 52*52;
-    _best = 52*52;
-}
+GeneticAlgorithm::GeneticAlgorithm(GeneticAi** startAis, int aiSize, Simulator* simulator):
+    _ais(startAis),
+    _aiSize(aiSize),
+    _simulator(simulator)
+{}
 
 void GeneticAlgorithm::execute(int generations) {
     std::random_device rd;
@@ -41,7 +38,7 @@ void GeneticAlgorithm::execute(int generations) {
             //delete the worst ais
             delete _ais[i];
             //crossover
-            _ais[i] = _ais[dist(gen)]->crossover(_ais[dist(gen)]);
+            _ais[i] = _ais[dist(gen)]->crossover(*_ais[dist(gen)]);
             //mutate
             _ais[i]->mutate();
         }

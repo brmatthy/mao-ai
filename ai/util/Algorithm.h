@@ -7,6 +7,7 @@
 
 class Algorithm {
 public:
+    virtual ~Algorithm() = default;
     /**
      * Simulate n iterations of the network
      * @param iterations number of iterations

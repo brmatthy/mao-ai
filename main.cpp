@@ -2,8 +2,6 @@
 // Created by brent on 1/10/22.
 //
 
-
-
 #include <iostream>
 
 #include "ai/LayCardSimulator.h"
@@ -31,7 +29,7 @@ int main(){
     ais[0]->clean();
     simulator->simulate(ais[0]);
     std::cout << "FINAL ai faults: " << ais[0]->faults() << std::endl;
-    ais[0]->print(std::cout);
+    std::cout << ais[0] << std::endl;
 
     // DELETE
     delete algorithm;

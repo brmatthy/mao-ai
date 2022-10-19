@@ -5,11 +5,10 @@
 #include <random>
 #include "GeneticAi.h"
 
-GeneticAi::GeneticAi(int size)
+GeneticAi::GeneticAi(int size):
+    _weights(new double[size]),
+    _size(size)
 {
-    _size = size;
-    _faults = 0;
-    _weights = new double[size];
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_real_distribution<double> dist(-1, 1); //TODO VERSLAG: -1 was een 0, dit gaf altijd output true
@@ -19,11 +18,10 @@ GeneticAi::GeneticAi(int size)
     }
 }
 
-GeneticAi::GeneticAi(double* weights, int size)
-{
-    _size = size;
-    _weights = weights;
-}
+GeneticAi::GeneticAi(double* weights, int size):
+    _weights(weights),
+    _size(size)
+{}
 
 GeneticAi::~GeneticAi()
 {
@@ -35,38 +33,38 @@ void GeneticAi::clean()
     _faults = 0;
 }
 
-void GeneticAi::correct(Correction* correction)
+void GeneticAi::correct(const Correction& correction)
 {
     _faults++;
 }
 
-int GeneticAi::faults()
+int GeneticAi::faults() const
 {
     return _faults;
 }
 
-GeneticAi* GeneticAi::crossover(GeneticAi *other)
+GeneticAi* GeneticAi::crossover(const GeneticAi& other)
 {
-    if(other->_size != this->_size)
+    if(other._size != _size)
     {
         return nullptr;
     }
-    double* new_weights = new double[_size];
+    auto* new_weights = new double[_size];
     for(int i = 0; i < _size; i++)
     {
         if(i < _size / 2)
         {
-            new_weights[i] = this->_weights[i];
+            new_weights[i] = _weights[i];
         }
         else
         {
-            new_weights[i] = other->_weights[i];
+            new_weights[i] = other._weights[i];
         }
     }
     return new GeneticAi(new_weights, _size);
 }
 
-int GeneticAi::getSize()
+int GeneticAi::getSize() const
 {
     return _size;
 }
@@ -88,13 +86,14 @@ void GeneticAi::mutate()
     _weights[index2] = temp;
 }
 
-void GeneticAi::print(std::ostream& out)
+std::ostream& operator<<(std::ostream& out, const GeneticAi& ai)
 {
     out << "[ ";
-    for(int i = 0; i < _size; i++)
+    for(int i = 0; i < ai._size; i++)
     {
         if(i != 0) out << ", ";
-        out << "\"" << _weights[i] << "\"";
+        out << "\"" << ai._weights[i] << "\"";
     }
-    out << "]" << std::endl;
+    out << "]";
+    return out;
 }

@@ -15,8 +15,8 @@ private:
     GeneticAi** _ais;
     int _aiSize;
     Simulator* _simulator;
-    int _best;
-    int _avg;
+    int _best = 52*52;
+    int _avg = 52*52;
 public:
     /**
      * Initialize a genetic algoritm
@@ -29,13 +29,13 @@ public:
     /**
      * Deletes a Genetic Algorithm and all its data
      */
-    virtual ~GeneticAlgorithm() = default;
+    ~GeneticAlgorithm() override = default;
 
     /**
      * Simulate n generations of the network
      * @param generations number of iterations
      */
-    void execute(int generations) final;
+    void execute(int generations) override;
 
     /**
      * Print the current algorithm state (best and average)

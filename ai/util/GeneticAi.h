@@ -10,7 +10,7 @@
 
 class GeneticAi {
 private:
-    int _faults;
+    int _faults = 0;
     double* _weights;
     int _size;
 public:
@@ -35,13 +35,13 @@ public:
     /**
      * Correct a mistake from the AI
      */
-    void correct(Correction* correction);
+    void correct(const Correction& correction);
 
     /**
      * See the number off faults of the AI
      * @return the amount of faults
      */
-    int faults();
+    int faults() const;
 
     /**
      * Clean the Ai for a new simulation
@@ -53,7 +53,7 @@ public:
      * @param other the other AI to crossover with
      * @return a new GeneticAI
      */
-     GeneticAi* crossover(GeneticAi* other);
+     GeneticAi* crossover(const GeneticAi& other);
 
      /**
       * Mutate the AI slightly
@@ -70,13 +70,15 @@ public:
       * Get the Ai weight size
       * @return the ai weight size
       */
-     int getSize();
+     int getSize() const;
 
      /**
       * Prints the AI state (weights) as a string representing the weights array
       * @param out the output stream to write to.
+      * @param ai the ai to write.
+      * @return an output stream to continue the chain.
       */
-     void print(std::ostream& out);
+     friend std::ostream& operator<<(std::ostream& out, const GeneticAi& ai);
 };
 
 
