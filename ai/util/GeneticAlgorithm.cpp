@@ -8,7 +8,7 @@
 #include <fstream>
 #include "GeneticAlgorithm.h"
 
-GeneticAlgorithm::GeneticAlgorithm(GeneticAi** startAis, int aiSize, GeneticSimulator* simulator)
+GeneticAlgorithm::GeneticAlgorithm(GeneticAi** startAis, int aiSize, Simulator* simulator)
 {
     _ais = startAis;
     _aiSize = aiSize;
@@ -22,13 +22,12 @@ GeneticAlgorithm::~GeneticAlgorithm()
     // everything created at construction no need for deletion
 }
 
-void GeneticAlgorithm::simulate(int iterations)
-{
+void GeneticAlgorithm::execute(int generations) {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dist(0, 10);
-    std::ofstream file ("out.csv");
-    for(int generation = 1; generation <= iterations; generation++)
+    std::ofstream file ("out_large.csv");
+    for(int generation = 1; generation <= generations; generation++)
     {
         // simulate every AI
         int newavg = 0;

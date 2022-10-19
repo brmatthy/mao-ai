@@ -18,7 +18,7 @@ public:
      * Create a new geneticAi, weights are set randomly
      * @param size the size of the weights array
      */
-    GeneticAi(int size);
+    explicit GeneticAi(int size);
 
     /**
      * Create a new genetic AI with starting weights

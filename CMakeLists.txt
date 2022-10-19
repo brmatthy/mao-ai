@@ -30,10 +30,9 @@ add_executable(mao_ai
         ai/util/GeneticAlgorithm.h
         ai/util/GeneticAi.cpp
         ai/util/GeneticAi.h
-        ai/util/GeneticSimulator.cpp
-        ai/util/GeneticSimulator.h
+        ai/util/Simulator.h
         ai/LayCardSimulator.cpp
         ai/LayCardSimulator.h
         
         player/bot.cpp
-        player/bot.h)
+        player/bot.h ai/util/Algorithm.h)

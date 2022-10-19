@@ -5,7 +5,7 @@
 #include "LayCardSimulator.h"
 #include "../game/validation/PlayValidation.h"
 
-LayCardSimulator::LayCardSimulator(NeuralNetwork* network): GeneticSimulator(network) {}
+LayCardSimulator::LayCardSimulator(NeuralNetwork* network): Simulator(network) {}
 
 LayCardSimulator::~LayCardSimulator() {}
 
