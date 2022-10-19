@@ -15,5 +15,5 @@ CardNumber ImmutableCard::getCardNumber() const{
 }
 
 std::ostream &operator<<(std::ostream &os, const ImmutableCard &ic) {
-    return os << "(" << CardNumberToString(ic._number) << " of " << CardTypeToString(ic._type) << ")";
+    return os << CardTypeToString(ic._type) << CardNumberToString(ic._number);
 }

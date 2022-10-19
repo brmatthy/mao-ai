@@ -7,10 +7,10 @@
 
 const char* CardTypeToString(CardType ct){
     switch(ct){
-        case HEARTS: return "Hearts";
-        case CLOVERS: return "Clovers";
-        case DIAMONDS: return "Diamonds";
-        case SPADES: return "Spades";
+        case HEARTS: return "♥";
+        case CLOVERS: return "♣";
+        case DIAMONDS: return "♦";
+        case SPADES: return "♠";
         default: throw std::invalid_argument("No such card type");
     }
 }
@@ -27,19 +27,19 @@ Act toAct(CardType ct){
 
 const char* CardNumberToString(CardNumber cn){
     switch(cn){
-        case ACE: return "Ace";
-        case TWO: return "Two";
-        case THREE: return "Three";
-        case FOUR: return "Four";
-        case FIVE: return "Five";
-        case SIX: return "Six";
-        case SEVEN: return "Seven";
-        case EIGHT: return "Eight";
-        case NINE: return "Nine";
-        case TEN: return "Ten";
-        case JACK: return "Jack";
-        case QUEEN: return "Queen";
-        case KING: return "King";
+        case ACE: return "1";
+        case TWO: return "2";
+        case THREE: return "3";
+        case FOUR: return "4";
+        case FIVE: return "5";
+        case SIX: return "6";
+        case SEVEN: return "7";
+        case EIGHT: return "8";
+        case NINE: return "9";
+        case TEN: return "10";
+        case JACK: return "J";
+        case QUEEN: return "Q";
+        case KING: return "K";
         default: throw std::invalid_argument("No such card number");
     }
 }

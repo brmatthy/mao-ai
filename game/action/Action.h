@@ -53,6 +53,8 @@ public:
      */
     const Player* getPlayer() const;
 
+    friend std::ostream& operator<<(std::ostream& os, const Action& action);
+
 };
 
 

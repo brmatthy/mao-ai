@@ -20,6 +20,17 @@ const Player* Action::getPlayer() const{
     return _player;
 }
 
+std::ostream &operator<<(std::ostream &os, const Action &action) {
+    const ImmutableCard* card = action._card;
+    os << action._player << ": ";
+    if(card == nullptr){
+        os << "draw card" << std::endl;
+    }else{
+        os << *card << std::endl;
+    }
+    return os;
+}
+
 
 
 

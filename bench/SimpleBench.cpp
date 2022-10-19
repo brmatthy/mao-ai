@@ -6,7 +6,7 @@
 #include "../player/bot/Bot.h"
 
 void threeBotsTest(){
-    /*
+
     // create bots
     Bot bot1 = Bot();
     Bot bot2 = Bot();
@@ -26,12 +26,6 @@ void threeBotsTest(){
 
     // log the action stack
     for(const Action& action: game.getPlayed()){
-        const ImmutableCard* card = action.getCard();
-        std::cout << action.getPlayer() << ": ";
-        if(card == nullptr){
-            std::cout << "draw card" << std::endl;
-        }else{
-            std::cout << *card << std::endl;
-        }
-    }*/
+        std::cout << action;
+    }
 }
