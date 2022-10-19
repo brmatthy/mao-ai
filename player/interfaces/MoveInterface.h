@@ -6,24 +6,16 @@
 #define MAO_AI_MOVEINTERFACE_H
 
 
+#include "CorrectionAccepter.h"
 
-#include "../../game/validation/Correction.h"
-class Correction;
-
-class MoveInterface {
+class MoveInterface : public CorrectionAccepter {
 public:
+    virtual ~MoveInterface() = default;
     /**
      * Returns whether or not the player is at turn according to the mover
      * @return `true` if the player is at turn, `false` otherwise
      */
     virtual bool atTurn() = 0;
-
-    /**
-     * Handle the correction that the player received, this may or may not be useful
-     * @param correction The Correction
-     */
-    virtual void acceptCorrection(const Correction &correction) = 0;
-
 };
 
 

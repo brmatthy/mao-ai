@@ -6,11 +6,11 @@
 #define MAO_AI_PLAYINTERFACE_H
 
 
-#include "../../game/validation/Correction.h"
-class Correction;
+#include "CorrectionAccepter.h"
 
-class PlayInterface {
+class PlayInterface : public CorrectionAccepter {
 public:
+    virtual ~PlayInterface() = default;
     /**
      * Suggest a card to play. This function will only be called when wantsCard() is `false`
      * @param playerCards The cards to choose from
@@ -26,12 +26,6 @@ public:
      * @return `True` if the player wants to draw a card, `false` otherwise
      */
     virtual bool wantsCard(const std::deque<Action> &played, std::vector<const ImmutableCard *> &playerCards) = 0;
-
-    /**
-     * Handle the correction that the player received, this may or may not be useful
-     * @param correction The Correction
-     */
-    virtual void acceptCorrection(const Correction &correction) = 0;
 };
 
 
