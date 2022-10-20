@@ -26,16 +26,13 @@ Game::Game() {
 }
 
 Game::~Game() {
-    // cards are already taken from the players
 
+    // delete played cards
     for(const Action& action : _played){
-        const ImmutableCard* card = action.getCard();
-        if(card != nullptr){
-            _pile.push_front(card);
-        }
+        delete action.getCard();
     }
 
-    // Delete all the cards
+    // delete unplayed cards
     for(const ImmutableCard* card : _pile){
         delete card;
     }
@@ -43,7 +40,6 @@ Game::~Game() {
 
 void Game::drawNewCard(Player* player) {
     player->drawCard(getTopCard());
-    return;
 }
 
 const ImmutableCard* Game::getTopCard() {
@@ -134,7 +130,7 @@ void Game::step() {
             while (!hasActed && _gameIsNotFinished){
                 if(p->wantsCard()){ // draw a card
                     drawNewCard(p);
-                    ImmutableCard* card = nullptr;
+                    const ImmutableCard* card = nullptr;
                     actionActCorrection(p,card);
                     hasActed = true;
                 }else{ // play a card
