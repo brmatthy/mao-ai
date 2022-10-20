@@ -1,9 +1,6 @@
-//
 // Created by mats on 12/10/22.
-//
 
-#ifndef MAO_AI_GENETICAI_H
-#define MAO_AI_GENETICAI_H
+#pragma once
 
 #include <string>
 #include "../../game/validation/Correction.h"
@@ -80,6 +77,3 @@ public:
       */
      friend std::ostream& operator<<(std::ostream& out, const GeneticAi& ai);
 };
-
-
-#endif //MAO_AI_GENETICAI_H

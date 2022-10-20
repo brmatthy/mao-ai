@@ -38,7 +38,7 @@ void getActsForDraw(std::unordered_multiset<Act>& acts, const std::deque<Action>
 
 void getActsForCard(std::unordered_multiset<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard){
     // let all the rules say what acts must be performed
-    chnar(acts, played, newCard);
+    gnarr(acts, played, newCard);
     bong(acts, played, newCard);
     spades(acts, newCard);
     pleasantDay(acts, played, newCard);
@@ -56,10 +56,10 @@ int getTopCardReversedIndex(const std::deque<Action>& played){
 }
 
 
-void chnar(std::unordered_multiset<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard){
+void gnarr(std::unordered_multiset<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard){
     if(newCard->getCardType() == HEARTS
         || played.at(played.size() - getTopCardReversedIndex(played)).getCard()->getCardType() == HEARTS){
-        acts.insert(ACT_CHNAR);
+        acts.insert(ACT_GNARR);
     }
 }
 

@@ -1,24 +1,22 @@
-//
 // Created by mats on 12/10/22.
-//
 
 #include <random>
 #include "GeneticAi.h"
 
-GeneticAi::GeneticAi(int size):
+GeneticAi::GeneticAi(const int size):
     _weights(new double[size]),
     _size(size)
 {
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_real_distribution<double> dist(-1, 1); //TODO VERSLAG: -1 was een 0, dit gaf altijd output true
-    for(int i = 0; i < _size; i++)
+    std::uniform_real_distribution<double> dist(-1, 1);
+    for(int i = 0; i < _size; ++i)
     {
         _weights[i] = dist(gen);
     }
 }
 
-GeneticAi::GeneticAi(double* weights, int size):
+GeneticAi::GeneticAi(double* const weights, int const size):
     _weights(weights),
     _size(size)
 {}
@@ -33,9 +31,9 @@ void GeneticAi::clean()
     _faults = 0;
 }
 
-void GeneticAi::correct(const Correction& correction)
+void GeneticAi::correct(const Correction&)
 {
-    _faults++;
+    ++_faults;
 }
 
 int GeneticAi::faults() const
@@ -49,10 +47,11 @@ GeneticAi* GeneticAi::crossover(const GeneticAi& other)
     {
         return nullptr;
     }
-    auto* new_weights = new double[_size];
-    for(int i = 0; i < _size; i++)
+    auto* const new_weights = new double[_size];
+    const int divider = _size / 2;
+    for(int i = 0; i < _size; ++i)
     {
-        if(i < _size / 2)
+        if(i < divider)
         {
             new_weights[i] = _weights[i];
         }
@@ -75,11 +74,12 @@ double *GeneticAi::getWeights()
 }
 
 void GeneticAi::mutate() {
+    const int number_of_mutations = 6;
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dist(0, _size - 1);
     std::uniform_real_distribution<double> valdist(-1, 1);
-    for(int i = 0; i < 6; i++)
+    for(int i = 0; i < number_of_mutations; ++i)
     {
         _weights[dist(gen)] = valdist(gen);
     }
@@ -88,9 +88,9 @@ void GeneticAi::mutate() {
 std::ostream& operator<<(std::ostream& out, const GeneticAi& ai)
 {
     out << "[ ";
-    for(int i = 0; i < ai._size; i++)
+    for(int i = 0; i < ai._size; ++i)
     {
-        if(i != 0) out << ", ";
+        if(i != 0) {out << ", ";}
         out << "\"" << ai._weights[i] << "\"";
     }
     out << "]";

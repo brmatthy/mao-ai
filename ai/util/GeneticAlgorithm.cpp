@@ -1,6 +1,4 @@
-//
 // Created by mats on 12/10/22.
-//
 
 #include <iostream>
 #include <random>
@@ -8,32 +6,32 @@
 #include <fstream>
 #include "GeneticAlgorithm.h"
 
-GeneticAlgorithm::GeneticAlgorithm(GeneticAi** startAis, int aiSize, Simulator* simulator):
+GeneticAlgorithm::GeneticAlgorithm(GeneticAi** const startAis, int const aiSize, Simulator* const simulator):
     _ais(startAis),
     _aiSize(aiSize),
     _simulator(simulator)
 {}
 
-void GeneticAlgorithm::execute(int generations) {
+void GeneticAlgorithm::execute(int const generations) {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dist(0, 10);
     std::ofstream file ("out_test.csv");
-    for(int generation = 1; generation <= generations; generation++)
+    for(int generation = 1; generation <= generations; ++generation)
     {
         // simulate every AI
         int newavg = 0;
-        for(int i = 0; i < _aiSize; i++)
+        for(int i = 0; i < _aiSize; ++i)
         {
             _simulator->simulate(_ais[i]);
             newavg += _ais[i]->faults();
         }
         newavg = newavg / _aiSize;
         //Sort array based on faults
-        std::sort(_ais, _ais + _aiSize,[] (GeneticAi const* lhs, GeneticAi const* rhs) {
+        std::sort(_ais, _ais + _aiSize,[] (const GeneticAi* const lhs, const GeneticAi* const rhs) {
                      return lhs->faults() < rhs->faults();
         });
-        for(int i = _aiSize / 2; i < _aiSize; i++)
+        for(int i = _aiSize / 2; i < _aiSize; ++i)
         {
             //delete the worst ais
             delete _ais[i];
@@ -44,7 +42,7 @@ void GeneticAlgorithm::execute(int generations) {
         }
 
         // Change state
-        int newbest = _ais[0]->faults();
+        const int newbest = _ais[0]->faults();
         bool changed = false;
         if(newbest < _best)
         {
@@ -57,13 +55,13 @@ void GeneticAlgorithm::execute(int generations) {
             changed = true;
         }
 
-        for(int i = 0; i < _aiSize; i++)
+        for(int i = 0; i < _aiSize; ++i)
         {
             // clean the ais
             _ais[i]->clean();
         }
 
-        //PRINT
+        // PRINT
         print(file);
         if(changed)
         {

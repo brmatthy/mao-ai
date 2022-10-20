@@ -33,9 +33,9 @@ public:
 
     /**
      * Simulate n generations of the network
-     * @param generations number of iterations
+     * @param iterations number of generations
      */
-    void execute(int generations) override;
+    void execute(int iterations) override;
 
     /**
      * Print the current algorithm state (best and average)

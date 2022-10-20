@@ -13,7 +13,7 @@
  * All the possible acts
  */
 enum Act{
-    ACT_CHNAR,
+    ACT_GNARR,
     ACT_BONG,
     ACT_HAVE_A_PLEASANT_DAY,
     ACT_THANK_YOU,
