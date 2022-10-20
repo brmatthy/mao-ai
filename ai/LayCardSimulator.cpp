@@ -4,6 +4,7 @@
 
 #include "LayCardSimulator.h"
 #include "../game/validation/PlayValidation.h"
+#include "../util/EnumToVector.h"
 
 LayCardSimulator::LayCardSimulator(NeuralNetwork* network): GeneticSimulator(network) {}
 
@@ -18,21 +19,21 @@ void LayCardSimulator::simulate(GeneticAi* ai)
     {
         i = false;
     }
-    for(int type = HEARTS; type <= SPADES; type++)
+    for(CardType type : EnumToVector::getCardTypeVector())
     {
-        for(int number = ACE; number <= KING; number++)
+        for(CardNumber number : EnumToVector::getCardNumberVector())
         {
             input[index] = true;
             _network->calculate(ai->getWeights(), input);
             bool* output = _network->getOutputs();
             input[index] = false;
             int outindex = 0;
-            for(int outtype = HEARTS; outtype <= SPADES; outtype++)
+            for(CardType outtype : EnumToVector::getCardTypeVector())
             {
-                for (int outnumber = ACE; outnumber <= KING; outnumber++) 
+                for(CardNumber outnumber : EnumToVector::getCardNumberVector())
                 {
-                    ImmutableCard card(static_cast<CardType>(type), static_cast<CardNumber>(number));
-                    ImmutableCard played(static_cast<CardType>(outtype), static_cast<CardNumber>(outnumber));
+                    ImmutableCard card(type, number);
+                    ImmutableCard played(outtype, outnumber);
                     bool didplay = output[outindex];
                     bool mustplay = playedCorrectCard(&card, &played);
                     if(didplay != mustplay)

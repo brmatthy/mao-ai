@@ -10,12 +10,14 @@
 /**
  * All possible card types
  */
-enum CardType{
+enum class CardType{
     HEARTS,
     CLOVERS,
     DIAMONDS,
     SPADES
 };
+
+
 
 const char* CardTypeToString(CardType ct);
 
@@ -24,7 +26,7 @@ Act toAct(CardType ct);
 /**
  * All possible card numbers or figures
  */
-enum CardNumber{
+enum class CardNumber{
     ACE,
     TWO,
     THREE,
