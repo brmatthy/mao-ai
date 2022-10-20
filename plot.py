@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 pointsBest = []
 pointsAvg = []
 
-filename = 'out'
+filename = 'out_new'
 
 # read csv file
 with open('cmake-build-debug/' + filename + '.csv') as csv_file:

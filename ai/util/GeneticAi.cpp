@@ -74,16 +74,15 @@ double *GeneticAi::getWeights()
     return _weights;
 }
 
-void GeneticAi::mutate()
-{
+void GeneticAi::mutate() {
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dist(0, _size-1);
-    int index1 = dist(gen);
-    int index2 = dist(gen);
-    double temp = _weights[index1];
-    _weights[index1] = _weights[index2];
-    _weights[index2] = temp;
+    std::uniform_int_distribution<> dist(0, _size - 1);
+    std::uniform_real_distribution<double> valdist(-1, 1);
+    for(int i = 0; i < 6; i++)
+    {
+        _weights[dist(gen)] = valdist(gen);
+    }
 }
 
 std::ostream& operator<<(std::ostream& out, const GeneticAi& ai)

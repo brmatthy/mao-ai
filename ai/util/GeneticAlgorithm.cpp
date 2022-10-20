@@ -18,7 +18,7 @@ void GeneticAlgorithm::execute(int generations) {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dist(0, 10);
-    std::ofstream file ("out_large.csv");
+    std::ofstream file ("out_test.csv");
     for(int generation = 1; generation <= generations; generation++)
     {
         // simulate every AI
@@ -30,7 +30,7 @@ void GeneticAlgorithm::execute(int generations) {
         }
         newavg = newavg / _aiSize;
         //Sort array based on faults
-        std::sort(_ais, _ais + _aiSize,[] (GeneticAi *lhs, GeneticAi *rhs) {
+        std::sort(_ais, _ais + _aiSize,[] (GeneticAi const* lhs, GeneticAi const* rhs) {
                      return lhs->faults() < rhs->faults();
         });
         for(int i = _aiSize / 2; i < _aiSize; i++)
