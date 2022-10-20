@@ -52,7 +52,9 @@ const ImmutableCard* Game::getTopCard() {
     if(_pile.empty()){
         flushActionsToPileAndShuffle();
         // if the pile is still empty, then all the cards are with the players: end the game
-        _gameIsNotFinished = false;
+        if(_pile.empty()){
+            _gameIsNotFinished = false;
+        }
     }
     return card;
 }
@@ -122,14 +124,14 @@ void Game::step() {
 
         if(_currentPlayer == i){ // player at turn
             // hand cards until player realizes it's his turn
-            while (!p->myTurn()){
+            while (!p->myTurn() && _gameIsNotFinished){
                 drawNewCard(p);
                 const Correction correction = Correction(NOT_PLAYED_AT_TURN, nullptr);
                 p->acceptCorrection(correction);
             }
             // now player wants to move
             bool hasActed = false;
-            while (!hasActed){
+            while (!hasActed && _gameIsNotFinished){
                 if(p->wantsCard()){ // draw a card
                     drawNewCard(p);
                     ImmutableCard* card = nullptr;
