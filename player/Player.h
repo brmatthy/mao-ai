@@ -13,10 +13,16 @@
 #include "../game/action/Act.h"
 #include "../game/validation/Correction.h"
 #include "../game/Game.h"
+#include "interfaces/ActInterface.h"
+#include "interfaces/MoveInterface.h"
+#include "interfaces/PlayInterface.h"
 
 class Action;
 class Correction;
 class Game;
+class MoveInterface;
+class PlayInterface;
+class ActInterface;
 
 /**
  * This is an abstract base class for any player.
@@ -27,8 +33,20 @@ protected:
     std::vector<const ImmutableCard*> _cards;
     const Game* _game;
 
+    MoveInterface* _mover;
+    PlayInterface* _cardPlayer;
+    ActInterface* _actor;
 
 public:
+
+    /**
+     * Create a player with it's aid classes. The aid classes are given to the player, and the player is not responsible
+     * for it' deletions
+     * @param mover The class which determines if the player will move or not
+     * @param cardPlayer The class which determines if the player draw or play a card, and what card to play
+     * @param actor The class which determines what acts the player will do
+     */
+    Player( MoveInterface* mover, PlayInterface* cardPlayer, ActInterface* actor);
 
     /**
      * Let the player play a card, remove the pointer from the card vector
@@ -36,26 +54,26 @@ public:
      * a correct move. (when the wantsCard() function returns `false`)
      * @return A reference to the card, cannot be nullptr
      */
-    virtual const ImmutableCard* play() = 0;
+    const ImmutableCard* play();
 
     /**
      * Let the player do an action after playing a card
      * If the card is nullptr than it means you just drew a card instead of playing
      * @return The acts
      */
-    virtual const std::unordered_multiset<Act> act(const std::deque<Action>& played, const ImmutableCard* played_card) = 0;
+    const std::unordered_multiset<Act> act(const std::deque<Action>& played, const ImmutableCard* played_card);
 
     /**
      * Ask the player if he thinks it's his turn
      * @return `True` if the player thinks it's his turn, `false` otherwise
      */
-    virtual bool myTurn() = 0;
+    bool myTurn();
 
     /**
      * Ask the player if he wants to draw a card
      * @return `True` if the player wants to draw a card, `false` otherwise
      */
-    virtual bool wantsCard() = 0;
+    bool wantsCard();
 
     /**
      * If the player played out of turn or made an error in it's action, he receives a Correction
@@ -98,6 +116,12 @@ public:
      * Clears the card vector. Cards are stored on the heap, make sure to delete them beforehand
      */
      void clearCards();
+
+     /**
+      * Get the game that this player is playing
+      * @return the game
+      */
+     const Game* getGame();
 };
 
 

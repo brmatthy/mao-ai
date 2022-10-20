@@ -26,16 +26,13 @@ Game::Game() {
 }
 
 Game::~Game() {
-    // cards are already taken from the players
 
+    // delete played cards
     for(const Action& action : _played){
-        const ImmutableCard* card = action.getCard();
-        if(card != nullptr){
-            _pile.push_front(card);
-        }
+        delete action.getCard();
     }
 
-    // Delete all the cards
+    // delete unplayed cards
     for(const ImmutableCard* card : _pile){
         delete card;
     }
@@ -43,7 +40,6 @@ Game::~Game() {
 
 void Game::drawNewCard(Player* player) {
     player->drawCard(getTopCard());
-    return;
 }
 
 const ImmutableCard* Game::getTopCard() {
@@ -52,7 +48,9 @@ const ImmutableCard* Game::getTopCard() {
     if(_pile.empty()){
         flushActionsToPileAndShuffle();
         // if the pile is still empty, then all the cards are with the players: end the game
-        _gameIsNotFinished = false;
+        if(_pile.empty()){
+            _gameIsNotFinished = false;
+        }
     }
     return card;
 }
@@ -122,17 +120,17 @@ void Game::step() {
 
         if(_currentPlayer == i){ // player at turn
             // hand cards until player realizes it's his turn
-            while (!p->myTurn()){
+            while (!p->myTurn() && _gameIsNotFinished){
                 drawNewCard(p);
                 const Correction correction = Correction(NOT_PLAYED_AT_TURN, nullptr);
                 p->acceptCorrection(correction);
             }
             // now player wants to move
             bool hasActed = false;
-            while (!hasActed){
+            while (!hasActed && _gameIsNotFinished){
                 if(p->wantsCard()){ // draw a card
                     drawNewCard(p);
-                    ImmutableCard* card = nullptr;
+                    const ImmutableCard* card = nullptr;
                     actionActCorrection(p,card);
                     hasActed = true;
                 }else{ // play a card
