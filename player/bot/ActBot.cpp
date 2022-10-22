@@ -5,8 +5,8 @@
 #include "ActBot.h"
 #include "../../game/validation/ActValidation.h"
 
-const std::unordered_multiset<Act> ActBot::act(const std::deque<Action> &played, const ImmutableCard *played_card) {
-    std::unordered_multiset<Act> acts;
+const std::unordered_set<Act> ActBot::act(const std::deque<Action> &played, const ImmutableCard *played_card) {
+    std::unordered_set<Act> acts;
     getCorrectActs(acts, played, played_card);
     return acts;
 }

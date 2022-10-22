@@ -10,7 +10,7 @@
 
 class QActAI : public ActInterface {
 public:
-    const std::unordered_multiset<Act> act(const std::deque<Action> &played, const ImmutableCard *played_card) override;
+    const std::unordered_set<Act> act(const std::deque<Action> &played, const ImmutableCard *played_card) override;
 
     void acceptCorrection(const Correction &correction) override;
 };

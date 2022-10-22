@@ -61,7 +61,7 @@ public:
      * If the card is nullptr than it means you just drew a card instead of playing
      * @return The acts
      */
-    const std::unordered_multiset<Act> act(const std::deque<Action>& played, const ImmutableCard* played_card);
+    const std::unordered_set<Act> act(const std::deque<Action>& played, const ImmutableCard* played_card);
 
     /**
      * Ask the player if he thinks it's his turn

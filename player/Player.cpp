@@ -42,7 +42,7 @@ const ImmutableCard *Player::play() {
     return card;
 }
 
-const std::unordered_multiset<Act> Player::act(const std::deque<Action> &played, const ImmutableCard *played_card) {
+const std::unordered_set<Act> Player::act(const std::deque<Action> &played, const ImmutableCard *played_card) {
     return _actor->act(played, played_card);
 }
 

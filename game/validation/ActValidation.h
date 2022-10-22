@@ -9,22 +9,22 @@
 #include "../action/Action.h"
 
 
-void getCorrectActs(std::unordered_multiset<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard);
+void getCorrectActs(std::unordered_set<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard);
 
-bool compareMultisets(const std::unordered_multiset<Act>& correctActs, const std::unordered_multiset<Act>& acts);
+bool compareMultisets(const std::unordered_set<Act>& correctActs, const std::unordered_set<Act>& acts);
 
-void getActsForDraw(std::unordered_multiset<Act>& acts, const std::deque<Action>& played);
+void getActsForDraw(std::unordered_set<Act>& acts, const std::deque<Action>& played);
 
-void getActsForCard(std::unordered_multiset<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard);
+void getActsForCard(std::unordered_set<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard);
 
 int getTopCardReversedIndex(const std::deque<Action>& played);
 
-void chnar(std::unordered_multiset<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard);
+void chnar(std::unordered_set<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard);
 
-void bong(std::unordered_multiset<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard);
+void bong(std::unordered_set<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard);
 
-void spades(std::unordered_multiset<Act>& acts, const ImmutableCard* newCard);
+void spades(std::unordered_set<Act>& acts, const ImmutableCard* newCard);
 
-void pleasantDay(std::unordered_multiset<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard);
+void pleasantDay(std::unordered_set<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard);
 
 #endif //MAO_AI_ACTVALIDATION_H

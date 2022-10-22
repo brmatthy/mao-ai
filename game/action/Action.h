@@ -26,14 +26,14 @@ private:
     /**
      * The acts of the action.
      */
-    const std::unordered_multiset<Act> _acts;
+    const std::unordered_set<Act> _acts;
     /**
      * The player who did this action
      */
      const Player* _player;
 
 public:
-    Action(const ImmutableCard* card, const std::unordered_multiset<Act> acts, const Player* player);
+    Action(const ImmutableCard* card, const std::unordered_set<Act> acts, const Player* player);
 
     /**
      * Get a reference to the card
@@ -45,7 +45,7 @@ public:
      * Get the action
      * @return the action
      */
-    const std::unordered_multiset<Act>& getAct() const;
+    const std::unordered_set<Act>& getAct() const;
 
     /**
      * Get a reference to the player

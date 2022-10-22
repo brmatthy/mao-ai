@@ -74,13 +74,13 @@ void Game::pushAction(Action& action) {
 
 
 void Game::actionActCorrection(Player *p, const ImmutableCard *card) {
-    std::unordered_multiset<Act> acts = p->act(_played, card);
-    std::unordered_multiset<Act> correctActs;
+    std::unordered_set<Act> acts = p->act(_played, card);
+    std::unordered_set<Act> correctActs;
     getCorrectActs(correctActs, _played, card);
     Action action = {card, correctActs, p};
     if(!compareMultisets(correctActs, acts)){
         drawNewCard(p);
-        const Correction correction = Correction(INVALID_ACT, &action);
+        const Correction correction = Correction(CorrectionStatus::CHNAR, &action);
         p->acceptCorrection(correction);
     }
     pushAction(action);
@@ -121,7 +121,7 @@ void Game::step() {
             // hand cards until player realizes it's his turn
             while (!p->myTurn() && _gameIsNotFinished){
                 drawNewCard(p);
-                const Correction correction = Correction(NOT_PLAYED_AT_TURN, nullptr);
+                const Correction correction = Correction(CorrectionStatus::NOT_PLAYED_AT_TURN, nullptr);
                 p->acceptCorrection(correction);
             }
             // now player wants to move
@@ -150,7 +150,7 @@ void Game::step() {
                         // punish with extra card
                         drawNewCard(p);
                         // create and tell the correction to the player
-                        const Correction correction = Correction(INVALID_CARD, nullptr);
+                        const Correction correction = Correction(CorrectionStatus::INVALID_CARD, nullptr);
                         p->acceptCorrection(correction);
                     }
                 }
@@ -160,9 +160,9 @@ void Game::step() {
                 CorrectionStatus status;
                 if(p->wantsCard()){ // drew card out of turn
                     drawNewCard(p);
-                    status = DREW_CARD_OUT_OF_TURN;
+                    status = CorrectionStatus::DREW_CARD_OUT_OF_TURN;
                 }else{ // wanted to play out of turn
-                    status = PLAYED_OUT_OF_TURN;
+                    status = CorrectionStatus::PLAYED_OUT_OF_TURN;
                 }
                 // Tell the player it is not his turn
                 drawNewCard(p);
