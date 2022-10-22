@@ -30,8 +30,8 @@ bool compareMultisets(const std::unordered_multiset<Act>& correctActs, const std
 }
 
 void getActsForDraw(std::unordered_multiset<Act>& acts, const std::deque<Action>& played){
-    if(played.at(played.size() - getTopCardReversedIndex(played)).getCard()->getCardNumber() == SEVEN){
-        acts.insert(ACT_THANK_YOU);
+    if(played.at(played.size() - getTopCardReversedIndex(played)).getCard()->getCardNumber() == CardNumber::SEVEN){
+        acts.insert(Act::THANK_YOU);
     }
 }
 
@@ -57,16 +57,16 @@ int getTopCardReversedIndex(const std::deque<Action>& played){
 
 
 void chnar(std::unordered_multiset<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard){
-    if(newCard->getCardType() == HEARTS
-        || played.at(played.size() - getTopCardReversedIndex(played)).getCard()->getCardType() == HEARTS){
-        acts.insert(ACT_CHNAR);
+    if(newCard->getCardType() == CardType::HEARTS
+        || played.at(played.size() - getTopCardReversedIndex(played)).getCard()->getCardType() == CardType::HEARTS){
+        acts.insert(Act::CHNAR);
     }
 }
 
 void bong(std::unordered_multiset<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard){
     const ImmutableCard* current = newCard;
-    for (int i = getTopCardReversedIndex(played); current->getCardNumber() == EIGHT; i++){
-        acts.insert(ACT_BONG);
+    for (int i = getTopCardReversedIndex(played); current->getCardNumber() == CardNumber::EIGHT; i++){
+        acts.insert(Act::BONG);
         current = played.at(played.size() - i).getCard();
         while (current == nullptr){
             i++;
@@ -76,20 +76,20 @@ void bong(std::unordered_multiset<Act>& acts, const std::deque<Action>& played, 
 }
 
 void spades(std::unordered_multiset<Act>& acts, const ImmutableCard* newCard){
-    if(newCard->getCardType() == SPADES){
+    if(newCard->getCardType() == CardType::SPADES){
         acts.insert(toAct(newCard->getCardNumber()));
-        acts.insert(ACT_SPADES);
+        acts.insert(Act::SPADES);
         acts.insert(toAct(newCard->getCardNumber()));
     }
 }
 
 void pleasantDay(std::unordered_multiset<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard){
-    if(newCard->getCardNumber() == SEVEN){
-        acts.insert(ACT_HAVE_A_PLEASANT_DAY);
+    if(newCard->getCardNumber() == CardNumber::SEVEN){
+        acts.insert(Act::HAVE_A_PLEASANT_DAY);
     }
     const ImmutableCard* card = played.back().getCard();
-    if(card != nullptr && card->getCardNumber() == SEVEN){
-        acts.insert(ACT_THANK_YOU);
+    if(card != nullptr && card->getCardNumber() == CardNumber::SEVEN){
+        acts.insert(Act::THANK_YOU);
     }
 }
 

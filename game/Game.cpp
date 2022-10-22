@@ -6,6 +6,7 @@
 #include "validation/Correction.h"
 #include "validation/PlayValidation.h"
 #include "validation/ActValidation.h"
+#include "../util/EnumToVector.h"
 #include <algorithm>
 #include <random>
 
@@ -13,10 +14,8 @@
 
 Game::Game() {
     // create all the cards
-    for(int typeInt = HEARTS; typeInt < SPADES + 1; typeInt++){
-        CardType type = static_cast<CardType>(typeInt);
-        for(int numberInt = ACE; numberInt < KING + 1; numberInt++){
-            CardNumber number = static_cast<CardNumber>(numberInt);
+    for(CardType type : EnumToVector::getCardTypeVector()){
+        for(CardNumber number : EnumToVector::getCardNumberVector()){
             const ImmutableCard* card = new ImmutableCard(type, number);
             _pile.push_front(card);
         }
@@ -137,7 +136,7 @@ void Game::step() {
                     const ImmutableCard* card = p->play();
                     if(playedCorrectCard(_played.at(_played.size() - getTopCardReversedIndex(_played)).getCard(), card)){ // played a correct card
                         actionActCorrection(p,card);
-                        if(card->getCardNumber() == TEN){
+                        if(card->getCardNumber() == CardNumber::TEN){
                             switchDirection();
                         }
                         // check if player has won the game

@@ -5,37 +5,34 @@
 #ifndef MAO_AI_ACT_H
 #define MAO_AI_ACT_H
 
-#include "../card/CardDetail.h"
-
-
 
 /**
  * All the possible acts
  */
-enum Act{
-    ACT_CHNAR,
-    ACT_BONG,
-    ACT_HAVE_A_PLEASANT_DAY,
-    ACT_THANK_YOU,
-    ACT_MAO,
-    ACT_WAVE,
-    ACT_HEARTS,
-    ACT_CLOVERS,
-    ACT_DIAMONDS,
-    ACT_SPADES,
-    ACT_ACE,
-    ACT_TWO,
-    ACT_THREE,
-    ACT_FOUR,
-    ACT_FIVE,
-    ACT_SIX,
-    ACT_SEVEN,
-    ACT_EIGHT,
-    ACT_NINE,
-    ACT_TEN,
-    ACT_JACK,
-    ACT_QUEEN,
-    ACT_KING
+enum class Act{
+    CHNAR,
+    BONG,
+    HAVE_A_PLEASANT_DAY,
+    THANK_YOU,
+    MAO,
+    WAVE,
+    HEARTS,
+    CLOVERS,
+    DIAMONDS,
+    SPADES,
+    ACE,
+    TWO,
+    THREE,
+    FOUR,
+    FIVE,
+    SIX,
+    SEVEN,
+    EIGHT,
+    NINE,
+    TEN,
+    JACK,
+    QUEEN,
+    KING
 };
 
 
