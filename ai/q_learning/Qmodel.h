@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <algorithm>
+#include "../../util/util.h"
 
 template<class S, class A>
 class Qmodel {
@@ -61,9 +62,9 @@ public:
 
     /**
      * Update a value in the Q-table with a given reward.
-     * @param state
-     * @param action
-     * @param r
+     * @param state The state
+     * @param action The action
+     * @param r The reward.
      */
     void valueUpdate(const S& state, const A& action, double r);
 
@@ -76,13 +77,8 @@ public:
 
 template<class S, class A>
 Qmodel<S, A>::Qmodel(std::vector<S> states, std::vector<A> actions, double alpha): _states(states), _actions(actions) {
-    if(alpha < 0){ // too low
-        _alpha = 0;
-    } else if(alpha <= 1){ // in range
-        _alpha = alpha;
-    } else{ // too high
-        _alpha = 1;
-    }
+    _alpha = clamp(alpha, 0.0, 1.0);
+
     int rows = states.size();
     _table = new double*[rows];
     for(int r = 0; r < rows; ++r){
@@ -125,6 +121,16 @@ int Qmodel<S, A>::getIndexOfAction(const A &action) const {
         return -1;
     }
     return it - begin;
+}
+
+template<class S, class A>
+bool Qmodel<S, A>::doAction(const S &state, const A &action) const {
+    return _table[getIndexOfState(state)][getIndexOfAction(action)] > 0;
+}
+
+template<class S, class A>
+void Qmodel<S, A>::valueUpdate(const S &state, const A &action, double r) {
+
 }
 
 

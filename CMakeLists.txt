@@ -36,4 +36,4 @@ add_executable(mao_ai
         ai/LayCardSimulator.h
 
         player/bot/Bot.cpp
-        player/bot/Bot.h bench/SimpleBench.cpp bench/SimpleBench.h player/bot/ActBot.cpp player/bot/ActBot.h player/bot/PlayBot.cpp player/bot/PlayBot.h player/bot/MoveBot.cpp player/bot/MoveBot.h player/interfaces/MoveInterface.h player/interfaces/PlayInterface.h player/interfaces/ActInterface.h player/interfaces/CorrectionAccepter.h ai/ActAi/QActAI.cpp ai/ActAi/QActAI.h util/EnumToVector.cpp util/EnumToVector.h ai/q_learning/Qmodel.h)
+        player/bot/Bot.h bench/SimpleBench.cpp bench/SimpleBench.h player/bot/ActBot.cpp player/bot/ActBot.h player/bot/PlayBot.cpp player/bot/PlayBot.h player/bot/MoveBot.cpp player/bot/MoveBot.h player/interfaces/MoveInterface.h player/interfaces/PlayInterface.h player/interfaces/ActInterface.h player/interfaces/CorrectionAccepter.h ai/ActAi/QActAI.cpp ai/ActAi/QActAI.h util/EnumToVector.cpp util/EnumToVector.h ai/q_learning/Qmodel.h util/util.cpp util/util.h)
