@@ -61,13 +61,24 @@ public:
     bool doAction(const S& state, const A& action) const;
 
     /**
-     * Update a value in the Q-table with a given reward.
+     * Update a value in the Q-table, while neglecting any future influence
+     * @see <a href="https://en.wikipedia.org/wiki/Q-learning#Algorithm">Q-learning algorithm</a>
      * @param state The state
      * @param action The action
-     * @param r The reward.
+     * @param r The reward
      */
     void valueUpdate(const S& state, const A& action, double r);
 
+    /**
+     * Update a value in the Q-table.
+     * @see <a href="https://en.wikipedia.org/wiki/Q-learning#Algorithm">Q-learning algorithm</a>
+     * @param state The state
+     * @param action The action
+     * @param r The reward
+     * @param df The discount factor in range [0.1]
+     * @param ofv The estimate of optimal future value
+     */
+    void valueUpdate(const S& state, const A& action, double r, double df, double ofv);
 };
 
 
@@ -76,9 +87,7 @@ public:
  */
 
 template<class S, class A>
-Qmodel<S, A>::Qmodel(std::vector<S> states, std::vector<A> actions, double alpha): _states(states), _actions(actions) {
-    _alpha = clamp(alpha, 0.0, 1.0);
-
+Qmodel<S, A>::Qmodel(std::vector<S> states, std::vector<A> actions, double alpha): _states(states), _actions(actions), _alpha(clamp(alpha, 0.0, 1.0)) {
     int rows = states.size();
     _table = new double*[rows];
     for(int r = 0; r < rows; ++r){
@@ -123,6 +132,11 @@ int Qmodel<S, A>::getIndexOfAction(const A &action) const {
     return it - begin;
 }
 
+
+/*
+ * Public functions
+ */
+
 template<class S, class A>
 bool Qmodel<S, A>::doAction(const S &state, const A &action) const {
     return _table[getIndexOfState(state)][getIndexOfAction(action)] > 0;
@@ -130,12 +144,15 @@ bool Qmodel<S, A>::doAction(const S &state, const A &action) const {
 
 template<class S, class A>
 void Qmodel<S, A>::valueUpdate(const S &state, const A &action, double r) {
-
+    valueUpdate(state, action, r, 0.0, 0.0);
 }
 
-
-/*
- * Public functions
- */
+template<class S, class A>
+void Qmodel<S, A>::valueUpdate(const S &state, const A &action, double r, double df, double ofv) {
+    int row = getIndexOfState(state);
+    int col = getIndexOfAction(action);
+    double oldVal = _table[row][col];
+    _table[row][col] = oldVal + _alpha * (r + df * ofv - oldVal);
+}
 
 #endif //MAO_AI_QMODEL_H

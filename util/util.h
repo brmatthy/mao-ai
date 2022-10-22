@@ -15,7 +15,8 @@ constexpr T clamp( const T& v, const T& lo, const T& hi )
     }
     if(v <= hi){ // in range
         return v;
-    } return hi;
+    } // too high
+    return hi;
 }
 
 

@@ -90,7 +90,7 @@ public:
 
     /**
      * Check if the player has no cards left
-     * @return True` if the player has no cards left, `false` otherwise
+     * @return `true` if the player has no cards left, `false` otherwise
      */
     bool hasNoCards();
 
@@ -102,7 +102,7 @@ public:
 
     /**
      * Update the game that this player is playing
-     * @param game
+     * @param game The game to set
      */
     void setGame(Game* game);
 
@@ -119,7 +119,7 @@ public:
 
      /**
       * Get the game that this player is playing
-      * @return the game
+      * @return The game
       */
      const Game* getGame();
 };
