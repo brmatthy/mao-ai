@@ -12,7 +12,7 @@ public:
     Bot();
     ~Bot();
 
-    void acceptCorrection(const Correction &correction) override;
+    void acceptCorrection(const std::unordered_set<CorrectionStatus>& correction) override;
 
 
 };

@@ -6,6 +6,8 @@
 #define MAO_AI_ACT_H
 
 
+#include "../validation/CorrectionStatus.h"
+
 /**
  * All the possible acts
  */
@@ -53,6 +55,8 @@ enum class Act{
     LONG_LIVE_THE_KING_3,
     LONG_LIVE_THE_KING_4,
 };
+
+CorrectionStatus toCorrectionStatus(Act act);
 
 
 

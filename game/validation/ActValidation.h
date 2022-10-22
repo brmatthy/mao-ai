@@ -11,7 +11,7 @@
 
 void getCorrectActs(std::unordered_set<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard);
 
-bool compareMultisets(const std::unordered_set<Act>& correctActs, const std::unordered_set<Act>& acts);
+const std::unordered_set<CorrectionStatus> compareMultisets(const std::unordered_set<Act>& correctActs, const std::unordered_set<Act>& acts);
 
 void getActsForDraw(std::unordered_set<Act>& acts, const std::deque<Action>& played);
 

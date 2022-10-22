@@ -28,11 +28,10 @@ class ActInterface;
  * This is an abstract base class for any player.
  */
 class Player {
-protected:
-
+private:
     std::vector<const ImmutableCard*> _cards;
     const Game* _game;
-
+protected:
     MoveInterface* _mover;
     PlayInterface* _cardPlayer;
     ActInterface* _actor;
@@ -47,6 +46,7 @@ public:
      * @param actor The class which determines what acts the player will do
      */
     Player( MoveInterface* mover, PlayInterface* cardPlayer, ActInterface* actor);
+    virtual ~Player() = default;
 
     /**
      * Let the player play a card, remove the pointer from the card vector
@@ -80,7 +80,7 @@ public:
      * This function takes a Correction, and handles it.
      * @param correction The Correction
      */
-    virtual void acceptCorrection(const Correction& correction) = 0;
+    virtual void acceptCorrection(const std::unordered_set<CorrectionStatus>& correction) = 0;
 
     /**
      * Let the player draw a card. The card will be added to the player's card collection

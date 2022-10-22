@@ -15,18 +15,21 @@ void getCorrectActs(std::unordered_set<Act>& acts, const std::deque<Action>& pla
 
 
 
-bool compareMultisets(const std::unordered_set<Act>& correctActs, const std::unordered_set<Act>& acts){
-    // check if each correct act is contained in the acts
-    if(correctActs.size() != acts.size()){
-        return false;
-    }
+const std::unordered_set<CorrectionStatus> compareMultisets(const std::unordered_set<Act>& correctActs, const std::unordered_set<Act>& acts){
+    std::unordered_set<CorrectionStatus> faults;
     auto notFound = acts.end();
     for(Act act : correctActs){
         if(acts.find(act) == notFound){
-            return false;
+            faults.insert(toCorrectionStatus(act));
         }
     }
-    return true;
+    notFound = correctActs.end();
+    for(Act act : acts){
+        if(correctActs.find(act) == notFound){
+            faults.insert(toCorrectionStatus(act));
+        }
+    }
+    return faults;
 }
 
 void getActsForDraw(std::unordered_set<Act>& acts, const std::deque<Action>& played){

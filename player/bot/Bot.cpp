@@ -15,9 +15,10 @@ Bot::~Bot() {
     delete _actor;
 }
 
-void Bot::acceptCorrection(const Correction &correction) {
- // we are always correct
+void Bot::acceptCorrection(const std::unordered_set<CorrectionStatus> &correction) {
+    // we are always correct
 }
+
 
 
 
