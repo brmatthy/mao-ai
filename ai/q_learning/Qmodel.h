@@ -45,7 +45,7 @@ public:
      * @param states A vector containing all te required states
      * @param actions A vector containing all te required actions
      */
-    Qmodel(std::vector<S> states, std::vector<A> actions, const double alpha);
+    Qmodel(std::vector<S> states, std::vector<A> actions, double alpha);
 
     /**
      * Deletes all the dynamically allocated space of this Q-model.
@@ -149,6 +149,7 @@ void Qmodel<S, A>::valueUpdate(const S &state, const A &action, double r) {
 
 template<class S, class A>
 void Qmodel<S, A>::valueUpdate(const S &state, const A &action, double r, double df, double ofv) {
+    df = clamp(df, 0.0, 0.1);
     int row = getIndexOfState(state);
     int col = getIndexOfAction(action);
     double oldVal = _table[row][col];
