@@ -80,7 +80,8 @@ public:
      * This function takes a Correction, and handles it.
      * @param correction The Correction
      */
-    virtual void acceptCorrection(const std::unordered_set<CorrectionStatus>& correction) = 0;
+     //TODO: fix docs
+    void acceptCorrection(const std::unordered_set<CorrectionStatus>& corrections);
 
     /**
      * Let the player draw a card. The card will be added to the player's card collection

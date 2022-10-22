@@ -5,7 +5,8 @@
 #ifndef MAO_AI_CORRECTIONACCEPTER_H
 #define MAO_AI_CORRECTIONACCEPTER_H
 
-class Correction;
+#include "../../game/validation/CorrectionStatus.h"
+
 
 class CorrectionAccepter {
 public:
@@ -14,7 +15,7 @@ public:
      * Handle the correction that the player received, this may or may not be useful
      * @param correction The Correction
      */
-    virtual void acceptCorrection(const Correction &correction) = 0;
+    virtual void acceptCorrection(CorrectionStatus status) = 0;
 };
 
 

@@ -58,4 +58,20 @@ const Game* Player::getGame() {
     return _game;
 }
 
+void Player::acceptCorrection(const std::unordered_set<CorrectionStatus> &corrections) {
+    for(CorrectionStatus status: corrections){
+        if(status == CorrectionStatus::INVALID_CARD){
+            _cardPlayer->acceptCorrection(status);
+        }else if(
+                status == CorrectionStatus::PLAYED_OUT_OF_TURN ||
+                status == CorrectionStatus::NOT_PLAYED_AT_TURN ||
+                status == CorrectionStatus::DREW_CARD_OUT_OF_TURN
+                ){
+            _mover->acceptCorrection(status);
+        }else{
+            _actor->acceptCorrection(status);
+        }
+    }
+}
+
 

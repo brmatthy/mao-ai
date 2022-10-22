@@ -11,6 +11,6 @@ const std::unordered_set<Act> ActBot::act(const std::deque<Action> &played, cons
     return acts;
 }
 
-void ActBot::acceptCorrection(const Correction &correction) {
+void ActBot::acceptCorrection(CorrectionStatus status) {
     // don't handle corrections, we are always correct
 }

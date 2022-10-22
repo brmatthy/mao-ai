@@ -9,4 +9,4 @@ const std::unordered_set<Act> QActAI::act(const std::deque<Action> &played, cons
 }
 
 
-void QActAI::acceptCorrection(const Correction &correction) {}
+void QActAI::acceptCorrection(CorrectionStatus status) {}
