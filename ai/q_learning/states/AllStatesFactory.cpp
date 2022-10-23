@@ -32,6 +32,7 @@ void addKLengthRec(std::vector<GlobalNstate>& states,
             }
             states.push_back(state);
         }
+        return;
     }
 
     // One by one add all characters

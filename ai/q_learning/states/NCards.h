@@ -7,6 +7,7 @@
 
 
 #include <vector>
+#include <ostream>
 #include "../../../game/card/CardDetail.h"
 #include "../../../game/card/ImmutableCard.h"
 
@@ -38,6 +39,8 @@ public:
     bool operator==(const NCards &rhs) const;
 
     bool operator!=(const NCards &rhs) const;
+
+    friend std::ostream &operator<<(std::ostream &os, const NCards &cards);
 };
 
 

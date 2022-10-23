@@ -6,6 +6,7 @@
 #define MAO_AI_GLOBALNSTATE_H
 
 
+#include <ostream>
 #include "NCards.h"
 
 class GlobalNstate : public NCards{
@@ -18,6 +19,8 @@ public:
     bool operator==(const GlobalNstate &rhs) const;
 
     bool operator!=(const GlobalNstate &rhs) const;
+
+    friend std::ostream &operator<<(std::ostream &os, const GlobalNstate &nstate);
 
 };
 

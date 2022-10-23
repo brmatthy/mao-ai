@@ -15,3 +15,8 @@ bool GlobalNstate::operator!=(const GlobalNstate &rhs) const {
 
 GlobalNstate::GlobalNstate(const std::vector<const ImmutableCard *> &cards, bool lastTurn) : NCards(cards),
 _lastTurn(lastTurn) {}
+
+std::ostream &operator<<(std::ostream &os, const GlobalNstate &nstate) {
+    os << "{" << nstate._lastTurn << ", "<< static_cast<const NCards &>(nstate) << "}" << std::endl;
+    return os;
+}

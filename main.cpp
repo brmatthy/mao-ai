@@ -8,5 +8,9 @@
 
 
 int main(){
-    auto states = getAllGlobalNstate(3);
+    auto states = getAllGlobalNstate(1);
+    for(GlobalNstate state: states){
+        std::cout << state;
+    }
+
 }

@@ -29,3 +29,13 @@ bool NCards::operator==(const NCards &rhs) const {
 bool NCards::operator!=(const NCards &rhs) const {
     return !(rhs == *this);
 }
+
+std::ostream &operator<<(std::ostream &os, const NCards &cards) {
+    os << "[";
+    for(int i = 0; i < cards._types.size() - 1; i++){
+        os << CardTypeToString(cards._types.at(i)) << CardNumberToString(cards._numbers.at(i)) << ",";
+    }
+    os << CardTypeToString(cards._types.at(cards._types.size())) << CardNumberToString(cards._numbers.at(cards._types.size()));
+    os << "]";
+    return os;
+}
