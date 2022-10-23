@@ -19,6 +19,9 @@ const std::vector<CardNumber> &EnumToVector::getCardNumberVector() {
 const std::vector<Act> EnumToVector::_actVector({
     Act::CHNAR,
     Act::BONG,
+    Act::BONG_2,
+    Act::BONG_3,
+    Act::BONG_4,
     Act::HAVE_A_PLEASANT_DAY,
     Act::THANK_YOU,
     Act::MAO,
@@ -39,7 +42,15 @@ const std::vector<Act> EnumToVector::_actVector({
     Act::TEN,
     Act::JACK,
     Act::QUEEN,
-    Act::KING
+    Act::KING,
+    Act::LONG_LIVE_THE_QUEEN,
+    Act::LONG_LIVE_THE_QUEEN_2,
+    Act::LONG_LIVE_THE_QUEEN_3,
+    Act::LONG_LIVE_THE_QUEEN_4,
+    Act::LONG_LIVE_THE_KING,
+    Act::LONG_LIVE_THE_KING_2,
+    Act::LONG_LIVE_THE_KING_3,
+    Act::LONG_LIVE_THE_KING_4,
 });
 
 const std::vector<CardType> EnumToVector::_cardTypeVector({

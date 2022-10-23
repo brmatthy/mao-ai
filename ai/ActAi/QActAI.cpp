@@ -4,11 +4,9 @@
 
 #include "QActAI.h"
 
-const std::unordered_multiset<Act> QActAI::act(const std::deque<Action> &played, const ImmutableCard *played_card) {
-    return std::unordered_multiset<Act>();
+const std::unordered_set<Act> QActAI::act(const std::deque<Action> &played, const ImmutableCard *played_card) {
+    return std::unordered_set<Act>();
 }
 
 
-void QActAI::acceptCorrection(const Correction &correction) {
-
-}
+void QActAI::acceptCorrection(CorrectionStatus status) {}

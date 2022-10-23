@@ -17,7 +17,7 @@ public:
 
     bool atTurn() override;
 
-    void acceptCorrection(const Correction &correction) override;
+    void acceptCorrection(CorrectionStatus status) override;
 
 
 };

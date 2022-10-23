@@ -7,4 +7,6 @@
 
 void threeBotsTest();
 
+void nCardsEqualCheck();
+
 #endif //MAO_AI_SIMPLEBENCH_H

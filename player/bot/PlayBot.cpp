@@ -30,6 +30,6 @@ bool PlayBot::wantsCard(const std::deque<Action> &played, std::vector<const Immu
     return getGoodCardIndex(played, playerCards) == -1;
 }
 
-void PlayBot::acceptCorrection(const Correction &correction) {
+void PlayBot::acceptCorrection(CorrectionStatus status) {
     // always correct
 }
