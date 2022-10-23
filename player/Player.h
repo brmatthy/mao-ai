@@ -77,10 +77,9 @@ public:
 
     /**
      * If the player played out of turn or made an error in it's action, he receives a Correction
-     * This function takes a Correction, and handles it.
-     * @param correction The Correction
+     * This function takes a set of all the corrections and handles them as wanted.
+     * @param correction The corrections
      */
-     //TODO: fix docs
     void acceptCorrection(const std::unordered_set<CorrectionStatus>& corrections);
 
     /**

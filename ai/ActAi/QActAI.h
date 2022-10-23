@@ -7,8 +7,11 @@
 
 
 #include "../../player/interfaces/ActInterface.h"
+#include "../q_learning/Qmodel.h"
 
 class QActAI : public ActInterface {
+private:
+
 public:
     const std::unordered_set<Act> act(const std::deque<Action> &played, const ImmutableCard *played_card) override;
 
