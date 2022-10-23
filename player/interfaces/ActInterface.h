@@ -20,7 +20,7 @@ public:
      * @param played_card The card that this player is about to play
      * @return An unordered_multiset containing the acts.
      */
-    virtual const std::unordered_multiset<Act> act(const std::deque<Action>& played, const ImmutableCard* played_card) = 0;
+    virtual const std::unordered_set<Act> act(const std::deque<Action>& played, const ImmutableCard* played_card) = 0;
 };
 
 

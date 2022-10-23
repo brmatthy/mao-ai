@@ -16,7 +16,7 @@ public:
 
     bool wantsCard(const std::deque<Action> &played, std::vector<const ImmutableCard *> &playerCards) override;
 
-    void acceptCorrection(const Correction &correction) override;
+    void acceptCorrection(CorrectionStatus status) override;
 
 };
 

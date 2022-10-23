@@ -6,13 +6,16 @@
 #include "Action.h"
 
 
-Action::Action(const ImmutableCard* card, const std::unordered_multiset<Act> acts, const Player* player) : _acts(acts), _card(card), _player(player) {}
+Action::Action(const ImmutableCard* card, const std::unordered_set<Act> acts, const Player* player) :
+    _card(card),
+    _acts(acts),
+    _player(player) {}
 
 const ImmutableCard* Action::getCard() const {
     return _card;
 }
 
-const std::unordered_multiset<Act>& Action::getAct() const{
+const std::unordered_set<Act>& Action::getAct() const{
     return _acts;
 }
 

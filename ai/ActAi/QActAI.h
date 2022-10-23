@@ -7,12 +7,15 @@
 
 
 #include "../../player/interfaces/ActInterface.h"
+#include "../q_learning/Qmodel.h"
 
 class QActAI : public ActInterface {
-public:
-    const std::unordered_multiset<Act> act(const std::deque<Action> &played, const ImmutableCard *played_card) override;
+private:
 
-    void acceptCorrection(const Correction &correction) override;
+public:
+    const std::unordered_set<Act> act(const std::deque<Action> &played, const ImmutableCard *played_card) override;
+
+    void acceptCorrection(CorrectionStatus status) override;
 };
 
 

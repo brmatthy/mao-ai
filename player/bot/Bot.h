@@ -11,10 +11,6 @@ class Bot : public Player{
 public:
     Bot();
     ~Bot();
-
-    void acceptCorrection(const Correction &correction) override;
-
-
 };
 
 

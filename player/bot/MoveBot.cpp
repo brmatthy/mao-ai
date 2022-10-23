@@ -8,7 +8,7 @@ bool MoveBot::atTurn() {
     return _player->getGame()->isAtTurn(_player);
 }
 
-void MoveBot::acceptCorrection(const Correction &correction) {
+void MoveBot::acceptCorrection(CorrectionStatus status) {
     // we are always correct
 }
 

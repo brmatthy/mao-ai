@@ -15,9 +15,6 @@ Bot::~Bot() {
     delete _actor;
 }
 
-void Bot::acceptCorrection(const Correction &correction) {
- // we are always correct
-}
 
 
 

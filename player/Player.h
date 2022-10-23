@@ -28,11 +28,10 @@ class ActInterface;
  * This is an abstract base class for any player.
  */
 class Player {
-protected:
-
+private:
     std::vector<const ImmutableCard*> _cards;
     const Game* _game;
-
+protected:
     MoveInterface* _mover;
     PlayInterface* _cardPlayer;
     ActInterface* _actor;
@@ -47,6 +46,7 @@ public:
      * @param actor The class which determines what acts the player will do
      */
     Player( MoveInterface* mover, PlayInterface* cardPlayer, ActInterface* actor);
+    virtual ~Player() = default;
 
     /**
      * Let the player play a card, remove the pointer from the card vector
@@ -61,7 +61,7 @@ public:
      * If the card is nullptr than it means you just drew a card instead of playing
      * @return The acts
      */
-    const std::unordered_multiset<Act> act(const std::deque<Action>& played, const ImmutableCard* played_card);
+    const std::unordered_set<Act> act(const std::deque<Action>& played, const ImmutableCard* played_card);
 
     /**
      * Ask the player if he thinks it's his turn
@@ -77,10 +77,10 @@ public:
 
     /**
      * If the player played out of turn or made an error in it's action, he receives a Correction
-     * This function takes a Correction, and handles it.
-     * @param correction The Correction
+     * This function takes a set of all the corrections and handles them as wanted.
+     * @param correction The corrections
      */
-    virtual void acceptCorrection(const Correction& correction) = 0;
+    void acceptCorrection(const std::unordered_set<CorrectionStatus>& corrections);
 
     /**
      * Let the player draw a card. The card will be added to the player's card collection

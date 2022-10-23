@@ -35,7 +35,7 @@ void GeneticAi::clean()
     _faults = 0;
 }
 
-void GeneticAi::correct(Correction* correction)
+void GeneticAi::correct(Correction* correction) // TODO dont use Correction class anymore, use set of correction status instead
 {
     _faults++;
 }
