@@ -36,6 +36,12 @@ public:
      */
     void addCard(CardType type, CardNumber number);
 
+    /**
+     * Add a card to the front of the state (bottom card)
+     * @param card
+     */
+    void addBottomCard(const ImmutableCard* card);
+
     bool operator==(const NCards &rhs) const;
 
     bool operator!=(const NCards &rhs) const;

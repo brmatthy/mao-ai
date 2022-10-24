@@ -15,6 +15,8 @@ private:
     Qmodel<GlobalNstate, Act> _qmodel;
 
 public:
+    QActAI(int n, double alpha);
+
     const std::unordered_set<Act> act(const std::deque<Action> &played, const ImmutableCard *played_card) override;
 
     void acceptCorrection(CorrectionStatus status) override;

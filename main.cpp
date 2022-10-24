@@ -8,9 +8,6 @@
 
 
 int main(){
-    auto states = getAllGlobalNstate(1);
-    for(GlobalNstate state: states){
-        std::cout << state;
-    }
-
+    auto states = getAllGlobalNstate(3);
+    std::cout << states.size();
 }

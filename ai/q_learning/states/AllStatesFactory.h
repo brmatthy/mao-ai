@@ -10,6 +10,8 @@
 
 std::vector<GlobalNstate> getAllGlobalNstate(int n);
 
+std::vector<GlobalNstate> getAllGlobalNstateNotNull(int n);
+
 void addKLengthRec(std::vector<GlobalNstate>& states,
                    std::vector<ImmutableCard>& cardset,
                    std::vector<ImmutableCard>& prefix, int n);

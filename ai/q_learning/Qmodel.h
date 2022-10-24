@@ -88,7 +88,7 @@ public:
 
 template<class S, class A>
 Qmodel<S, A>::Qmodel(std::vector<S> states, std::vector<A> actions, double alpha): _states(states), _actions(actions), _alpha(clamp(alpha, 0.0, 1.0)) {
-    int rows = states.size();
+    auto rows = states.size();
     _table = new double*[rows];
     for(int r = 0; r < rows; ++r){
         // init values at 0

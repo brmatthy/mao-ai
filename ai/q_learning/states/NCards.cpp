@@ -21,6 +21,11 @@ void NCards::addCard(CardType type, CardNumber number) {
     _numbers.push_back(number);
 }
 
+void NCards::addBottomCard(const ImmutableCard *card) {
+    _types.insert(_types.begin(),card->getCardType());
+    _numbers.insert(_numbers.begin(),card->getCardNumber());
+}
+
 bool NCards::operator==(const NCards &rhs) const {
     return _types == rhs._types &&
            _numbers == rhs._numbers;
@@ -35,7 +40,9 @@ std::ostream &operator<<(std::ostream &os, const NCards &cards) {
     for(int i = 0; i < cards._types.size() - 1; i++){
         os << CardTypeToString(cards._types.at(i)) << CardNumberToString(cards._numbers.at(i)) << ",";
     }
-    os << CardTypeToString(cards._types.at(cards._types.size())) << CardNumberToString(cards._numbers.at(cards._types.size()));
+    os << CardTypeToString(cards._types.at(cards._types.size() - 1)) << CardNumberToString(cards._numbers.at(cards._types.size() -1));
     os << "]";
     return os;
 }
+
+

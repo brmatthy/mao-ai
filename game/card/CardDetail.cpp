@@ -11,6 +11,7 @@ const char* CardTypeToString(CardType ct){
         case CardType::CLOVERS: return "♣";
         case CardType::DIAMONDS: return "♦";
         case CardType::SPADES: return "♠";
+        case CardType::NONE: return "0";
         default: throw std::invalid_argument("No such card type");
     }
 }
@@ -40,6 +41,7 @@ const char* CardNumberToString(CardNumber cn){
         case CardNumber::JACK: return "J";
         case CardNumber::QUEEN: return "Q";
         case CardNumber::KING: return "K";
+        case CardNumber::NONE: return "O";
         default: throw std::invalid_argument("No such card number");
     }
 }

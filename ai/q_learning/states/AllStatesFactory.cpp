@@ -6,6 +6,23 @@
 #include "../../../util/EnumToVector.h"
 
 std::vector<GlobalNstate> getAllGlobalNstate(int n){
+    std::vector<GlobalNstate> states = getAllGlobalNstateNotNull(n);
+    ImmutableCard noneCard = ImmutableCard(CardType::NONE, CardNumber::NONE);
+    for(int i = 1; i < n; i ++){
+        std::vector<GlobalNstate> extraStates = getAllGlobalNstateNotNull(n - i);
+        for(int j = 0; j < i; j++){
+            for(GlobalNstate& state: extraStates){
+                state.addBottomCard(&noneCard);
+            }
+        }
+        for(const GlobalNstate& state: extraStates){
+            states.push_back(state);
+        }
+    }
+    return states;
+}
+
+std::vector<GlobalNstate> getAllGlobalNstateNotNull(int n){
     std::vector<GlobalNstate> states;
     std::vector<ImmutableCard> cardset;
     for(CardType type : EnumToVector::getCardTypeVector()){
