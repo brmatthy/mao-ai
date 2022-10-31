@@ -79,6 +79,12 @@ public:
      * @param ofv The estimate of optimal future value
      */
     void valueUpdate(const S& state, const A& action, double r, double df, double ofv);
+
+    /**
+     * Get all the actions of this Q-table
+     * @return A const reference to the action vector
+     */
+    const std::vector<A>& getActions();
 };
 
 
@@ -154,6 +160,11 @@ void Qmodel<S, A>::valueUpdate(const S &state, const A &action, double r, double
     int col = getIndexOfAction(action);
     double oldVal = _table[row][col];
     _table[row][col] = oldVal + _alpha * (r + df * ofv - oldVal);
+}
+
+template<class S, class A>
+const std::vector<A> &Qmodel<S, A>::getActions() {
+    return _actions;
 }
 
 #endif //MAO_AI_QMODEL_H

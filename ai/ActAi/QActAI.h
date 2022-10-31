@@ -13,6 +13,7 @@
 class QActAI : public ActInterface {
 private:
     Qmodel<GlobalNstate, Act> _qmodel;
+    std::unordered_set<Act> _lastActs = {};
 
 public:
     QActAI(int n, double alpha);
