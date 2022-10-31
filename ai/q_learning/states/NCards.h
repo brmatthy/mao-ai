@@ -8,8 +8,10 @@
 
 #include <vector>
 #include <ostream>
+#include "deque"
 #include "../../../game/card/CardDetail.h"
 #include "../../../game/card/ImmutableCard.h"
+#include "../../../game/action/Action.h"
 
 class NCards {
 private:
@@ -22,6 +24,8 @@ public:
      * @param cards The N following cards
      */
     NCards(const std::vector<const ImmutableCard*>& cards);
+
+    NCards(const std::deque<Action> &played, const ImmutableCard *played_card, int n);
 
     /**
      * Add a card to the back of the state (top card)

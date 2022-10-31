@@ -11,6 +11,23 @@ NCards::NCards(const std::vector<const ImmutableCard *>& cards) {
     }
 }
 
+NCards::NCards(const std::deque<Action> &played, const ImmutableCard *played_card, int n) {
+    const ImmutableCard* currentcard;
+    int i = 0;
+    while (_types.size() < n - 1 && i < played.size()){
+        currentcard = played.at(i).getCard();
+        if(currentcard != nullptr){
+            addCard(currentcard);
+        }
+    }
+    addCard(played_card);
+    while (_types.size() < n){
+        // push empty cards to front if stack had too little cards
+        _types.insert(_types.begin(), CardType::NONE);
+        _numbers.insert(_numbers.begin(), CardNumber::NONE);
+    }
+}
+
 void NCards::addCard(const ImmutableCard* card) {
     _types.push_back(card->getCardType());
     _numbers.push_back(card->getCardNumber());
