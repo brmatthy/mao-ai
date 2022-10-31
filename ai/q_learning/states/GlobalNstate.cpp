@@ -1,7 +1,7 @@
 //
 // Created by brent on 23/10/22.
 //
-
+/*
 #include "GlobalNstate.h"
 
 bool GlobalNstate::operator==(const GlobalNstate &rhs) const {
@@ -20,3 +20,5 @@ std::ostream &operator<<(std::ostream &os, const GlobalNstate &nstate) {
     os << "{" << nstate._lastTurn << ", "<< static_cast<const NCards &>(nstate) << "}" << std::endl;
     return os;
 }
+
+*/

@@ -3,10 +3,8 @@
 //
 
 #include "QActAI.h"
-#include "../q_learning/states/AllStatesFactory.h"
-#include "../../util/EnumToVector.h"
 
-QActAI::QActAI(int n, double alpha): _qmodel(Qmodel<GlobalNstate, Act>(getAllGlobalNstate(n), EnumToVector::getActVector(), alpha)), _n(n) {}
+QActAI::QActAI(int n, double alpha): _qmodel(Qmodel<NCards, Act>(getAllNCards(n), EnumToVector::getActVector(), alpha)), _n(n) {}
 
 const std::unordered_set<Act> QActAI::act(const std::deque<Action> &played, const ImmutableCard *played_card) {
     _lastActs.clear();
@@ -18,8 +16,6 @@ const std::unordered_set<Act> QActAI::act(const std::deque<Action> &played, cons
 }
 
 
-void QActAI::acceptCorrection(CorrectionStatus status) {
-
-}
+void QActAI::acceptCorrection(CorrectionStatus status) {}
 
 

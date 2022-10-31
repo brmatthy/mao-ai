@@ -8,11 +8,13 @@
 
 #include "../../player/interfaces/ActInterface.h"
 #include "../q_learning/Qmodel.h"
-#include "../q_learning/states/GlobalNstate.h"
+#include "../q_learning/states/NCards.h"
+#include "../q_learning/states/AllStatesFactory.h"
+#include "../../util/EnumToVector.h"
 
 class QActAI : public ActInterface {
 private:
-    Qmodel<GlobalNstate, Act> _qmodel;
+    Qmodel<NCards, Act> _qmodel;
     std::unordered_set<Act> _lastActs = {};
     int _n;
 

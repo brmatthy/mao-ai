@@ -6,13 +6,13 @@
 #define MAO_AI_ALLSTATESFACTORY_H
 
 #include <vector>
-#include "GlobalNstate.h"
+#include "NCards.h"
 
-std::vector<GlobalNstate> getAllGlobalNstate(int n);
+std::vector<NCards> getAllNCards(int n);
 
-std::vector<GlobalNstate> getAllGlobalNstateNotNull(int n);
+std::vector<NCards> getAllNCardsNotNull(int n);
 
-void addKLengthRec(std::vector<GlobalNstate>& states,
+void addKLengthRec(std::vector<NCards>& states,
                    std::vector<ImmutableCard>& cardset,
                    std::vector<ImmutableCard>& prefix, int n);
 

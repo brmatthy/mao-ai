@@ -23,8 +23,8 @@ NCards::NCards(const std::deque<Action> &played, const ImmutableCard *played_car
     addCard(played_card);
     while (_types.size() < n){
         // push empty cards to front if stack had too little cards
-        _types.insert(_types.begin(), CardType::NONE);
-        _numbers.insert(_numbers.begin(), CardNumber::NONE);
+        ImmutableCard card = ImmutableCard(CardType::NONE, CardNumber::NONE);
+        addBottomCard(&card);
     }
 }
 
