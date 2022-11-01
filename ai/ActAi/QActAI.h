@@ -8,11 +8,20 @@
 
 #include "../../player/interfaces/ActInterface.h"
 #include "../q_learning/Qmodel.h"
+#include "../q_learning/states/NCards.h"
+#include "../q_learning/states/AllStatesFactory.h"
+#include "../../util/EnumToVector.h"
 
 class QActAI : public ActInterface {
 private:
+    Qmodel<NCards, Act> _qmodel;
+    std::unordered_set<Act> _lastActs = {};
+    NCards _lastState = NCards({});
+    int _n;
 
 public:
+    QActAI(int n, double alpha);
+
     const std::unordered_set<Act> act(const std::deque<Action> &played, const ImmutableCard *played_card) override;
 
     void acceptCorrection(CorrectionStatus status) override;

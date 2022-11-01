@@ -5,6 +5,7 @@
 #include "SimpleBench.h"
 #include "../player/bot/Bot.h"
 #include "../ai/q_learning/states/NCards.h"
+#include "../ai/q_learning/states/GlobalNstate.h"
 #include <vector>
 
 void threeBotsTest(){
@@ -30,21 +31,4 @@ void threeBotsTest(){
     for(const Action& action: game.getPlayed()){
         std::cout << action;
     }
-}
-
-void nCardsEqualCheck(){
-
-    ImmutableCard card1 = ImmutableCard(CardType::CLOVERS, CardNumber::KING);
-    ImmutableCard card2 = ImmutableCard(CardType::HEARTS, CardNumber::ACE);
-    ImmutableCard card3 = ImmutableCard(CardType::SPADES, CardNumber::FIVE);
-    std::vector<const ImmutableCard*> cards1  = {&card1, &card2, &card3};
-
-    std::vector<const ImmutableCard*> cards2  = {&card1, &card2, &card2};
-
-    NCards n1 = NCards(cards1);
-    NCards n2 = NCards(cards1);
-
-
-    std::cout << (n1 == n2) << std::endl;
-
 }

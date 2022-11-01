@@ -79,6 +79,12 @@ public:
      * @param ofv The estimate of optimal future value
      */
     void valueUpdate(const S& state, const A& action, double r, double df, double ofv);
+
+    /**
+     * Get all the actions of this Q-table
+     * @return A const reference to the action vector
+     */
+    const std::vector<A>& getActions();
 };
 
 
@@ -88,7 +94,7 @@ public:
 
 template<class S, class A>
 Qmodel<S, A>::Qmodel(std::vector<S> states, std::vector<A> actions, double alpha): _states(states), _actions(actions), _alpha(clamp(alpha, 0.0, 1.0)) {
-    int rows = states.size();
+    auto rows = states.size();
     _table = new double*[rows];
     for(int r = 0; r < rows; ++r){
         // init values at 0
@@ -123,8 +129,8 @@ int Qmodel<S, A>::getIndexOfState(const S& state) const {
 
 template<class S, class A>
 int Qmodel<S, A>::getIndexOfAction(const A &action) const {
-    auto begin = _states.begin();
-    auto end = _states.end();
+    auto begin = _actions.begin();
+    auto end = _actions.end();
     auto it = std::find(begin, end, action);
     if(it == end){
         return -1;
@@ -138,7 +144,7 @@ int Qmodel<S, A>::getIndexOfAction(const A &action) const {
  */
 
 template<class S, class A>
-bool Qmodel<S, A>::doAction(const S &state, const A &action) const {
+bool Qmodel<S, A>::doAction(const S& state, const A &action) const {
     return _table[getIndexOfState(state)][getIndexOfAction(action)] > 0;
 }
 
@@ -154,6 +160,11 @@ void Qmodel<S, A>::valueUpdate(const S &state, const A &action, double r, double
     int col = getIndexOfAction(action);
     double oldVal = _table[row][col];
     _table[row][col] = oldVal + _alpha * (r + df * ofv - oldVal);
+}
+
+template<class S, class A>
+const std::vector<A> &Qmodel<S, A>::getActions() {
+    return _actions;
 }
 
 #endif //MAO_AI_QMODEL_H

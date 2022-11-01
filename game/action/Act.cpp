@@ -44,3 +44,44 @@ CorrectionStatus toCorrectionStatus(Act act){
         default: throw std::invalid_argument("No such Act");
     }
 }
+
+Act toAct(CorrectionStatus status){
+    switch(status){
+        case CorrectionStatus::CHNAR: return Act::CHNAR;
+        case CorrectionStatus::BONG: return Act::BONG;
+        case CorrectionStatus::BONG_2: return Act::BONG_2;
+        case CorrectionStatus::BONG_3: return Act::BONG_3;
+        case CorrectionStatus::BONG_4: return Act::BONG_4;
+        case CorrectionStatus::HAVE_A_PLEASANT_DAY: return Act::HAVE_A_PLEASANT_DAY;
+        case CorrectionStatus::THANK_YOU: return Act::THANK_YOU;
+        case CorrectionStatus::MAO: return Act::MAO;
+        case CorrectionStatus::WAVE: return Act::WAVE;
+        case CorrectionStatus::HEARTS: return Act::HEARTS;
+        case CorrectionStatus::CLOVERS: return Act::CLOVERS;
+        case CorrectionStatus::DIAMONDS: return Act::DIAMONDS;
+        case CorrectionStatus::SPADES: return Act::SPADES;
+        case CorrectionStatus::ACE: return Act::ACE;
+        case CorrectionStatus::TWO: return Act::TWO;
+        case CorrectionStatus::THREE: return Act::THREE;
+        case CorrectionStatus::FOUR: return Act::FOUR;
+        case CorrectionStatus::FIVE: return Act::FIVE;
+        case CorrectionStatus::SIX: return Act::SIX;
+        case CorrectionStatus::SEVEN: return Act::SEVEN;
+        case CorrectionStatus::EIGHT: return Act::EIGHT;
+        case CorrectionStatus::NINE: return Act::NINE;
+        case CorrectionStatus::TEN: return Act::TEN;
+        case CorrectionStatus::JACK: return Act::JACK;
+        case CorrectionStatus::QUEEN: return Act::QUEEN;
+        case CorrectionStatus::KING: return Act::KING;
+        case CorrectionStatus::LONG_LIVE_THE_QUEEN: return Act::LONG_LIVE_THE_QUEEN;
+        case CorrectionStatus::LONG_LIVE_THE_QUEEN_2: return Act::LONG_LIVE_THE_QUEEN_2;
+        case CorrectionStatus::LONG_LIVE_THE_QUEEN_3: return Act::LONG_LIVE_THE_QUEEN_3;
+        case CorrectionStatus::LONG_LIVE_THE_QUEEN_4: return Act::LONG_LIVE_THE_QUEEN_4;
+        case CorrectionStatus::LONG_LIVE_THE_KING: return Act::LONG_LIVE_THE_KING;
+        case CorrectionStatus::LONG_LIVE_THE_KING_2: return Act::LONG_LIVE_THE_KING_2;
+        case CorrectionStatus::LONG_LIVE_THE_KING_3: return Act::LONG_LIVE_THE_KING_3;
+        case CorrectionStatus::LONG_LIVE_THE_KING_4: return Act::LONG_LIVE_THE_KING_4;
+        default: throw std::invalid_argument("No such Act");
+    }
+}
+

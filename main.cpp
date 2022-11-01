@@ -4,8 +4,13 @@
 
 
 #include "bench/SimpleBench.h"
+#include "ai/q_learning/states/AllStatesFactory.h"
 
 
 int main(){
-    threeBotsTest();
+    auto states = getAllNCards(3);
+    for(NCards state: states){
+        std::cout << state << std::endl;
+    }
+    std::cout << states.size();
 }
