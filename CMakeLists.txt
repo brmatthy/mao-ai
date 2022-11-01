@@ -8,7 +8,32 @@ add_executable(mao_ai
         game/card/ImmutableCard.h
         game/card/CardDetail.cpp
         game/card/CardDetail.h
+        game/action/Action.cpp
+        game/action/Action.h
         player/Player.cpp
         player/Player.h
-        game/act/Action.cpp
-        game/act/Action.h)
+        game/Game.cpp
+        game/Game.h
+
+        game/action/Act.h
+        game/validation/Correction.cpp
+        game/validation/Correction.h
+        game/validation/CorrectionStatus.h
+        game/validation/PlayValidation.cpp
+        game/validation/PlayValidation.h
+        game/validation/ActValidation.cpp
+        game/validation/ActValidation.h
+
+        ai/util/NeuralNetwork.cpp
+        ai/util/NeuralNetwork.h
+        ai/util/GeneticAlgorithm.cpp
+        ai/util/GeneticAlgorithm.h
+        ai/util/GeneticAi.cpp
+        ai/util/GeneticAi.h
+        ai/util/GeneticSimulator.cpp
+        ai/util/GeneticSimulator.h
+        ai/LayCardSimulator.cpp
+        ai/LayCardSimulator.h
+
+        player/bot/Bot.cpp
+        player/bot/Bot.h bench/SimpleBench.cpp bench/SimpleBench.h player/bot/ActBot.cpp player/bot/ActBot.h player/bot/PlayBot.cpp player/bot/PlayBot.h player/bot/MoveBot.cpp player/bot/MoveBot.h player/interfaces/MoveInterface.h player/interfaces/PlayInterface.h player/interfaces/ActInterface.h player/interfaces/CorrectionAccepter.h ai/ActAi/QActAI.cpp ai/ActAi/QActAI.h util/EnumToVector.cpp util/EnumToVector.h ai/q_learning/Qmodel.h util/util.cpp util/util.h game/action/Act.cpp ai/q_learning/states/NCards.cpp ai/q_learning/states/NCards.h ai/q_learning/states/GlobalNstate.cpp ai/q_learning/states/GlobalNstate.h ai/q_learning/states/AllStatesFactory.cpp ai/q_learning/states/AllStatesFactory.h)

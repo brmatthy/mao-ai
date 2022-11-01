@@ -1,0 +1,49 @@
+//
+// Created by mats on 16/10/22.
+//
+
+#include "LayCardSimulator.h"
+#include "../game/validation/PlayValidation.h"
+#include "../util/EnumToVector.h"
+
+LayCardSimulator::LayCardSimulator(NeuralNetwork* network): GeneticSimulator(network) {}
+
+LayCardSimulator::~LayCardSimulator() {}
+
+void LayCardSimulator::simulate(GeneticAi* ai)
+{
+    Correction correction(CorrectionStatus::INVALID_CARD, nullptr);
+    int index = 0;
+    bool input[52];
+    for(bool & i : input)
+    {
+        i = false;
+    }
+    for(CardType type : EnumToVector::getCardTypeVector())
+    {
+        for(CardNumber number : EnumToVector::getCardNumberVector())
+        {
+            input[index] = true;
+            _network->calculate(ai->getWeights(), input);
+            bool* output = _network->getOutputs();
+            input[index] = false;
+            int outindex = 0;
+            for(CardType outtype : EnumToVector::getCardTypeVector())
+            {
+                for(CardNumber outnumber : EnumToVector::getCardNumberVector())
+                {
+                    ImmutableCard card(type, number);
+                    ImmutableCard played(outtype, outnumber);
+                    bool didplay = output[outindex];
+                    bool mustplay = playedCorrectCard(&card, &played);
+                    if(didplay != mustplay)
+                    {
+                       ai->correct(&correction);
+                    }
+                    outindex++;
+                }
+            }
+            index++;
+        }
+    }
+}

@@ -3,11 +3,14 @@
 //
 
 
+#include "bench/SimpleBench.h"
+#include "ai/q_learning/states/AllStatesFactory.h"
 
-#include <iostream>
-#include "game/card/ImmutableCard.h"
 
 int main(){
-    ImmutableCard card = ImmutableCard(HEARTS, ACE);
-    std::cout << card;
+    auto states = getAllNCards(3);
+    for(NCards state: states){
+        std::cout << state << std::endl;
+    }
+    std::cout << states.size();
 }

@@ -16,12 +16,12 @@ private:
     /**
      * Representation of the type of the card
      */
-    const CardType m_type;
+    CardType _type;
 
     /**
      * Representation of the number of the card
      */
-    const CardNumber m_number;
+    CardNumber _number;
 
 public:
     /**
@@ -35,13 +35,13 @@ public:
      * Return the type of the card
      * @return The type of the card
      */
-    CardType getCardType();
+    CardType getCardType() const;
 
     /**
      * Return the number of the card
      * @return The number of the card
      */
-    CardNumber getCardNumber();
+    CardNumber getCardNumber() const;
 
     friend std::ostream& operator<<(std::ostream& os, const ImmutableCard& ic);
 };

@@ -5,22 +5,29 @@
 #ifndef MAO_AI_CARDDETAIL_H
 #define MAO_AI_CARDDETAIL_H
 
+#include "../action/Act.h"
+
 /**
  * All possible card types
  */
-enum CardType{
+enum class CardType{
     HEARTS,
     CLOVERS,
     DIAMONDS,
-    SPADES
+    SPADES,
+    NONE // don't add to static EnumToVector list
 };
 
+
+
 const char* CardTypeToString(CardType ct);
+
+Act toAct(CardType ct);
 
 /**
  * All possible card numbers or figures
  */
-enum CardNumber{
+enum class CardNumber{
     ACE,
     TWO,
     THREE,
@@ -33,9 +40,12 @@ enum CardNumber{
     TEN,
     JACK,
     QUEEN,
-    KING
+    KING,
+    NONE // don't add to static EnumToVector list
 };
 
-const char* CardNumberToString(CardNumber ct);
+const char* CardNumberToString(CardNumber cn);
+
+Act toAct(CardNumber ct);
 
 #endif //MAO_AI_CARDDETAIL_H

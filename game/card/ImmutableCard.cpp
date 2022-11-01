@@ -4,16 +4,16 @@
 
 #include "ImmutableCard.h"
 
-ImmutableCard::ImmutableCard(const CardType mType,const CardNumber mNumber) : m_type(mType), m_number(mNumber) {}
+ImmutableCard::ImmutableCard(CardType mType, CardNumber mNumber) : _type(mType), _number(mNumber) {}
 
-CardType ImmutableCard::getCardType() {
-    return this->m_type;
+CardType ImmutableCard::getCardType() const {
+    return _type;
 }
 
-CardNumber ImmutableCard::getCardNumber() {
-    return this->m_number;
+CardNumber ImmutableCard::getCardNumber() const{
+    return _number;
 }
 
 std::ostream &operator<<(std::ostream &os, const ImmutableCard &ic) {
-    return os << "(" << CardNumberToString(ic.m_number) << " of " << CardTypeToString(ic.m_type) << ")";
+    return os << CardTypeToString(ic._type) << CardNumberToString(ic._number);
 }
