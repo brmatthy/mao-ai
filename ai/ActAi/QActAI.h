@@ -16,6 +16,7 @@ class QActAI : public ActInterface {
 private:
     Qmodel<NCards, Act> _qmodel;
     std::unordered_set<Act> _lastActs = {};
+    NCards _lastState = NCards({});
     int _n;
 
 public:

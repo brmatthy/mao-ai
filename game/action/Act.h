@@ -58,6 +58,8 @@ enum class Act{
 
 CorrectionStatus toCorrectionStatus(Act act);
 
+Act toAct(CorrectionStatus status);
+
 
 
 #endif //MAO_AI_ACT_H
