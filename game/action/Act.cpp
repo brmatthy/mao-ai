@@ -45,6 +45,46 @@ CorrectionStatus toCorrectionStatus(Act act){
     }
 }
 
+const char* actToString(Act act){
+    switch(act){
+        case Act::CHNAR: return "CHNAR";
+        case Act::BONG: return "BONG";
+        case Act::BONG_2: return "BONG_2";
+        case Act::BONG_3: return "BONG_3";
+        case Act::BONG_4: return "BONG_4";
+        case Act::HAVE_A_PLEASANT_DAY: return "HAVE_A_PLEASANT_DAY";
+        case Act::THANK_YOU: return "THANK_YOU";
+        case Act::MAO: return "MAO";
+        case Act::WAVE: return "WAVE";
+        case Act::HEARTS: return "HEARTS";
+        case Act::CLOVERS: return "CLOVERS";
+        case Act::DIAMONDS: return "DIAMONDS";
+        case Act::SPADES: return "SPADES";
+        case Act::ACE: return "ACE";
+        case Act::TWO: return "TWO";
+        case Act::THREE: return "THREE";
+        case Act::FOUR: return "FOUR";
+        case Act::FIVE: return "FIVE";
+        case Act::SIX: return "SIX";
+        case Act::SEVEN: return "SEVEN";
+        case Act::EIGHT: return "EIGHT";
+        case Act::NINE: return "NINE";
+        case Act::TEN: return "TEN";
+        case Act::JACK: return "JACK";
+        case Act::QUEEN: return "QUEEN";
+        case Act::KING: return "KING";
+        case Act::LONG_LIVE_THE_QUEEN: return "LONG_LIVE_THE_QUEEN";
+        case Act::LONG_LIVE_THE_QUEEN_2: return "LONG_LIVE_THE_QUEEN_2";
+        case Act::LONG_LIVE_THE_QUEEN_3: return "LONG_LIVE_THE_QUEEN_3";
+        case Act::LONG_LIVE_THE_QUEEN_4: return "LONG_LIVE_THE_QUEEN_4";
+        case Act::LONG_LIVE_THE_KING: return "LONG_LIVE_THE_KING";
+        case Act::LONG_LIVE_THE_KING_2: return "LONG_LIVE_THE_KING_2";
+        case Act::LONG_LIVE_THE_KING_3: return "LONG_LIVE_THE_KING_3";
+        case Act::LONG_LIVE_THE_KING_4: return "LONG_LIVE_THE_KING_4";
+        default: throw std::invalid_argument("No such Act");
+    }
+}
+
 Act toAct(CorrectionStatus status){
     switch(status){
         case CorrectionStatus::CHNAR: return Act::CHNAR;
