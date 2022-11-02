@@ -5,12 +5,10 @@
 
 #include "bench/SimpleBench.h"
 #include "ai/q_learning/states/AllStatesFactory.h"
+#include "ai/ActAi/QActTrainer.h"
 
 
 int main(){
-    auto states = getAllNCards(3);
-    for(NCards state: states){
-        std::cout << state << std::endl;
-    }
-    std::cout << states.size();
+    QActTrainer trainer = QActTrainer(1);
+    trainer.train(2);
 }

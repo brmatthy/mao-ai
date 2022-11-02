@@ -15,3 +15,7 @@ void MoveBot::acceptCorrection(CorrectionStatus status) {
 MoveBot::MoveBot(Player *player): _player(player){
 
 }
+
+void MoveBot::setPlayer(Player *player) {
+    _player = player;
+}

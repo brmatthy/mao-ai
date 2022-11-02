@@ -115,14 +115,19 @@ public:
     /**
      * Clears the card vector. Cards are stored on the heap, make sure to delete them beforehand
      */
-     void clearCards();
+    void clearCards();
 
      /**
       * Get the game that this player is playing
       * @return The game
       */
-     const Game* getGame();
-};
+    const Game* getGame();
 
+    MoveInterface *getMover() const;
+
+    PlayInterface *getCardPlayer() const;
+
+    ActInterface *getActor() const;
+};
 
 #endif //MAO_AI_PLAYER_H

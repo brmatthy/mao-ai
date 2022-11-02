@@ -186,6 +186,7 @@ void Game::playGame() {
 
         while (_gameIsNotFinished){
             step();
+            _gameStepCount++;
         }
 
         // get the cards back from the players
@@ -208,5 +209,9 @@ const std::deque<Action> &Game::getPlayed() const {
 void Game::addPlayer(Player *player) {
     player->setGame(this);
     _players.push_back(player);
+}
+
+unsigned int Game::getGameStepCount() const {
+    return _gameStepCount;
 }
 
