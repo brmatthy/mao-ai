@@ -11,7 +11,7 @@
 
 class MoveBot: public MoveInterface {
 private:
-    Player* _player{};
+    Player* _player;
 public:
     MoveBot(Player* player);
 

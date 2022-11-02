@@ -58,6 +58,8 @@ enum class Act{
 
 CorrectionStatus toCorrectionStatus(Act act);
 
+const char* actToString(Act act);
+
 Act toAct(CorrectionStatus status);
 
 
