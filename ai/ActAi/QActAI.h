@@ -18,13 +18,19 @@ private:
     std::unordered_set<Act> _lastActs = {};
     NCards _lastState = NCards({});
     int _n;
+    unsigned int _faults = 0;
 
+    void incrementFaults();
 public:
     QActAI(int n, double alpha);
 
     const std::unordered_set<Act> act(const std::deque<Action> &played, const ImmutableCard *played_card) override;
 
     void acceptCorrection(CorrectionStatus status) override;
+
+    unsigned int getFaults();
+
+    void clearFaults();
 };
 
 
