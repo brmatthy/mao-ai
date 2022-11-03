@@ -10,12 +10,15 @@
 /**
  * All possible card types
  */
-enum CardType{
+enum class CardType{
     HEARTS,
     CLOVERS,
     DIAMONDS,
-    SPADES
+    SPADES,
+    NONE // don't add to static EnumToVector list
 };
+
+
 
 const char* CardTypeToString(CardType ct);
 
@@ -24,7 +27,7 @@ Act toAct(CardType ct);
 /**
  * All possible card numbers or figures
  */
-enum CardNumber{
+enum class CardNumber{
     ACE,
     TWO,
     THREE,
@@ -37,7 +40,8 @@ enum CardNumber{
     TEN,
     JACK,
     QUEEN,
-    KING
+    KING,
+    NONE // don't add to static EnumToVector list
 };
 
 const char* CardNumberToString(CardNumber cn);

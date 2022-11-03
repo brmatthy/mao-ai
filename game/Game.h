@@ -25,9 +25,9 @@ private:
      */
     std::deque<Action> _played;
 
-    short _maxCards;
     int _currentPlayer = 0;
     int _direction = 1;
+    bool _gameIsNotFinished = true;
 
     void drawNewCard(Player* player);
     const ImmutableCard* getTopCard();
@@ -39,16 +39,22 @@ private:
     void flushActionsToPileAndShuffle();
     void shufflePile();
 
+    /**
+     * Simulates one turn of the game. Updates _gameIsNotFinished when player wins
+     */
+    void step();
+
 public:
 
     Game();
-    Game(short maxCards);
     ~Game();
 
     /**
-     * Simulates one turn of the game
+     * Give each player 3 cards, call step function until a player has no cards left.
+     * Take al the leftover cards back from the players
      */
-    void step();
+    void playGame();
+
 
     /**
      * Checks if the given player is at turn

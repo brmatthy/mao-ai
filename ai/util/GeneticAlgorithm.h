@@ -19,7 +19,7 @@ private:
     int _avg = 52*52;
 public:
     /**
-     * Initialize a genetic algoritm
+     * Initialize a genetic algorithm
      * @param startAis starting Ai list
      * @param network the network on which the AIs will be checked
      * @param simulator the simulator to run an iteration

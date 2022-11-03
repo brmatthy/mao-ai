@@ -5,38 +5,62 @@
 #ifndef MAO_AI_ACT_H
 #define MAO_AI_ACT_H
 
-#include "../card/CardDetail.h"
 
-
+#include "../validation/CorrectionStatus.h"
 
 /**
  * All the possible acts
  */
-enum Act{
-    ACT_GNARR,
-    ACT_BONG,
-    ACT_HAVE_A_PLEASANT_DAY,
-    ACT_THANK_YOU,
-    ACT_MAO,
-    ACT_WAVE,
-    ACT_HEARTS,
-    ACT_CLOVERS,
-    ACT_DIAMONDS,
-    ACT_SPADES,
-    ACT_ACE,
-    ACT_TWO,
-    ACT_THREE,
-    ACT_FOUR,
-    ACT_FIVE,
-    ACT_SIX,
-    ACT_SEVEN,
-    ACT_EIGHT,
-    ACT_NINE,
-    ACT_TEN,
-    ACT_JACK,
-    ACT_QUEEN,
-    ACT_KING
+enum class Act{
+    GNARR,
+
+    BONG,
+    BONG_2,
+    BONG_3,
+    BONG_4,
+
+    HAVE_A_PLEASANT_DAY,
+    THANK_YOU,
+
+    MAO,
+
+    WAVE,
+
+    HEARTS,
+    CLOVERS,
+    DIAMONDS,
+    SPADES,
+
+    ACE,
+    TWO,
+    THREE,
+    FOUR,
+    FIVE,
+    SIX,
+    SEVEN,
+    EIGHT,
+    NINE,
+    TEN,
+    JACK,
+    QUEEN,
+    KING,
+
+    LONG_LIVE_THE_QUEEN,
+    LONG_LIVE_THE_QUEEN_2,
+    LONG_LIVE_THE_QUEEN_3,
+    LONG_LIVE_THE_QUEEN_4,
+
+    LONG_LIVE_THE_KING,
+    LONG_LIVE_THE_KING_2,
+    LONG_LIVE_THE_KING_3,
+    LONG_LIVE_THE_KING_4,
 };
+
+CorrectionStatus toCorrectionStatus(Act act);
+
+const char* actToString(Act act);
+
+Act toAct(CorrectionStatus status);
 
 
 

@@ -34,11 +34,7 @@ int main(){
     // DELETE
     delete algorithm;
     delete simulator;
-    for(int i = 0; i < size; i++)
-    {
+    for(int i = 0; i < size; ++i) {
         delete ais[i];
     }
-    delete[] ais;
-    delete network;
-    std::cout << "Done!" << std::endl;
 }
