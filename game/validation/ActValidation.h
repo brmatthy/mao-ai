@@ -19,7 +19,7 @@ void getActsForCard(std::unordered_set<Act>& acts, const std::deque<Action>& pla
 
 int getTopCardReversedIndex(const std::deque<Action>& played);
 
-void chnar(std::unordered_set<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard);
+void gnarr(std::unordered_set<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard);
 
 void bong(std::unordered_set<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard);
 

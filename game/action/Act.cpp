@@ -7,7 +7,7 @@
 
 CorrectionStatus toCorrectionStatus(Act act){
     switch(act){
-        case Act::CHNAR: return CorrectionStatus::CHNAR;
+        case Act::GNARR: return CorrectionStatus::CHNAR;
         case Act::BONG: return CorrectionStatus::BONG;
         case Act::BONG_2: return CorrectionStatus::BONG_2;
         case Act::BONG_3: return CorrectionStatus::BONG_3;
@@ -47,7 +47,7 @@ CorrectionStatus toCorrectionStatus(Act act){
 
 const char* actToString(Act act){
     switch(act){
-        case Act::CHNAR: return "CHNAR";
+        case Act::GNARR: return "CHNAR";
         case Act::BONG: return "BONG";
         case Act::BONG_2: return "BONG_2";
         case Act::BONG_3: return "BONG_3";
@@ -87,7 +87,7 @@ const char* actToString(Act act){
 
 Act toAct(CorrectionStatus status){
     switch(status){
-        case CorrectionStatus::CHNAR: return Act::CHNAR;
+        case CorrectionStatus::CHNAR: return Act::GNARR;
         case CorrectionStatus::BONG: return Act::BONG;
         case CorrectionStatus::BONG_2: return Act::BONG_2;
         case CorrectionStatus::BONG_3: return Act::BONG_3;

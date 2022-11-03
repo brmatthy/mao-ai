@@ -1,18 +1,13 @@
-//
 // Created by mats on 16/10/22.
-//
 
-#include "LayCardSimulator.h"
+#include "StaticLayCardSimulator.h"
 #include "../game/validation/PlayValidation.h"
 #include "../util/EnumToVector.h"
 
-LayCardSimulator::LayCardSimulator(NeuralNetwork* network): GeneticSimulator(network) {}
+StaticLayCardSimulator::StaticLayCardSimulator(NeuralNetwork* network): Simulator(network) {}
 
-LayCardSimulator::~LayCardSimulator() {}
-
-void LayCardSimulator::simulate(GeneticAi* ai)
+void StaticLayCardSimulator::simulate(GeneticAi* ai)
 {
-    Correction correction(CorrectionStatus::INVALID_CARD, nullptr);
     int index = 0;
     bool input[52];
     for(bool & i : input)
@@ -38,7 +33,7 @@ void LayCardSimulator::simulate(GeneticAi* ai)
                     bool mustplay = playedCorrectCard(&card, &played);
                     if(didplay != mustplay)
                     {
-                       ai->correct(&correction);
+                       ai->correct();
                     }
                     outindex++;
                 }
