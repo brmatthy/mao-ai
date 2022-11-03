@@ -28,7 +28,7 @@ const std::unordered_set<Act> QActAI::act(const std::deque<Action> &played, cons
 
 void QActAI::acceptCorrection(CorrectionStatus status) {
     Act act = toAct(status);
-    // only correct acts will remain
+    // only incrementFaults acts will remain
     _lastActs.erase(act);
     _qmodel.valueUpdate(_lastState, act, -1.0);
     _faults++;

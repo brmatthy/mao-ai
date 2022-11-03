@@ -10,8 +10,9 @@
 #include "../../game/card/ImmutableCard.h"
 #include "../../player/interfaces/PlayInterface.h"
 #include "../../game/validation/ActValidation.h"
+#include "../util/Ai.h"
 
-class QPlayAI: public PlayInterface {
+class QPlayAI: public PlayInterface, public Ai{
 private:
     Qmodel<ImmutableCard, ImmutableCard> _qmodel;
     ImmutableCard _lastState;

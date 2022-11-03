@@ -31,5 +31,5 @@ bool PlayBot::wantsCard(const std::deque<Action> &played, std::vector<const Immu
 }
 
 void PlayBot::acceptCorrection(CorrectionStatus status) {
-    // always correct
+    // always incrementFaults
 }

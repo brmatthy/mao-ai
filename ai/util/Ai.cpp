@@ -7,7 +7,7 @@ void Ai::clean()
     _faults = 0;
 }
 
-void Ai::correct()
+void Ai::incrementFaults()
 {
     ++_faults;
 }

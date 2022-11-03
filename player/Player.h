@@ -51,7 +51,7 @@ public:
     /**
      * Let the player play a card, remove the pointer from the card vector
      * This function will only be called if the player thinks he can make
-     * a correct move. (when the wantsCard() function returns `false`)
+     * a incrementFaults move. (when the wantsCard() function returns `false`)
      * @return A reference to the card, cannot be nullptr
      */
     const ImmutableCard* play();

@@ -133,7 +133,7 @@ void Game::step() {
                     hasActed = true;
                 }else{ // play a card
                     const ImmutableCard* card = p->play();
-                    if(playedCorrectCard(_played.at(_played.size() - getTopCardReversedIndex(_played)).getCard(), card)){ // played a correct card
+                    if(playedCorrectCard(_played.at(_played.size() - getTopCardReversedIndex(_played)).getCard(), card)){ // played a incrementFaults card
                         actionActCorrection(p,card);
                         if(card->getCardNumber() == CardNumber::TEN){
                             switchDirection();

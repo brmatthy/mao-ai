@@ -13,7 +13,7 @@ public:
     explicit GameLayCardSimulator(NeuralNetwork* network);
 
     /**
-     * Simulate a game for a single AI, and do the correct corrections
+     * Simulate a game for a single AI, and do the incrementFaults corrections
      * @param ai the ai for which to simulate.
      */
     void simulate(GeneticAi* ai) final;

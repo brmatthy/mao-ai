@@ -5,13 +5,16 @@
 #include "QPlayAI.h"
 
 void QPlayAI::acceptCorrection(CorrectionStatus status) {
-
+    incrementFaults();
+    _qmodel.valueUpdate(_lastState, _lastAct, -5);
 }
 
 int QPlayAI::play(const std::deque<Action> &played, std::vector<const ImmutableCard *> &playerCards) {
+    _qmodel.valueUpdate(_lastState, _lastAct, 1);
     _lastState = *played.at(played.size() - getTopCardReversedIndex(played)).getCard();
     for(int i = 0; i < playerCards.size(); ++i){
-        if(_qmodel.doAction(_lastState, *playerCards.at(i))){ // check if you could play the card
+        _lastAct = *playerCards.at(i);
+        if(_qmodel.doAction(_lastState, _lastAct)){ // check if you could play the card
             return i;
         }
     }

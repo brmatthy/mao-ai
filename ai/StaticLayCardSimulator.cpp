@@ -33,7 +33,7 @@ void StaticLayCardSimulator::simulate(GeneticAi* ai)
                     bool mustplay = playedCorrectCard(&card, &played);
                     if(didplay != mustplay)
                     {
-                       ai->correct();
+                        ai->incrementFaults();
                     }
                     outindex++;
                 }
