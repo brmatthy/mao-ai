@@ -8,6 +8,7 @@
 #include "ai/util/GeneticAi.h"
 #include "ai/util/GeneticAlgorithm.h"
 #include "ai/util/NeuralNetwork.h"
+#include "ai/GameLayCardSimulator.h"
 
 int main(){
 
@@ -21,7 +22,8 @@ int main(){
     {
         ais[i] = new GeneticAi(static_cast<int>(network->getCompleteSize()));
     }
-    auto* simulator = new StaticLayCardSimulator(network);
+    // auto* simulator = new StaticLayCardSimulator(network);
+    auto* simulator = new GameLayCardSimulator(network);
     auto* algorithm = new GeneticAlgorithm(ais, size, simulator);
 
     // SIMULATION
