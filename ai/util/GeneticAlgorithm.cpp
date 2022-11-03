@@ -12,12 +12,12 @@ GeneticAlgorithm::GeneticAlgorithm(GeneticAi** const startAis, int const aiSize,
     _simulator(simulator)
 {}
 
-void GeneticAlgorithm::execute(int const generations) {
+void GeneticAlgorithm::execute(int const iterations) {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dist(0, 10);
     std::ofstream file ("out_test.csv");
-    for(int generation = 1; generation <= generations; ++generation)
+    for(int generation = 1; generation <= iterations; ++generation)
     {
         // simulate every AI
         int newavg = 0;

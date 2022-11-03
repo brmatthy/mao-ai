@@ -1,6 +1,7 @@
 // Created by mats on 12/10/22.
 
 #include <random>
+#include <iostream>
 #include "GeneticAi.h"
 
 GeneticAi::GeneticAi(const int size):
@@ -24,21 +25,6 @@ GeneticAi::GeneticAi(double* const weights, int const size):
 GeneticAi::~GeneticAi()
 {
     delete[] _weights;
-}
-
-void GeneticAi::clean()
-{
-    _faults = 0;
-}
-
-void GeneticAi::correct(const Correction&)
-{
-    ++_faults;
-}
-
-int GeneticAi::faults() const
-{
-    return _faults;
 }
 
 GeneticAi* GeneticAi::crossover(const GeneticAi& other)

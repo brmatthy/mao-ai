@@ -31,8 +31,8 @@ add_executable(mao_ai
         ai/util/GeneticAi.cpp
         ai/util/GeneticAi.h
         ai/util/Simulator.h
-        ai/LayCardSimulator.cpp
-        ai/LayCardSimulator.h
+        ai/StaticLayCardSimulator.cpp
+        ai/StaticLayCardSimulator.h
         
         player/bot.cpp
-        player/bot.h ai/util/Algorithm.h)
+        player/bot.h ai/util/Algorithm.h ai/GameLayCardSimulator.cpp ai/GameLayCardSimulator.h ai/util/Ai.cpp ai/util/Ai.h ai/util/NeuralNetworkAi.cpp ai/util/NeuralNetworkAi.h)

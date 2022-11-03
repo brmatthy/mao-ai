@@ -3,11 +3,10 @@
 #pragma once
 
 #include <string>
-#include "../../game/validation/Correction.h"
+#include "NeuralNetworkAi.h"
 
-class GeneticAi {
+class GeneticAi: public NeuralNetworkAi {
 private:
-    int _faults = 0;
     double* _weights;
     int _size;
 public:
@@ -28,22 +27,6 @@ public:
      * Delete the geneticAI
      */
     ~GeneticAi();
-
-    /**
-     * Correct a mistake from the AI
-     */
-    void correct(const Correction& correction);
-
-    /**
-     * See the number off faults of the AI
-     * @return the amount of faults
-     */
-    int faults() const;
-
-    /**
-     * Clean the Ai for a new simulation
-     */
-    void clean();
 
     /**
      * Crossover with another AI

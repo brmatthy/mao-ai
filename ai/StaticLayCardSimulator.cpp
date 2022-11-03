@@ -1,15 +1,12 @@
-//
 // Created by mats on 16/10/22.
-//
 
-#include "LayCardSimulator.h"
+#include "StaticLayCardSimulator.h"
 #include "../game/validation/PlayValidation.h"
 
-LayCardSimulator::LayCardSimulator(NeuralNetwork* network): Simulator(network) {}
+StaticLayCardSimulator::StaticLayCardSimulator(NeuralNetwork* network): Simulator(network) {}
 
-void LayCardSimulator::simulate(GeneticAi* ai)
+void StaticLayCardSimulator::simulate(GeneticAi* ai)
 {
-    Correction correction(INVALID_CARD, nullptr);
     int index = 0;
     bool input[52];
     for(bool & i : input)
@@ -35,7 +32,7 @@ void LayCardSimulator::simulate(GeneticAi* ai)
                     bool mustplay = playedCorrectCard(&card, &played);
                     if(didplay != mustplay)
                     {
-                       ai->correct(correction);
+                       ai->correct();
                     }
                     outindex++;
                 }
