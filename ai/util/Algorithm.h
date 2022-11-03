@@ -1,9 +1,6 @@
-//
 // Created by mats on 19/10/22.
-//
 
-#ifndef MAO_AI_ALGORITHM_H
-#define MAO_AI_ALGORITHM_H
+#pragma once
 
 class Algorithm {
 public:
@@ -14,5 +11,3 @@ public:
      */
     virtual void execute(int iterations) = 0;
 };
-
-#endif //MAO_AI_ALGORITHM_H

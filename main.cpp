@@ -17,9 +17,9 @@ int main(){
     int size = 500;
     auto* network = new NeuralNetwork(52, 64, 64, 52);
     auto** ais = new GeneticAi*[size];
-    for(int i = 0; i < size; i++)
+    for(int i = 0; i < size; ++i)
     {
-        ais[i] = new GeneticAi(64*52*2);
+        ais[i] = new GeneticAi(static_cast<int>(network->getCompleteSize()));
     }
     auto* simulator = new StaticLayCardSimulator(network);
     auto* algorithm = new GeneticAlgorithm(ais, size, simulator);
