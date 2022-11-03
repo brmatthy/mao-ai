@@ -8,7 +8,7 @@
 
 #include "../util/Simulator.h"
 
-class QPlayTrainer: Simulator {
+class QPlayTrainer {
 
 };
 

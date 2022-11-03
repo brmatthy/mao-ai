@@ -6,7 +6,7 @@
 
 void QPlayAI::acceptCorrection(CorrectionStatus status) {
     incrementFaults();
-    _qmodel.valueUpdate(_lastState, _lastAct, -5);
+    _qmodel.valueUpdate(_lastState, _lastAct, -6);
 }
 
 int QPlayAI::play(const std::deque<Action> &played, std::vector<const ImmutableCard *> &playerCards) {
@@ -31,3 +31,4 @@ bool QPlayAI::wantsCard(const std::deque<Action> &played, std::vector<const Immu
     }
     return true;
 }
+
