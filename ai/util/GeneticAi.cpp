@@ -1,72 +1,55 @@
-//
 // Created by mats on 12/10/22.
-//
 
 #include <random>
+#include <iostream>
 #include "GeneticAi.h"
 
-GeneticAi::GeneticAi(int size)
+GeneticAi::GeneticAi(const int size):
+    _weights(new double[size]),
+    _size(size)
 {
-    _size = size;
-    _faults = 0;
-    _weights = new double[size];
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_real_distribution<double> dist(-1, 1); //TODO VERSLAG: -1 was een 0, dit gaf altijd output true
-    for(int i = 0; i < _size; i++)
+    std::uniform_real_distribution<double> dist(-1, 1);
+    for(int i = 0; i < _size; ++i)
     {
         _weights[i] = dist(gen);
     }
 }
 
-GeneticAi::GeneticAi(double* weights, int size)
-{
-    _size = size;
-    _weights = weights;
-}
+GeneticAi::GeneticAi(double* const weights, int const size):
+    _weights(weights),
+    _size(size)
+{}
 
 GeneticAi::~GeneticAi()
 {
     delete[] _weights;
 }
 
-void GeneticAi::clean()
+GeneticAi* GeneticAi::crossover(const GeneticAi& other)
 {
-    _faults = 0;
-}
-
-void GeneticAi::correct(Correction* correction) // TODO dont use Correction class anymore, use set of correction status instead
-{
-    _faults++;
-}
-
-int GeneticAi::faults()
-{
-    return _faults;
-}
-
-GeneticAi* GeneticAi::crossover(GeneticAi *other)
-{
-    if(other->_size != this->_size)
+    if(other._size != _size)
     {
         return nullptr;
     }
-    double* new_weights = new double[_size];
-    for(int i = 0; i < _size; i++)
+    auto* const new_weights = new double[_size];
+    const int divider = _size / 2;
+    for(int i = 0; i < _size; ++i)
     {
-        if(i < _size / 2)
+        if(i < divider)
         {
-            new_weights[i] = this->_weights[i];
+            new_weights[i] = _weights[i];
         }
         else
         {
-            new_weights[i] = other->_weights[i];
+            new_weights[i] = other._weights[i];
         }
     }
     return new GeneticAi(new_weights, _size);
 }
 
-int GeneticAi::getSize()
+int GeneticAi::getSize() const
 {
     return _size;
 }
@@ -76,14 +59,26 @@ double *GeneticAi::getWeights()
     return _weights;
 }
 
-void GeneticAi::mutate()
-{
+void GeneticAi::mutate() {
+    const int number_of_mutations = 6;
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dist(0, _size-1);
-    int index1 = dist(gen);
-    int index2 = dist(gen);
-    double temp = _weights[index1];
-    _weights[index1] = _weights[index2];
-    _weights[index2] = temp;
+    std::uniform_int_distribution<> dist(0, _size - 1);
+    std::uniform_real_distribution<double> valdist(-1, 1);
+    for(int i = 0; i < number_of_mutations; ++i)
+    {
+        _weights[dist(gen)] = valdist(gen);
+    }
+}
+
+std::ostream& operator<<(std::ostream& out, const GeneticAi& ai)
+{
+    out << "[ ";
+    for(int i = 0; i < ai._size; ++i)
+    {
+        if(i != 0) {out << ", ";}
+        out << "\"" << ai._weights[i] << "\"";
+    }
+    out << "]";
+    return out;
 }

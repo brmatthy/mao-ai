@@ -1,9 +1,6 @@
-//
 // Created by mats on 09/10/22.
-//
 
-#ifndef MAO_AI_NEURALNETWORK_H
-#define MAO_AI_NEURALNETWORK_H
+#pragma once
 
 /**
  * A Layered Neural Network with many inputs and many outputs.
@@ -42,6 +39,3 @@ public:
 
     bool* getOutputs();
 };
-
-
-#endif //MAO_AI_NEURALNETWORK_H

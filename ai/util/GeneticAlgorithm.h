@@ -7,13 +7,16 @@
 
 #include "GeneticAi.h"
 #include "NeuralNetwork.h"
-#include "GeneticSimulator.h"
+#include "Simulator.h"
+#include "Algorithm.h"
 
-class GeneticAlgorithm {
+class GeneticAlgorithm: public Algorithm {
 private:
     GeneticAi** _ais;
     int _aiSize;
-    GeneticSimulator* _simulator;
+    Simulator* _simulator;
+    int _best = 52*52;
+    int _avg = 52*52;
 public:
     /**
      * Initialize a genetic algorithm
@@ -21,18 +24,24 @@ public:
      * @param network the network on which the AIs will be checked
      * @param simulator the simulator to run an iteration
      */
-    GeneticAlgorithm(GeneticAi** startAis, int aiSize, GeneticSimulator* simulator);
+    GeneticAlgorithm(GeneticAi** startAis, int aiSize, Simulator* simulator);
 
     /**
      * Deletes a Genetic Algorithm and all its data
      */
-    ~GeneticAlgorithm();
+    ~GeneticAlgorithm() override = default;
 
     /**
      * Simulate n generations of the network
-     * @param iterations number of iterations
+     * @param iterations number of generations
      */
-    void simulate(int iterations);
+    void execute(int iterations) override;
+
+    /**
+     * Print the current algorithm state (best and average)
+     * @param out the output stream to write to.
+     */
+    void print(std::ostream& out) const;
 };
 
 

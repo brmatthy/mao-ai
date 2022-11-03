@@ -12,7 +12,7 @@
  * All the possible acts
  */
 enum class Act{
-    CHNAR,
+    GNARR,
 
     BONG,
     BONG_2,

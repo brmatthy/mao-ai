@@ -14,7 +14,6 @@ void getCorrectActs(std::unordered_set<Act>& acts, const std::deque<Action>& pla
 }
 
 
-
 const std::unordered_set<CorrectionStatus> compareMultisets(const std::unordered_set<Act>& correctActs, const std::unordered_set<Act>& acts){
     std::unordered_set<CorrectionStatus> faults;
     auto notFound = acts.end();
@@ -41,7 +40,7 @@ void getActsForDraw(std::unordered_set<Act>& acts, const std::deque<Action>& pla
 
 void getActsForCard(std::unordered_set<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard){
     // let all the rules say what acts must be performed
-    chnar(acts, played, newCard);
+    gnarr(acts, played, newCard);
     bong(acts, played, newCard);
     spades(acts, newCard);
     pleasantDay(acts, played, newCard);
@@ -59,10 +58,10 @@ int getTopCardReversedIndex(const std::deque<Action>& played){
 }
 
 
-void chnar(std::unordered_set<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard){
+void gnarr(std::unordered_set<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard){
     if(newCard->getCardType() == CardType::HEARTS
         || played.at(played.size() - getTopCardReversedIndex(played)).getCard()->getCardType() == CardType::HEARTS){
-        acts.insert(Act::CHNAR);
+        acts.insert(Act::GNARR);
     }
 }
 
