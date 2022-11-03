@@ -1,17 +1,15 @@
-//
 // Created by mats on 09/10/22.
-//
 
 #include "NeuralNetwork.h"
 #include <cmath>
 #include <iostream>
 
-NeuralNetwork::NeuralNetwork(int inputsize, int hiddensize, int hiddenlayersize, int outputsize)
+NeuralNetwork::NeuralNetwork(const int inputsize, const int hiddensize, const int hiddenlayersize, const int outputsize):
+    _inputsize(inputsize),
+    _hiddensize(hiddensize),
+    _hiddenlayersize(hiddenlayersize),
+    _outputsize(outputsize)
 {
-    _inputsize = inputsize;
-    _hiddensize = hiddensize;
-    _hiddenlayersize = hiddenlayersize;
-    _outputsize = outputsize;
     _outputs = new bool[_outputsize];
 }
 

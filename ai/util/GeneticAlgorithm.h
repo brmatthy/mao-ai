@@ -7,14 +7,14 @@
 
 #include "GeneticAi.h"
 #include "NeuralNetwork.h"
-#include "Simulator.h"
+#include "NeuralNetworkSimulator.h"
 #include "Algorithm.h"
 
 class GeneticAlgorithm: public Algorithm {
 private:
     GeneticAi** _ais;
     int _aiSize;
-    Simulator* _simulator;
+    NeuralNetworkSimulator* _simulator;
     int _best = 52*52;
     int _avg = 52*52;
 public:
@@ -24,7 +24,7 @@ public:
      * @param network the network on which the AIs will be checked
      * @param simulator the simulator to run an iteration
      */
-    GeneticAlgorithm(GeneticAi** startAis, int aiSize, Simulator* simulator);
+    GeneticAlgorithm(GeneticAi** startAis, int aiSize, NeuralNetworkSimulator* simulator);
 
     /**
      * Deletes a Genetic Algorithm and all its data

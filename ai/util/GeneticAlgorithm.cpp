@@ -6,7 +6,7 @@
 #include <fstream>
 #include "GeneticAlgorithm.h"
 
-GeneticAlgorithm::GeneticAlgorithm(GeneticAi** const startAis, int const aiSize, Simulator* const simulator):
+GeneticAlgorithm::GeneticAlgorithm(GeneticAi** const startAis, int const aiSize, NeuralNetworkSimulator* const simulator):
     _ais(startAis),
     _aiSize(aiSize),
     _simulator(simulator)

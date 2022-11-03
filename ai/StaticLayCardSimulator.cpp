@@ -4,9 +4,9 @@
 #include "../game/validation/PlayValidation.h"
 #include "../util/EnumToVector.h"
 
-StaticLayCardSimulator::StaticLayCardSimulator(NeuralNetwork* network): Simulator(network) {}
+StaticLayCardSimulator::StaticLayCardSimulator(NeuralNetwork* network): NeuralNetworkSimulator(network) {}
 
-void StaticLayCardSimulator::simulate(GeneticAi* ai)
+void StaticLayCardSimulator::simulate(NeuralNetworkAi* ai)
 {
     int index = 0;
     bool input[52];
