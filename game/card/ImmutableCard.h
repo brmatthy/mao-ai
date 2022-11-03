@@ -43,6 +43,10 @@ public:
      */
     CardNumber getCardNumber() const;
 
+    bool operator==(const ImmutableCard &rhs) const;
+
+    bool operator!=(const ImmutableCard &rhs) const;
+
     friend std::ostream& operator<<(std::ostream& os, const ImmutableCard& ic);
 };
 

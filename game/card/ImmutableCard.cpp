@@ -17,3 +17,12 @@ CardNumber ImmutableCard::getCardNumber() const{
 std::ostream &operator<<(std::ostream &os, const ImmutableCard &ic) {
     return os << CardTypeToString(ic._type) << CardNumberToString(ic._number);
 }
+
+bool ImmutableCard::operator==(const ImmutableCard &rhs) const {
+    return _type == rhs._type &&
+           _number == rhs._number;
+}
+
+bool ImmutableCard::operator!=(const ImmutableCard &rhs) const {
+    return !(rhs == *this);
+}
