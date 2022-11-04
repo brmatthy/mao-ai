@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include <cstdlib>
+
 /**
  * A Layered Neural Network with many inputs and many outputs.
  * x1...xn -> y1...yn (wx - 0)
@@ -12,7 +14,6 @@ private:
     int _hiddensize;
     int _hiddenlayersize;
     int _outputsize;
-
     bool* _outputs;
 public:
     /**
@@ -31,11 +32,21 @@ public:
 
     /**
      * Calculate the new output values of the network based on the weights and input values \n
-     * !!! size should be correct && weights order also !!!
+     * !!! size should be incrementFaults && weights order also !!!
      * @param weights gives the weight values for which to calculate the network.
      * @param inputs gives the input values for which to calculate the network.
      */
     void calculate(const double* weights, const bool* inputs);
 
+    /**
+     * Get the ouputs of the last calculation
+     * @return An array of length outputsize with the sizes
+     */
     bool* getOutputs();
+
+    /**
+     * Return the size of all the weights of the neural network
+     * @return a size (all the weights)
+     */
+    size_t getCompleteSize() const;
 };

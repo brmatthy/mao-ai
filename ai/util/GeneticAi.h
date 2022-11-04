@@ -2,31 +2,27 @@
 
 #pragma once
 
-#include <string>
 #include "NeuralNetworkAi.h"
 
 class GeneticAi: public NeuralNetworkAi {
-private:
-    double* _weights;
-    int _size;
 public:
     /**
      * Create a new geneticAi, weights are set randomly
      * @param size the size of the weights array
      */
-    explicit GeneticAi(int size);
+    explicit GeneticAi(const int size): NeuralNetworkAi(size){};
 
     /**
      * Create a new genetic AI with starting weights
      * @param weights starting weights (do not need to delete)
      * @param size the weights size
      */
-    GeneticAi(double* weights, int size);
+    GeneticAi(double* weights, const int size): NeuralNetworkAi(weights, size){};
 
     /**
      * Delete the geneticAI
      */
-    ~GeneticAi();
+    ~GeneticAi() = default;
 
     /**
      * Crossover with another AI
@@ -39,24 +35,4 @@ public:
       * Mutate the AI slightly
       */
      void mutate();
-
-     /**
-      * Get the Ai weights
-      * @return the weights as a double array
-      */
-     double* getWeights();
-
-     /**
-      * Get the Ai weight size
-      * @return the ai weight size
-      */
-     int getSize() const;
-
-     /**
-      * Prints the AI state (weights) as a string representing the weights array
-      * @param out the output stream to write to.
-      * @param ai the ai to write.
-      * @return an output stream to continue the chain.
-      */
-     friend std::ostream& operator<<(std::ostream& out, const GeneticAi& ai);
 };

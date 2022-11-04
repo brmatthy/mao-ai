@@ -16,7 +16,7 @@ private:
 
     CorrectionStatus _status;
     /**
-     * Contains the correct action. This will only be not nullptr when status is INVALID_ACT
+     * Contains the incrementFaults action. This will only be not nullptr when status is INVALID_ACT
      */
     const Action* _action;
 

@@ -4,6 +4,7 @@
 
 #include <algorithm>
 #include "ActValidation.h"
+#include "../../util/EnumToVector.h"
 
 void getCorrectActs(std::unordered_set<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard){
     if(newCard == nullptr){ // draw card
@@ -12,7 +13,6 @@ void getCorrectActs(std::unordered_set<Act>& acts, const std::deque<Action>& pla
         getActsForCard(acts, played, newCard);
     }
 }
-
 
 const std::unordered_set<CorrectionStatus> compareMultisets(const std::unordered_set<Act>& correctActs, const std::unordered_set<Act>& acts){
     std::unordered_set<CorrectionStatus> faults;
@@ -37,7 +37,6 @@ void getActsForDraw(std::unordered_set<Act>& acts, const std::deque<Action>& pla
     }
 }
 
-
 void getActsForCard(std::unordered_set<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard){
     // let all the rules say what acts must be performed
     gnarr(acts, played, newCard);
@@ -57,6 +56,23 @@ int getTopCardReversedIndex(const std::deque<Action>& played){
     return i;
 }
 
+int getCardIndex(const ImmutableCard* card)
+{
+    const int cardsOfType = 13;
+    int index = 0;
+
+    CardType type = card->getCardType();
+    auto types = EnumToVector::getCardTypeVector();
+    auto it = std::find(types.begin(), types.end(), type);
+    index += cardsOfType * (it - types.begin());
+
+    CardNumber number = card->getCardNumber();
+    auto numbers = EnumToVector::getCardNumberVector();
+    auto it2 = std::find(numbers.begin(), numbers.end(), number);
+    index += it2 - numbers.begin();
+
+    return index;
+}
 
 void gnarr(std::unordered_set<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard){
     if(newCard->getCardType() == CardType::HEARTS
@@ -68,10 +84,10 @@ void gnarr(std::unordered_set<Act>& acts, const std::deque<Action>& played, cons
 void bong(std::unordered_set<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard){
     const ImmutableCard* current = newCard;
     short bongNumebr = 0;
-    for (int i = getTopCardReversedIndex(played); current->getCardNumber() == CardNumber::EIGHT; i++){
+    for (int i = getTopCardReversedIndex(played); i <= played.size() && current->getCardNumber() == CardNumber::EIGHT; i++){
         bongNumebr++;
         current = played.at(played.size() - i).getCard();
-        while (current == nullptr){
+        while (current == nullptr && i <= played.size()){
             i++;
             current = played.at(played.size() - i).getCard();
         }

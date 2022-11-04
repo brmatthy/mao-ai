@@ -4,6 +4,7 @@
 
 #ifndef MAO_AI_UTIL_H
 #define MAO_AI_UTIL_H
+
 template<class T>
 constexpr T clamp( const T& v, const T& lo, const T& hi );
 
@@ -18,6 +19,5 @@ constexpr T clamp( const T& v, const T& lo, const T& hi )
     } // too high
     return hi;
 }
-
 
 #endif //MAO_AI_UTIL_H

@@ -28,6 +28,7 @@ private:
     int _currentPlayer = 0;
     int _direction = 1;
     bool _gameIsNotFinished = true;
+    unsigned int _gameStepCount = 0;
 
     void drawNewCard(Player* player);
     const ImmutableCard* getTopCard();
@@ -55,6 +56,11 @@ public:
      */
     void playGame();
 
+    /**
+     * Play a Game, but limit the amount of moves
+     * @param moves the amount of moves after which to stop: -1 = forever
+     */
+    void playLimitedGame(const int moves);
 
     /**
      * Checks if the given player is at turn
@@ -74,6 +80,8 @@ public:
      * @param player The player to be added
      */
     void addPlayer(Player* player);
+
+    unsigned int getGameStepCount() const;
 };
 
 

@@ -2,19 +2,20 @@
 
 #pragma once
 
-#include "util/Simulator.h"
+#include "util/NeuralNetworkSimulator.h"
+#include "../player/interfaces/PlayInterface.h"
 
-class GameLayCardSimulator: public Simulator {
+class GameLayCardSimulator: public NeuralNetworkSimulator {
 public:
     /**
-    * Creat a Simulator to simulate games
+    * Creat a NeuralNetworkSimulator to simulate games
     * @param network the network from which to get the AI data
     */
     explicit GameLayCardSimulator(NeuralNetwork* network);
 
     /**
-     * Simulate a game for a single AI, and do the correct corrections
+     * Simulate a game for a single AI, and do the incrementFaults corrections
      * @param ai the ai for which to simulate.
      */
-    void simulate(GeneticAi* ai) final;
+    void simulate(NeuralNetworkAi* ai) final;
 };
