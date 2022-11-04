@@ -7,6 +7,7 @@
 
 #include "CardDetail.h"
 #include <iostream>
+#include <vector>
 
 /**
  * This class represents an immutable card. Jokers not included.
@@ -48,6 +49,8 @@ public:
     bool operator!=(const ImmutableCard &rhs) const;
 
     friend std::ostream& operator<<(std::ostream& os, const ImmutableCard& ic);
+
+    static std::vector<ImmutableCard> getAllCards();
 };
 
 

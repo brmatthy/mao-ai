@@ -5,6 +5,10 @@
 #include <iostream>
 #include "ai/q_learning/states/AllStatesFactory.h"
 #include "ai/ActAi/QActTrainer.h"
+#include "ai/playai/QPlayTrainer.h"
 
 
-int main(){}
+int main(){
+    QPlayTrainer trainer = QPlayTrainer(1);
+    trainer.execute(500);
+}

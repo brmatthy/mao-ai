@@ -4,13 +4,21 @@
 
 #include "QPlayAI.h"
 
+QPlayAI::QPlayAI(double alpha) : _qmodel(Qmodel<ImmutableCard, ImmutableCard>(ImmutableCard::getAllCards(),
+                                                                  ImmutableCard::getAllCards(),alpha)){}
+
+
 void QPlayAI::acceptCorrection(CorrectionStatus status) {
     incrementFaults();
-    _qmodel.valueUpdate(_lastState, _lastAct, -6);
+    _qmodel.valueUpdate(_lastState, _lastAct, -5);
+    _lastState = ImmutableCard(CardType::NONE, CardNumber::NONE);
 }
 
 int QPlayAI::play(const std::deque<Action> &played, std::vector<const ImmutableCard *> &playerCards) {
-    _qmodel.valueUpdate(_lastState, _lastAct, 1);
+    // reward if last action was correct
+    if(ImmutableCard(CardType::NONE, CardNumber::NONE) != _lastState){
+        _qmodel.valueUpdate(_lastState, _lastAct, 1);
+    }
     _lastState = *played.at(played.size() - getTopCardReversedIndex(played)).getCard();
     for(int i = 0; i < playerCards.size(); ++i){
         _lastAct = *playerCards.at(i);

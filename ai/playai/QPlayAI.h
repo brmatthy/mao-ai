@@ -15,9 +15,11 @@
 class QPlayAI: public PlayInterface, public Ai{
 private:
     Qmodel<ImmutableCard, ImmutableCard> _qmodel;
-    ImmutableCard _lastState;
-    ImmutableCard _lastAct;
+    ImmutableCard _lastState = ImmutableCard(CardType::NONE, CardNumber::NONE);
+    ImmutableCard _lastAct = ImmutableCard(CardType::NONE, CardNumber::NONE);
 public:
+    QPlayAI(double alpha);
+
     void acceptCorrection(CorrectionStatus status) override;
 
     int play(const std::deque<Action> &played, std::vector<const ImmutableCard *> &playerCards) override;

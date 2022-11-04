@@ -188,6 +188,10 @@ void Game::playGame() {
             step();
             _gameStepCount++;
         }
+/*
+        for(Player* p : _players){
+            std::cout << p << ": cards left: " << p->cardCount() << std::endl;
+        }*/
 
         // get the cards back from the players
         for(Player* p : _players){

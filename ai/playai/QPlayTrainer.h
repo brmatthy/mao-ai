@@ -6,10 +6,24 @@
 #define MAO_AI_QPLAYTRAINER_H
 
 
-#include "../util/Simulator.h"
+#include "../util/Algorithm.h"
+#include "../../player/Player.h"
+#include "QPlayAI.h"
+#include "../../player/bot/MoveBot.h"
+#include "../../player/bot/ActBot.h"
+#include "../../player/bot/neverfinish/NeverFinishBot.h"
 
-class QPlayTrainer {
 
+class QPlayTrainer : public Algorithm{
+private:
+    Player* _player;
+    QPlayAI* _qPlayAI;
+    std::vector<int> _faultHist;
+
+public:
+    QPlayTrainer(double alpha);
+    ~QPlayTrainer();
+    void execute(int iterations) override;
 };
 
 

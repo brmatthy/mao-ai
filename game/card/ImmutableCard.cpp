@@ -3,6 +3,7 @@
 //
 
 #include "ImmutableCard.h"
+#include "../../util/EnumToVector.h"
 
 ImmutableCard::ImmutableCard(CardType mType, CardNumber mNumber) : _type(mType), _number(mNumber) {}
 
@@ -25,4 +26,14 @@ bool ImmutableCard::operator==(const ImmutableCard &rhs) const {
 
 bool ImmutableCard::operator!=(const ImmutableCard &rhs) const {
     return !(rhs == *this);
+}
+
+std::vector<ImmutableCard> ImmutableCard::getAllCards() {
+    std::vector<ImmutableCard> cards = {};
+    for(CardType type: EnumToVector::getCardTypeVector()){
+        for(CardNumber number: EnumToVector::getCardNumberVector()){
+            cards.emplace_back(type, number);
+        }
+    }
+    return cards;
 }
