@@ -56,6 +56,11 @@ public:
      */
     void playGame();
 
+    /**
+     * Play a Game, but limit the amount of moves
+     * @param moves the amount of moves after which to stop: -1 = forever
+     */
+    void playLimitedGame(const int moves);
 
     /**
      * Checks if the given player is at turn

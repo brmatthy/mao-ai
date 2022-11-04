@@ -24,4 +24,6 @@ void GameLayCardSimulator::simulate(NeuralNetworkAi* ai)
     game.addPlayer(&bot2);
     game.addPlayer(&aiplayer);
     //play the game
-    game.playGame();}
+    const int maxMoves = 500;
+    game.playLimitedGame(maxMoves);
+}

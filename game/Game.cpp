@@ -1,6 +1,4 @@
-//
 // Created by brent on 1/10/22.
-//
 
 #include "Game.h"
 #include "validation/Correction.h"
@@ -9,7 +7,6 @@
 #include "../util/EnumToVector.h"
 #include <algorithm>
 #include <random>
-
 
 
 Game::Game() {
@@ -173,21 +170,35 @@ void Game::step() {
     nextRoot();
 }
 
-void Game::playGame() {
-    if(_gameIsNotFinished){
+void Game::playGame()
+{
+    playLimitedGame(-1);
+}
+
+void Game::playLimitedGame(const int moves)
+{
+    if(_gameIsNotFinished)
+    {
         // give the players cards
-        for(Player* p : _players){
-            for(int i = 0; i < 3; i++){
+        for(Player* p : _players)
+        {
+            for(int i = 0; i < 3; ++i)
+            {
                 drawNewCard(p);
             }
         }
         // put 1 card on the _played stack
-        Action action = Action(getTopCard(), {}, nullptr);
+        auto action = Action(getTopCard(), {}, nullptr);
         pushAction(action);
 
-        while (_gameIsNotFinished){
+        while (_gameIsNotFinished)
+        {
             step();
-            _gameStepCount++;
+            ++_gameStepCount;
+            if((moves != -1) && (_gameStepCount > moves))
+            {
+                _gameIsNotFinished = false;
+            }
         }
 /*
         for(Player* p : _players){
@@ -198,10 +209,8 @@ void Game::playGame() {
         for(Player* p : _players){
             takeAllCardsFromPlayer(p);
         }
-
     }
 }
-
 
 bool Game::isAtTurn(const Player *player) const {
     return player == _players.at(_currentPlayer);

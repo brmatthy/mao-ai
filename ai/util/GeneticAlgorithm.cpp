@@ -31,6 +31,7 @@ void GeneticAlgorithm::execute(int const iterations) {
         std::sort(_ais, _ais + _aiSize,[] (const GeneticAi* const lhs, const GeneticAi* const rhs) {
                      return lhs->faults() < rhs->faults();
         });
+        const int newbest = _ais[_aiSize-1]->faults();
         for(int i = _aiSize / 2; i < _aiSize; ++i)
         {
             //delete the worst ais
@@ -42,7 +43,6 @@ void GeneticAlgorithm::execute(int const iterations) {
         }
 
         // Change state
-        const int newbest = _ais[0]->faults();
         bool changed = false;
         if(newbest < _best)
         {
@@ -63,7 +63,7 @@ void GeneticAlgorithm::execute(int const iterations) {
 
         // PRINT
         print(file);
-        if(changed)
+        if(changed || true)
         {
             std::cout << "Generation: " << generation << " | ";
             print(std::cout);
