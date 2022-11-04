@@ -84,10 +84,10 @@ void gnarr(std::unordered_set<Act>& acts, const std::deque<Action>& played, cons
 void bong(std::unordered_set<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard){
     const ImmutableCard* current = newCard;
     short bongNumebr = 0;
-    for (int i = getTopCardReversedIndex(played); current->getCardNumber() == CardNumber::EIGHT; i++){
+    for (int i = getTopCardReversedIndex(played); i <= played.size() && current->getCardNumber() == CardNumber::EIGHT; i++){
         bongNumebr++;
         current = played.at(played.size() - i).getCard();
-        while (current == nullptr){
+        while (current == nullptr && i <= played.size()){
             i++;
             current = played.at(played.size() - i).getCard();
         }

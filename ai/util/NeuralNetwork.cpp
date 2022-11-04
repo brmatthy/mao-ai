@@ -8,10 +8,9 @@ NeuralNetwork::NeuralNetwork(const int inputsize, const int hiddensize, const in
     _inputsize(inputsize),
     _hiddensize(hiddensize),
     _hiddenlayersize(hiddenlayersize),
-    _outputsize(outputsize)
-{
-    _outputs = new bool[_outputsize];
-}
+    _outputsize(outputsize),
+    _outputs(new bool[outputsize])
+{}
 
 NeuralNetwork::~NeuralNetwork()
 {

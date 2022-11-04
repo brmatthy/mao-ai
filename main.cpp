@@ -1,8 +1,8 @@
-//
 // Created by brent on 1/10/22.
-//
 
 #include <iostream>
+#include "ai/ActAi/QActTrainer.h"
+#include "ai/playai/QPlayTrainer.h"
 
 #include "ai/StaticLayCardSimulator.h"
 #include "ai/util/GeneticAi.h"

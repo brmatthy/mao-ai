@@ -145,7 +145,7 @@ int Qmodel<S, A>::getIndexOfAction(const A &action) const {
 
 template<class S, class A>
 bool Qmodel<S, A>::doAction(const S& state, const A &action) const {
-    return _table[getIndexOfState(state)][getIndexOfAction(action)] > 0;
+    return _table[getIndexOfState(state)][getIndexOfAction(action)] >= 0;
 }
 
 template<class S, class A>

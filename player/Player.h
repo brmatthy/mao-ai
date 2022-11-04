@@ -51,7 +51,7 @@ public:
     /**
      * Let the player play a card, remove the pointer from the card vector
      * This function will only be called if the player thinks he can make
-     * a correct move. (when the wantsCard() function returns `false`)
+     * a incrementFaults move. (when the wantsCard() function returns `false`)
      * @return A reference to the card, cannot be nullptr
      */
     const ImmutableCard* play();
@@ -115,14 +115,19 @@ public:
     /**
      * Clears the card vector. Cards are stored on the heap, make sure to delete them beforehand
      */
-     void clearCards();
+    void clearCards();
 
      /**
       * Get the game that this player is playing
       * @return The game
       */
-     const Game* getGame();
-};
+    const Game* getGame();
 
+    MoveInterface *getMover() const;
+
+    PlayInterface *getCardPlayer() const;
+
+    ActInterface *getActor() const;
+};
 
 #endif //MAO_AI_PLAYER_H

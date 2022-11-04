@@ -74,4 +74,15 @@ void Player::acceptCorrection(const std::unordered_set<CorrectionStatus> &correc
     }
 }
 
+MoveInterface *Player::getMover() const {
+    return _mover;
+}
+
+PlayInterface *Player::getCardPlayer() const {
+    return _cardPlayer;
+}
+
+ActInterface *Player::getActor() const {
+    return _actor;
+}
 

@@ -9,7 +9,7 @@ public:
     /**
      * Correct a mistake from the AI
      */
-    void correct();
+    void incrementFaults();
 
     /**
      * See the number off faults of the AI

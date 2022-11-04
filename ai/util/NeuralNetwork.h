@@ -32,7 +32,7 @@ public:
 
     /**
      * Calculate the new output values of the network based on the weights and input values \n
-     * !!! size should be correct && weights order also !!!
+     * !!! size should be incrementFaults && weights order also !!!
      * @param weights gives the weight values for which to calculate the network.
      * @param inputs gives the input values for which to calculate the network.
      */

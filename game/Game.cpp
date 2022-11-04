@@ -133,7 +133,8 @@ void Game::step() {
                     hasActed = true;
                 }else{ // play a card
                     const ImmutableCard* card = p->play();
-                    if(playedCorrectCard(_played.at(_played.size() - getTopCardReversedIndex(_played)).getCard(), card)){ // played a correct card
+                    // played a incrementFaults card
+                    if(playedCorrectCard(_played.at(_played.size() - getTopCardReversedIndex(_played)).getCard(), card)){
                         actionActCorrection(p,card);
                         if(card->getCardNumber() == CardNumber::TEN){
                             switchDirection();
@@ -186,7 +187,12 @@ void Game::playGame() {
 
         while (_gameIsNotFinished){
             step();
+            _gameStepCount++;
         }
+/*
+        for(Player* p : _players){
+            std::cout << p << ": cards left: " << p->cardCount() << std::endl;
+        }*/
 
         // get the cards back from the players
         for(Player* p : _players){
@@ -208,5 +214,9 @@ const std::deque<Action> &Game::getPlayed() const {
 void Game::addPlayer(Player *player) {
     player->setGame(this);
     _players.push_back(player);
+}
+
+unsigned int Game::getGameStepCount() const {
+    return _gameStepCount;
 }
 

@@ -13,7 +13,7 @@ public:
     virtual ~Simulator() = default;
 
     /**
-     * Simulate a game for a single AI, and do the correct corrections
+     * Simulate a game for a single AI, and do the incrementFaults corrections
      * @param ai the ai for which to simulate.
      */
     virtual void simulate(T* ai) = 0;

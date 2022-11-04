@@ -9,9 +9,13 @@ bool MoveBot::atTurn() {
 }
 
 void MoveBot::acceptCorrection(CorrectionStatus status) {
-    // we are always correct
+    // we are always incrementFaults
 }
 
 MoveBot::MoveBot(Player *player): _player(player){
 
+}
+
+void MoveBot::setPlayer(Player *player) {
+    _player = player;
 }

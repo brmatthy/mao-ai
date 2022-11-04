@@ -2,7 +2,7 @@
 
 #include "GameLayCardSimulator.h"
 #include "../game/Game.h"
-#include "../player/bot/Bot.h"
+#include "../player/bot/neverfinish/NeverFinishBot.h"
 #include "PlayAi/NeuralNetworkPlayAi.h"
 #include "../player/bot/MoveBot.h"
 #include "../player/bot/ActBot.h"
@@ -11,16 +11,17 @@ GameLayCardSimulator::GameLayCardSimulator(NeuralNetwork* network): NeuralNetwor
 
 void GameLayCardSimulator::simulate(NeuralNetworkAi* ai)
 {
-    Game game;
     //add players/ai to game
-    auto bot1 = Bot();
-    auto bot2 = Bot();
+    auto bot1 = NeverFinishBot();
+    auto bot2 = NeverFinishBot();
     auto playai = NeuralNetworkPlayAi(_network, ai);
-    Player* aiplayer = new Player(new MoveBot(aiplayer), &playai, new ActBot());
+    auto actbot = ActBot();
+    auto movebot = MoveBot(nullptr);
+    auto aiplayer = Player(&movebot, &playai, &actbot);
+    movebot.setPlayer(&aiplayer);
+    auto game = Game();
     game.addPlayer(&bot1);
     game.addPlayer(&bot2);
-    game.addPlayer(aiplayer);
+    game.addPlayer(&aiplayer);
     //play the game
-    game.playGame();
-    delete aiplayer;
-}
+    game.playGame();}

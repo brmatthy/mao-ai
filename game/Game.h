@@ -28,6 +28,7 @@ private:
     int _currentPlayer = 0;
     int _direction = 1;
     bool _gameIsNotFinished = true;
+    unsigned int _gameStepCount = 0;
 
     void drawNewCard(Player* player);
     const ImmutableCard* getTopCard();
@@ -74,6 +75,8 @@ public:
      * @param player The player to be added
      */
     void addPlayer(Player* player);
+
+    unsigned int getGameStepCount() const;
 };
 
 

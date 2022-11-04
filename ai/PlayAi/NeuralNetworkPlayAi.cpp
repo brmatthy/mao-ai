@@ -40,7 +40,7 @@ std::vector<ImmutableCard> NeuralNetworkPlayAi::calculateFromNetwork(const std::
 
 void NeuralNetworkPlayAi::acceptCorrection(CorrectionStatus status)
 {
-    _ai->correct();
+    _ai->incrementFaults();
 }
 
 int NeuralNetworkPlayAi::play(const std::deque<Action> &played, std::vector<const ImmutableCard *> &playerCards)
@@ -77,8 +77,8 @@ bool NeuralNetworkPlayAi::wantsCard(const std::deque<Action> &played, std::vecto
     //small penalty for taking a card to discourage this
     if(wantsCard)
     {
-        _ai->correct();
-        _ai->correct();
+        _ai->incrementFaults();
+        _ai->incrementFaults();
     }
     return wantsCard;
 }
