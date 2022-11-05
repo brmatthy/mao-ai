@@ -9,6 +9,6 @@
 
 
 int main(){
-    QPlayTrainer trainer = QPlayTrainer(1);
+    QPlayTrainer trainer = QPlayTrainer(0.);
     trainer.execute(500);
 }
