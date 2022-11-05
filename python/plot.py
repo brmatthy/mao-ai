@@ -4,10 +4,10 @@ import matplotlib.pyplot as plt
 pointsBest = []
 pointsAvg = []
 
-filename = 'out_new'
+filename = 'out_test'
 
 # read csv file
-with open('cmake-build-debug/' + filename + '.csv') as csv_file:
+with open('../cmake-build-debug/' + filename + '.csv') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter='|')
     line_count = 0
     for row in csv_reader:

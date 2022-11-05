@@ -1,22 +1,14 @@
-//
-// Created by mats on 12/10/22.
-//
+// Created by mats on 03/11/22.
 
-#ifndef MAO_AI_SIMULATOR_H
-#define MAO_AI_SIMULATOR_H
+#pragma once
 
-#include "GeneticAi.h"
-#include "NeuralNetwork.h"
-
+template <class T>
 class Simulator {
-protected:
-    NeuralNetwork *_network;
 public:
     /**
-     * Creat a Simulator to simulate games
-     * @param network the network from which to get the AI data
+     * Creat a Simulator to simulate games for a single Ai
      */
-    explicit Simulator(NeuralNetwork *network) : _network(network) {}
+    Simulator() = default;
 
     virtual ~Simulator() = default;
 
@@ -24,8 +16,5 @@ public:
      * Simulate a game for a single AI, and do the incrementFaults corrections
      * @param ai the ai for which to simulate.
      */
-    virtual void simulate(GeneticAi *ai) = 0;
+    virtual void simulate(T* ai) = 0;
 };
-
-
-#endif //MAO_AI_SIMULATOR_H
