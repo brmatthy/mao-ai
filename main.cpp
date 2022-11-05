@@ -11,7 +11,6 @@
 #include "ai/GameLayCardSimulator.h"
 
 int main(){
-
     std::cout << "Starting simulation" << std::endl;
 
     //CREATE
@@ -40,3 +39,4 @@ int main(){
         delete ais[i];
     }
 }
+

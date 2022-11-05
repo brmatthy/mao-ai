@@ -8,16 +8,17 @@
 
 #include "../util/Algorithm.h"
 #include "../../player/Player.h"
-#include "QPlayAI.h"
+#include "PlayAi.h"
 #include "../../player/bot/MoveBot.h"
 #include "../../player/bot/ActBot.h"
 #include "../../player/bot/neverfinish/NeverFinishBot.h"
-
+#include "../../data/FaultsToJson.h"
+#include "SmartQPlayAi.h"
 
 class QPlayTrainer : public Algorithm{
 private:
     Player* _player;
-    QPlayAI* _qPlayAI;
+    PlayAi* _playAi;
     std::vector<int> _faultHist;
 
 public:

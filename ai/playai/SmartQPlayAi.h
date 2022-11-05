@@ -1,25 +1,28 @@
 //
-// Created by brent on 3/11/22.
+// Created by brent on 4/11/22.
 //
 
-#ifndef MAO_AI_QPLAYAI_H
-#define MAO_AI_QPLAYAI_H
+#ifndef MAO_AI_SMARTQPLAYAI_H
+#define MAO_AI_SMARTQPLAYAI_H
 
 
-#include "../q_learning/Qmodel.h"
 #include "../../game/card/ImmutableCard.h"
-#include "../../player/interfaces/PlayInterface.h"
-#include "../../game/validation/ActValidation.h"
-#include "../util/Ai.h"
 #include "PlayAi.h"
+#include "../q_learning/Qmodel.h"
+#include "../../game/validation/ActValidation.h"
+#include "../../util/EnumToVector.h"
 
-class QPlayAI: public PlayAi{
+class SmartQPlayAi: public PlayAi{
 private:
     Qmodel<ImmutableCard, ImmutableCard> _qmodel;
     ImmutableCard _lastState = ImmutableCard(CardType::NONE, CardNumber::NONE);
     ImmutableCard _lastAct = ImmutableCard(CardType::NONE, CardNumber::NONE);
+
+    void reward();
+    void punish();
+    void generalUpdate(double reward);
 public:
-    QPlayAI(double alpha);
+    SmartQPlayAi(double alpha);
 
     void acceptCorrection(CorrectionStatus status) override;
 
@@ -30,6 +33,4 @@ public:
 };
 
 
-#endif //MAO_AI_QPLAYAI_H
-
-
+#endif //MAO_AI_SMARTQPLAYAI_H
