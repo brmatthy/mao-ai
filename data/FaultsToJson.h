@@ -7,6 +7,6 @@
 
 #include <vector>
 
-void faultVectorToJsonFile(const std::vector<int>& faults);
+void faultVectorToJsonFile(const std::vector<double>& faults);
 
 #endif //MAO_AI_FAULTSTOJSON_H

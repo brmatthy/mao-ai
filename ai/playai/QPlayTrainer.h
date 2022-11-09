@@ -13,13 +13,13 @@
 #include "../../player/bot/ActBot.h"
 #include "../../player/bot/neverfinish/NeverFinishBot.h"
 #include "../../data/FaultsToJson.h"
-#include "SmartQPlayAi.h"
+#include "StateActPredictQPlayAI.h"
 
 class QPlayTrainer : public Algorithm{
 private:
     Player* _player;
     PlayAi* _playAi;
-    std::vector<int> _faultHist;
+    std::vector<double> _faultHist;
 
 public:
     QPlayTrainer(double alpha);

@@ -4,6 +4,7 @@
 
 #include "QPlayTrainer.h"
 #include "QPlayAI.h"
+#include "ActPredictQPlayAI.h"
 
 
 QPlayTrainer::QPlayTrainer(double alpha){
@@ -35,10 +36,10 @@ void QPlayTrainer::execute(int iterations) {
 
         // play the game
         game.playGame();
-        _faultHist.push_back(_playAi->faults());
+        _faultHist.push_back(_playAi->relativeFaults());
 
         // ask the AI how many mistakes were made
-        // std::cout << "Game " << i << " | F: " << _playAi->faults() << " | S: " << game.getGameStepCount() << std::endl;
+        std::cout << "Game " << i << " | F: " << _playAi->faults() << " | T: " << _playAi->turns() << " | R: " << _playAi->relativeFaults() << std::endl;
 
         // reset faults for next game
         _playAi->clean();
