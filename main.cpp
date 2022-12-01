@@ -12,6 +12,6 @@
 
 int main(){
     auto trainer = QPlayTrainer(0.1);
-    trainer.execute(600);
+    trainer.execute(1000);
 }
 

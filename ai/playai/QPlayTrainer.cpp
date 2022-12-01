@@ -8,7 +8,7 @@
 
 
 QPlayTrainer::QPlayTrainer(double alpha){
-    _playAi = new QPlayAI(alpha);
+    _playAi = new StateActPredictQPlayAI(alpha);
     MoveBot* mover = new MoveBot(nullptr);
     _player = new Player(mover, _playAi, new ActBot());
     mover->setPlayer(_player);
@@ -39,7 +39,7 @@ void QPlayTrainer::execute(int iterations) {
         _faultHist.push_back(_playAi->relativeFaults());
 
         // ask the AI how many mistakes were made
-        std::cout << "Game " << i << " | F: " << _playAi->faults() << " | T: " << _playAi->turns() << " | R: " << _playAi->relativeFaults() << std::endl;
+        // std::cout << "Game " << i << " | F: " << _playAi->faults() << " | T: " << _playAi->turns() << " | R: " << _playAi->relativeFaults() << std::endl;
 
         // reset faults for next game
         _playAi->clean();

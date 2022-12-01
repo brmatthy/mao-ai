@@ -29,7 +29,7 @@ void StateActPredictQPlayAI::generalUpdate(double reward) {
             _qmodel.valueUpdate(ImmutableCard(stateType, sn), ImmutableCard(actType, an),reward);
         }
     }
-
+/*
     // update all type-number
     for(CardNumber sn: EnumToVector::getCardNumberVector()){
         for(CardType at: EnumToVector::getCardTypeVector()){
@@ -42,7 +42,7 @@ void StateActPredictQPlayAI::generalUpdate(double reward) {
         for(CardNumber an: EnumToVector::getCardNumberVector()){
             _qmodel.valueUpdate(ImmutableCard(st, stateNumber), ImmutableCard(actType, an),reward);
         }
-    }
+    }*/
 
     // update all number-number
     for(CardType st: EnumToVector::getCardTypeVector()){
