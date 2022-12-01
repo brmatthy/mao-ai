@@ -8,7 +8,7 @@
 #include "../../player/bot/neverfinish/NeverFinishBot.h"
 
 QActTrainer::QActTrainer(double alpha) {
-    _qActAi = new QActAI(2,1);
+    _qActAi = new QActAI(2,0.1);
     MoveBot* mover = new MoveBot(nullptr);
     _player = new Player(mover, new PlayBot(), _qActAi);
     mover->setPlayer(_player);
@@ -21,12 +21,12 @@ QActTrainer::~QActTrainer() {
     delete _qActAi;
 }
 
-void QActTrainer::train(unsigned int n) {
+void QActTrainer::execute(int iterations) {
     NeverFinishBot bot1 = NeverFinishBot();
     NeverFinishBot bot2 = NeverFinishBot();
     NeverFinishBot bot3 = NeverFinishBot();
 
-    for(unsigned int i = 1; i < n; i++){
+    for(unsigned int i = 1; i < iterations; i++){
         // create a game and add the bots
         Game game = Game();
         game.addPlayer(&bot1);

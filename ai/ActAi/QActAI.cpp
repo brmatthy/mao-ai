@@ -7,9 +7,6 @@
 QActAI::QActAI(int n, double alpha): _qmodel(Qmodel<NCards, Act>(getAllNCards(n), EnumToVector::getActVector(), alpha)), _n(n) {}
 
 
-void QActAI::incrementFaults() {
-    _faults++;
-}
 
 
 const std::unordered_set<Act> QActAI::act(const std::deque<Action> &played, const ImmutableCard *played_card) {

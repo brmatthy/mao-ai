@@ -8,8 +8,9 @@
 
 #include "../../player/Player.h"
 #include "QActAI.h"
+#include "../util/Algorithm.h"
 
-class QActTrainer {
+class QActTrainer: Algorithm {
 private:
     Player* _player;
     QActAI* _qActAi;
@@ -18,7 +19,7 @@ public:
     QActTrainer(double alpha);
     ~QActTrainer();
 
-    void train(unsigned int n);
+    void execute(int iterations) override;
 };
 
 
