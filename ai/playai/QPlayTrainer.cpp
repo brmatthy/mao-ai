@@ -36,7 +36,7 @@ void QPlayTrainer::execute(int iterations) {
 
         // play the game
         game.playGame();
-        _faultHist.push_back(_playAi->relativeFaults());
+        _faultHist.push_back(_playAi->faults());
 
         // ask the AI how many mistakes were made
         // std::cout << "Game " << i << " | F: " << _playAi->faults() << " | T: " << _playAi->turns() << " | R: " << _playAi->relativeFaults() << std::endl;
@@ -46,6 +46,5 @@ void QPlayTrainer::execute(int iterations) {
     }
 
     faultVectorToJsonFile(_faultHist);
-
-
+    _faultHist.clear();
 }

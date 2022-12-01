@@ -10,6 +10,7 @@ QActAI::QActAI(int n, double alpha): _qmodel(Qmodel<NCards, Act>(getAllNCards(n)
 
 
 const std::unordered_set<Act> QActAI::act(const std::deque<Action> &played, const ImmutableCard *played_card) {
+    incrementTurns();
     // tell the qmodel that te remaining acts were good
     for(Act act : _lastActs){
         _qmodel.valueUpdate(_lastState, act, 1.0);
@@ -28,15 +29,7 @@ void QActAI::acceptCorrection(CorrectionStatus status) {
     // only incrementFaults acts will remain
     _lastActs.erase(act);
     _qmodel.valueUpdate(_lastState, act, -1.0);
-    _faults++;
-}
-
-unsigned int QActAI::getFaults() {
-    return _faults;
-}
-
-void QActAI::clearFaults() {
-    _faults = 0;
+    incrementFaults();
 }
 
 

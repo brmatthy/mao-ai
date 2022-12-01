@@ -19,7 +19,6 @@ private:
     std::unordered_set<Act> _lastActs = {};
     NCards _lastState = NCards({});
     int _n;
-    unsigned int _faults = 0;
 
 public:
     QActAI(int n, double alpha);
@@ -28,9 +27,6 @@ public:
 
     void acceptCorrection(CorrectionStatus status) override;
 
-    unsigned int getFaults();
-
-    void clearFaults();
 };
 
 

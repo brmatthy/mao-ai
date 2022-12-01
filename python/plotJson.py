@@ -4,7 +4,7 @@ import numpy as np
 
 path = '../cmake-build-debug/faults.json'
 
-title = 'Q-Cheaty_AI'
+title = 'Q-Act_test_AI'
 
 f = open(path)
 
@@ -17,7 +17,7 @@ y = np.around(y, decimals=2)
 
 plt.plot(y)
 plt.title(title)
-plt.ylabel(f'% Faults per game (mean: {percent})')
+plt.ylabel(f'Faults per game (mean: {percent})')
 # plt.yscale('symlog', base=2)
 plt.xlabel('# Games played')
 

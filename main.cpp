@@ -12,6 +12,7 @@
 
 int main(){
     auto trainer = QActTrainer(0.1);
-    trainer.execute(1000);
+    trainer.execute(500);
+    trainer.execute(500);
 }
 

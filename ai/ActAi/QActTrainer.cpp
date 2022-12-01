@@ -6,9 +6,10 @@
 #include "../../player/bot/MoveBot.h"
 #include "../../player/bot/PlayBot.h"
 #include "../../player/bot/neverfinish/NeverFinishBot.h"
+#include "../../data/FaultsToJson.h"
 
 QActTrainer::QActTrainer(double alpha) {
-    _qActAi = new QActAI(2,0.1);
+    _qActAi = new QActAI(2,alpha);
     MoveBot* mover = new MoveBot(nullptr);
     _player = new Player(mover, new PlayBot(), _qActAi);
     mover->setPlayer(_player);
@@ -36,11 +37,13 @@ void QActTrainer::execute(int iterations) {
 
         // play the game
         game.playGame();
+        _faultHist.push_back(_qActAi->relativeFaults());
 
         // ask the AI how many mistakes were made
-        std::cout << "Game " << i << " | F: " << _qActAi->getFaults() << " | S: " << game.getGameStepCount() << std::endl;
-
+        // std::cout << "Game " << i << " | F: " << _qActAi->faults() << " | T: " << _qActAi->turns() << " | R: " << _qActAi->relativeFaults() << std::endl;
         // reset faults for next game
-        _qActAi->clearFaults();
+        _qActAi->clean();
     }
+    faultVectorToJsonFile(_faultHist);
+    _faultHist.clear();
 }

@@ -19,7 +19,6 @@ class QPlayTrainer : public Algorithm{
 private:
     Player* _player;
     PlayAi* _playAi;
-    std::vector<double> _faultHist;
 
 public:
     QPlayTrainer(double alpha);
