@@ -11,7 +11,7 @@
 #include "ai/GameLayCardSimulator.h"
 
 int main(){
-    auto trainer = QPlayTrainer(0.1);
-    trainer.execute(1000);
+    auto trainer = QActTrainer(0.1);
+    trainer.train(1000);
 }
 
