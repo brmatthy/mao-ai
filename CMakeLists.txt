@@ -95,4 +95,9 @@ add_executable(mao_ai
         ai/ActAi/NeuralNetworkActAi.cpp
         ai/ActAi/GameActSimulator.h
         ai/ActAi/GameActSimulator.cpp
-        ai/PlayAi/SmartQPlayAi.cpp)
+        ai/PlayAi/StateActPredictQPlayAI.cpp
+        ai/PlayAi/StateActPredictQPlayAI.h
+        ai/PlayAi/CombinedQPlayAI.cpp
+        ai/PlayAi/CombinedQPlayAI.h
+        ai/PlayAi/ActPredictQPlayAI.cpp
+        ai/PlayAi/ActPredictQPlayAI.h)

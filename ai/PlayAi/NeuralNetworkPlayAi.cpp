@@ -57,6 +57,8 @@ int NeuralNetworkPlayAi::play(const std::deque<Action> &played, std::vector<cons
             }
         }
     }
+    // should not occure
+    return 0;
 }
 
 bool NeuralNetworkPlayAi::wantsCard(const std::deque<Action> &played, std::vector<const ImmutableCard *> &playerCards)

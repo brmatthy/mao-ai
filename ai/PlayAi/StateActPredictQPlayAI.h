@@ -2,8 +2,8 @@
 // Created by brent on 4/11/22.
 //
 
-#ifndef MAO_AI_SMARTQPLAYAI_H
-#define MAO_AI_SMARTQPLAYAI_H
+#ifndef MAO_AI_STATEACTPREDICTQPLAYAI_H
+#define MAO_AI_STATEACTPREDICTQPLAYAI_H
 
 
 #include "../../game/card/ImmutableCard.h"
@@ -12,17 +12,19 @@
 #include "../../game/validation/ActValidation.h"
 #include "../../util/EnumToVector.h"
 
-class SmartQPlayAi: public PlayAi{
-private:
+class StateActPredictQPlayAI: public PlayAi{
+protected:
     Qmodel<ImmutableCard, ImmutableCard> _qmodel;
     ImmutableCard _lastState = ImmutableCard(CardType::NONE, CardNumber::NONE);
     ImmutableCard _lastAct = ImmutableCard(CardType::NONE, CardNumber::NONE);
 
     void reward();
     void punish();
-    void generalUpdate(double reward);
+
+
+    virtual void generalUpdate(double reward);
 public:
-    SmartQPlayAi(double alpha);
+    StateActPredictQPlayAI(double alpha);
 
     void acceptCorrection(CorrectionStatus status) override;
 
@@ -33,4 +35,4 @@ public:
 };
 
 
-#endif //MAO_AI_SMARTQPLAYAI_H
+#endif //MAO_AI_STATEACTPREDICTQPLAYAI_H

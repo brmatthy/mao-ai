@@ -5,7 +5,7 @@
 #include <fstream>
 #include "FaultsToJson.h"
 
-void faultVectorToJsonFile(const std::vector<int> &faults) {
+void faultVectorToJsonFile(const std::vector<double> &faults) {
     std::ofstream outFile("faults.json");
     outFile << "[";
     for (int i = 0; i < faults.size() - 1; i++) {

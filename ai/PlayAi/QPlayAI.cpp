@@ -15,6 +15,7 @@ void QPlayAI::acceptCorrection(CorrectionStatus status) {
 }
 
 int QPlayAI::play(const std::deque<Action> &played, std::vector<const ImmutableCard *> &playerCards) {
+    incrementTurns();
     // reward if last action was correct
     if(ImmutableCard(CardType::NONE, CardNumber::NONE) != _lastState){
         _qmodel.valueUpdate(_lastState, _lastAct, 1);

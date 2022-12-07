@@ -6,9 +6,11 @@
 #include "../../player/bot/MoveBot.h"
 #include "../../player/bot/PlayBot.h"
 #include "../../player/bot/neverfinish/NeverFinishBot.h"
+#include "../../data/FaultsToJson.h"
+#include "../PlayAi/CombinedQPlayAI.h"
 
 QActTrainer::QActTrainer(double alpha) {
-    _qActAi = new QActAI(2,1);
+    _qActAi = new QActAI(2,alpha);
     MoveBot* mover = new MoveBot(nullptr);
     _player = new Player(mover, new PlayBot(), _qActAi);
     mover->setPlayer(_player);
@@ -21,12 +23,12 @@ QActTrainer::~QActTrainer() {
     delete _qActAi;
 }
 
-void QActTrainer::train(unsigned int n) {
+void QActTrainer::execute(int iterations) {
     NeverFinishBot bot1 = NeverFinishBot();
     NeverFinishBot bot2 = NeverFinishBot();
     NeverFinishBot bot3 = NeverFinishBot();
 
-    for(unsigned int i = 1; i < n; i++){
+    for(unsigned int i = 1; i < iterations; i++){
         // create a game and add the bots
         Game game = Game();
         game.addPlayer(&bot1);
@@ -36,11 +38,13 @@ void QActTrainer::train(unsigned int n) {
 
         // play the game
         game.playGame();
+        _faultHist.push_back(_qActAi->relativeFaults());
 
         // ask the AI how many mistakes were made
-        std::cout << "Game " << i << " | F: " << _qActAi->getFaults() << " | S: " << game.getGameStepCount() << std::endl;
-
+        // std::cout << "Game " << i << " | F: " << _qActAi->faults() << " | T: " << _qActAi->turns() << " | R: " << _qActAi->relativeFaults() << std::endl;
         // reset faults for next game
-        _qActAi->clearFaults();
+        _qActAi->clean();
     }
+    faultVectorToJsonFile(_faultHist);
+    _faultHist.clear();
 }

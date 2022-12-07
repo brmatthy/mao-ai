@@ -30,6 +30,7 @@ std::vector<NCards> getAllNCardsNotNull(int n){
             cardset.emplace_back(type, number);
         }
     }
+    cardset.emplace_back(CardType::NONE, CardNumber::NONE);
     std::vector<ImmutableCard> prefix;
     addKLengthRec(states, cardset, prefix, n);
     return states;
