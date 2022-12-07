@@ -1,8 +1,8 @@
 // Created by mats on 16/10/22.
 
 #include "StaticLayCardSimulator.h"
-#include "../game/validation/PlayValidation.h"
-#include "../util/EnumToVector.h"
+#include "../../game/validation/PlayValidation.h"
+#include "../../util/EnumToVector.h"
 
 StaticLayCardSimulator::StaticLayCardSimulator(NeuralNetwork* network): NeuralNetworkSimulator(network) {}
 
