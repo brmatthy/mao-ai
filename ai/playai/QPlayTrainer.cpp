@@ -5,10 +5,11 @@
 #include "QPlayTrainer.h"
 #include "QPlayAI.h"
 #include "ActPredictQPlayAI.h"
+#include "CombinedQPlayAI.h"
 
 
 QPlayTrainer::QPlayTrainer(double alpha){
-    _playAi = new StateActPredictQPlayAI(alpha);
+    _playAi = new CombinedQPlayAI(alpha);
     MoveBot* mover = new MoveBot(nullptr);
     _player = new Player(mover, _playAi, new ActBot());
     mover->setPlayer(_player);

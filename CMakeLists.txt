@@ -87,4 +87,4 @@ add_executable(mao_ai
         data/FaultsToJson.h
         ai/playai/PlayAi.h
         ai/playai/StateActPredictQPlayAI.cpp
-        ai/playai/StateActPredictQPlayAI.h ai/playai/ActPredictQPlayAI.cpp ai/playai/ActPredictQPlayAI.h)
+        ai/playai/StateActPredictQPlayAI.h ai/playai/ActPredictQPlayAI.cpp ai/playai/ActPredictQPlayAI.h ai/playai/CombinedQPlayAI.cpp ai/playai/CombinedQPlayAI.h)

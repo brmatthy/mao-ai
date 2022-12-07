@@ -9,6 +9,9 @@ template<class T>
 constexpr T clamp( const T& v, const T& lo, const T& hi );
 
 template<class T>
+bool inInterval( const T& v, const T& lo, const T& hi );
+
+template<class T>
 constexpr T clamp( const T& v, const T& lo, const T& hi )
 {
     if(v < lo){ // too low
@@ -18,6 +21,12 @@ constexpr T clamp( const T& v, const T& lo, const T& hi )
         return v;
     } // too high
     return hi;
+}
+
+template<class T>
+bool inInterval( const T& v, const T& lo, const T& hi )
+{
+    return lo <= v &&  v <= hi;
 }
 
 #endif //MAO_AI_UTIL_H

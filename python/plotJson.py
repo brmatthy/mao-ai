@@ -4,15 +4,15 @@ import numpy as np
 
 path = '../cmake-build-debug/faults.json'
 
-title = 'Q-Act_test_AI'
+title = 'Combined_play_test_AI'
 
 f = open(path)
 
 y = json.load(f)
 
-percent = np.around(np.mean(y)*100, decimals=2)
+percent = np.around(np.mean(y), decimals=2)
 
-y = np.array(y) * 100
+y = np.array(y)
 y = np.around(y, decimals=2)
 
 plt.plot(y)
