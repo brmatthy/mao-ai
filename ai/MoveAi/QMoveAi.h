@@ -6,16 +6,14 @@
 #include "../../player/interfaces/MoveInterface.h"
 #include "../util/Ai.h"
 
-using playIndex = int;
-
 class QMoveAi: public MoveInterface, public Ai
 {
 private:
-    Qmodel<playIndex, playIndex> _qmodel;
+    Qmodel<int, int> _qmodel;
 public:
     QMoveAi(double alpha);
 
     void acceptCorrection(CorrectionStatus status) override;
 
-    bool atTurn() override;
+    bool atTurn(int lastPlayer, int secondlastPlayer, ImmutableCard const* lastCard, int myIndex) override;
 };

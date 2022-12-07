@@ -46,8 +46,20 @@ const std::unordered_set<Act> Player::act(const std::deque<Action> &played, cons
     return _actor->act(played, played_card);
 }
 
-bool Player::myTurn() {
-    return _mover->atTurn();
+bool Player::myTurn(Action const* lastAction, Action const* secondLastAction) {
+    int lastPlayer = 0;
+    int secondlastPlayer = 0;
+    int myIndex = _game->getPlayerIndex(this);
+    ImmutableCard const* lastCard = lastAction->getCard();
+    if (lastAction->getPlayer() != nullptr)
+    {
+        lastPlayer = _game->getPlayerIndex(lastAction->getPlayer());
+    }
+    if ((secondLastAction != nullptr) && (secondLastAction->getPlayer() != nullptr))
+    {
+        secondlastPlayer = _game->getPlayerIndex(secondLastAction->getPlayer());
+    }
+    return _mover->atTurn(lastPlayer, secondlastPlayer, lastCard, myIndex);
 }
 
 bool Player::wantsCard() {

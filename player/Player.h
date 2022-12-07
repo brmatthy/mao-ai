@@ -67,7 +67,7 @@ public:
      * Ask the player if he thinks it's his turn
      * @return `True` if the player thinks it's his turn, `false` otherwise
      */
-    bool myTurn();
+    bool myTurn(Action const* lastAction, Action const* secondLastAction);
 
     /**
      * Ask the player if he wants to draw a card

@@ -82,6 +82,8 @@ public:
     void addPlayer(Player* player);
 
     unsigned int getGameStepCount() const;
+
+    int getPlayerIndex(Player const* player) const;
 };
 
 
