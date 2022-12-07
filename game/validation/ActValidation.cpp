@@ -58,6 +58,10 @@ int getTopCardReversedIndex(const std::deque<Action>& played){
 
 int getCardIndex(const ImmutableCard* card)
 {
+    if(card == nullptr)
+    {
+        return -1;
+    }
     const int cardsOfType = 13;
     int index = 0;
 
@@ -72,6 +76,13 @@ int getCardIndex(const ImmutableCard* card)
     index += it2 - numbers.begin();
 
     return index;
+}
+
+int getActIndex(const Act* act)
+{
+    auto acts = EnumToVector::getActVector();
+    auto it = std::find(acts.begin(), acts.end(), *act);
+    return (int)(it - acts.begin());
 }
 
 void gnarr(std::unordered_set<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard){

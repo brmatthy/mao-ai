@@ -11,16 +11,15 @@
 #include "../q_learning/states/NCards.h"
 #include "../q_learning/states/AllStatesFactory.h"
 #include "../../util/EnumToVector.h"
+#include "../util/Ai.h"
 
-class QActAI : public ActInterface {
+class QActAI : public ActInterface, public Ai {
 private:
     Qmodel<NCards, Act> _qmodel;
     std::unordered_set<Act> _lastActs = {};
     NCards _lastState = NCards({});
     int _n;
-    unsigned int _faults = 0;
 
-    void incrementFaults();
 public:
     QActAI(int n, double alpha);
 
@@ -28,9 +27,6 @@ public:
 
     void acceptCorrection(CorrectionStatus status) override;
 
-    unsigned int getFaults();
-
-    void clearFaults();
 };
 
 

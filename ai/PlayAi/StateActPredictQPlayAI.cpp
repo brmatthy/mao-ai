@@ -2,22 +2,22 @@
 // Created by brent on 4/11/22.
 //
 
-#include "SmartQPlayAi.h"
+#include "StateActPredictQPlayAI.h"
 
 
-SmartQPlayAi::SmartQPlayAi(double alpha): _qmodel(Qmodel<ImmutableCard,ImmutableCard>(
+StateActPredictQPlayAI::StateActPredictQPlayAI(double alpha): _qmodel(Qmodel<ImmutableCard,ImmutableCard>(
         ImmutableCard::getAllCards(), ImmutableCard::getAllCards(), alpha)) {
 }
 
-void SmartQPlayAi::reward() {
+void StateActPredictQPlayAI::reward() {
     generalUpdate(1);
 }
 
-void SmartQPlayAi::punish() {
+void StateActPredictQPlayAI::punish() {
     generalUpdate(-10);
 }
 
-void SmartQPlayAi::generalUpdate(double reward) {
+void StateActPredictQPlayAI::generalUpdate(double reward) {
     CardType stateType = _lastState.getCardType();
     CardType actType = _lastAct.getCardType();
     CardNumber stateNumber = _lastState.getCardNumber();
@@ -29,7 +29,7 @@ void SmartQPlayAi::generalUpdate(double reward) {
             _qmodel.valueUpdate(ImmutableCard(stateType, sn), ImmutableCard(actType, an),reward);
         }
     }
-
+/*
     // update all type-number
     for(CardNumber sn: EnumToVector::getCardNumberVector()){
         for(CardType at: EnumToVector::getCardTypeVector()){
@@ -42,7 +42,7 @@ void SmartQPlayAi::generalUpdate(double reward) {
         for(CardNumber an: EnumToVector::getCardNumberVector()){
             _qmodel.valueUpdate(ImmutableCard(st, stateNumber), ImmutableCard(actType, an),reward);
         }
-    }
+    }*/
 
     // update all number-number
     for(CardType st: EnumToVector::getCardTypeVector()){
@@ -53,13 +53,14 @@ void SmartQPlayAi::generalUpdate(double reward) {
 
 }
 
-void SmartQPlayAi::acceptCorrection(CorrectionStatus status) {
+void StateActPredictQPlayAI::acceptCorrection(CorrectionStatus status) {
     incrementFaults();
     punish();
     _lastState = ImmutableCard(CardType::NONE, CardNumber::NONE);
 }
 
-int SmartQPlayAi::play(const std::deque<Action> &played, std::vector<const ImmutableCard *> &playerCards) {
+int StateActPredictQPlayAI::play(const std::deque<Action> &played, std::vector<const ImmutableCard *> &playerCards) {
+    incrementTurns();
     // reward if last action was correct
     if(ImmutableCard(CardType::NONE, CardNumber::NONE) != _lastState){
         reward();
@@ -75,7 +76,7 @@ int SmartQPlayAi::play(const std::deque<Action> &played, std::vector<const Immut
     return 0;
 }
 
-bool SmartQPlayAi::wantsCard(const std::deque<Action> &played, std::vector<const ImmutableCard *> &playerCards) {
+bool StateActPredictQPlayAI::wantsCard(const std::deque<Action> &played, std::vector<const ImmutableCard *> &playerCards) {
     const ImmutableCard* c_state = played.at(played.size() - getTopCardReversedIndex(played)).getCard();
     for(const ImmutableCard* c_act: playerCards){
         if(_qmodel.doAction(*c_state, *c_act)){ // check if you could play the card

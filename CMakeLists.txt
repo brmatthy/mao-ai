@@ -32,12 +32,12 @@ add_executable(mao_ai
         ai/util/GeneticAi.h
 
         ai/util/NeuralNetworkSimulator.h
-        ai/StaticLayCardSimulator.cpp
-        ai/StaticLayCardSimulator.h
+        ai/PlayAi/StaticLayCardSimulator.cpp
+        ai/PlayAi/StaticLayCardSimulator.h
         
         ai/util/Algorithm.h
-        ai/GameLayCardSimulator.cpp
-        ai/GameLayCardSimulator.h
+        ai/PlayAi/GameLayCardSimulator.cpp
+        ai/PlayAi/GameLayCardSimulator.h
         ai/util/Ai.cpp
         ai/util/Ai.h
         ai/util/NeuralNetworkAi.cpp
@@ -46,7 +46,6 @@ add_executable(mao_ai
         player/bot/Bot.h
         bench/SimpleBench.cpp
         bench/SimpleBench.h
-        
         player/bot/ActBot.cpp
         player/bot/ActBot.h
         player/bot/PlayBot.cpp
@@ -57,34 +56,48 @@ add_executable(mao_ai
         player/interfaces/PlayInterface.h
         player/interfaces/ActInterface.h
         player/interfaces/CorrectionAccepter.h
-        
         ai/ActAi/QActAI.cpp
         ai/ActAi/QActAI.h
         util/EnumToVector.cpp
         util/EnumToVector.h
         ai/q_learning/Qmodel.h
-        util/util.cpp util/util.h
+        util/util.cpp
+        util/util.h
         game/action/Act.cpp
+
         ai/q_learning/states/NCards.cpp
         ai/q_learning/states/NCards.h
         ai/q_learning/states/GlobalNstate.cpp
         ai/q_learning/states/GlobalNstate.h
         ai/q_learning/states/AllStatesFactory.cpp
         ai/q_learning/states/AllStatesFactory.h
+
         player/bot/neverfinish/NeverFinishMoveBot.cpp
         player/bot/neverfinish/NeverFinishMoveBot.h
         player/bot/neverfinish/NeverFinishBot.cpp
         player/bot/neverfinish/NeverFinishBot.h
-        ai/util/Simulator.h ai/PlayAi/NeuralNetworkPlayAi.cpp
+
+        ai/util/Simulator.h
+        ai/PlayAi/NeuralNetworkPlayAi.cpp
         ai/PlayAi/NeuralNetworkPlayAi.h
         ai/ActAi/QActTrainer.cpp
         ai/ActAi/QActTrainer.h
-        ai/playai/QPlayAI.cpp
-        ai/playai/QPlayAI.h
-        ai/playai/QPlayTrainer.cpp
-        ai/playai/QPlayTrainer.h
+        ai/PlayAi/QPlayAI.cpp
+        ai/PlayAi/QPlayAI.h
+        ai/PlayAi/QPlayTrainer.cpp
+        ai/PlayAi/QPlayTrainer.h
         data/FaultsToJson.cpp
         data/FaultsToJson.h
-        ai/playai/PlayAi.h
-        ai/playai/SmartQPlayAi.cpp
-        ai/playai/SmartQPlayAi.h)
+        ai/MoveAi/QMoveTrainer.h
+        ai/MoveAi/QMoveAi.cpp
+        ai/MoveAi/QMoveTrainer.cpp
+        ai/ActAi/NeuralNetworkActAi.h
+        ai/ActAi/NeuralNetworkActAi.cpp
+        ai/ActAi/GameActSimulator.h
+        ai/ActAi/GameActSimulator.cpp
+        ai/PlayAi/StateActPredictQPlayAI.cpp
+        ai/PlayAi/StateActPredictQPlayAI.h
+        ai/PlayAi/CombinedQPlayAI.cpp
+        ai/PlayAi/CombinedQPlayAI.h
+        ai/PlayAi/ActPredictQPlayAI.cpp
+        ai/PlayAi/ActPredictQPlayAI.h)

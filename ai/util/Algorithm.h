@@ -2,7 +2,11 @@
 
 #pragma once
 
+#include "vector"
+
 class Algorithm {
+protected:
+    std::vector<double> _faultHist;
 public:
     virtual ~Algorithm() = default;
     /**
@@ -11,3 +15,5 @@ public:
      */
     virtual void execute(int iterations) = 0;
 };
+
+

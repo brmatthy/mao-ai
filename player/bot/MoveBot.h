@@ -20,8 +20,6 @@ public:
     void acceptCorrection(CorrectionStatus status) override;
 
     void setPlayer(Player *player);
-
-
 };
 
 

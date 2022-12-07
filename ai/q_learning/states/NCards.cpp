@@ -29,8 +29,11 @@ NCards::NCards(const std::deque<Action> &played, const ImmutableCard *played_car
 }
 
 void NCards::addCard(const ImmutableCard* card) {
-    _types.push_back(card->getCardType());
-    _numbers.push_back(card->getCardNumber());
+    if(card == nullptr){
+        addCard(CardType::NONE, CardNumber::NONE);
+    }else{
+        addCard(card->getCardType(), card->getCardNumber());
+    }
 }
 
 void NCards::addCard(CardType type, CardNumber number) {

@@ -4,10 +4,12 @@
 
 #include "QPlayTrainer.h"
 #include "QPlayAI.h"
+#include "ActPredictQPlayAI.h"
+#include "CombinedQPlayAI.h"
 
 
 QPlayTrainer::QPlayTrainer(double alpha){
-    _playAi = new QPlayAI(alpha);
+    _playAi = new CombinedQPlayAI(alpha);
     MoveBot* mover = new MoveBot(nullptr);
     _player = new Player(mover, _playAi, new ActBot());
     mover->setPlayer(_player);
@@ -38,13 +40,12 @@ void QPlayTrainer::execute(int iterations) {
         _faultHist.push_back(_playAi->faults());
 
         // ask the AI how many mistakes were made
-        // std::cout << "Game " << i << " | F: " << _playAi->faults() << " | S: " << game.getGameStepCount() << std::endl;
+        // std::cout << "Game " << i << " | F: " << _playAi->faults() << " | T: " << _playAi->turns() << " | R: " << _playAi->relativeFaults() << std::endl;
 
         // reset faults for next game
         _playAi->clean();
     }
 
     faultVectorToJsonFile(_faultHist);
-
-
+    _faultHist.clear();
 }
