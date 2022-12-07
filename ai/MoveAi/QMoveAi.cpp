@@ -2,16 +2,60 @@
 
 #include "QMoveAi.h"
 
-QMoveAi::QMoveAi(double alpha):
-        _qmodel(Qmodel<int , int>({0,1,2}, {0,1,2}, alpha))
-{}
+#define PUNISHMENT -5
+#define REWARD 1
+
+QMoveAi::QMoveAi(double alpha, size_t numberOfPlayers)
+{
+    auto allStates = std::vector<std::tuple<int, int, ImmutableCard>>();
+    auto allActions = std::vector<int>();
+    auto allCards = ImmutableCard::getAllCards();
+    for (int player = 0; player < numberOfPlayers; ++player)
+    {
+        allActions.push_back(player);
+        for (int secondPlayer = 0; secondPlayer < numberOfPlayers; ++secondPlayer)
+        {
+            for (ImmutableCard card : allCards)
+            {
+                auto newtuple = std::tuple<int, int, ImmutableCard>{player, secondPlayer, card};
+                allStates.push_back(newtuple);
+            }
+        }
+    }
+    _numberOfPlayers = numberOfPlayers;
+    _qmodel = new Qmodel<std::tuple<int, int, ImmutableCard> , int>(allStates, allActions, alpha);
+}
+
+QMoveAi::~QMoveAi()
+{
+    delete _qmodel;
+}
 
 void QMoveAi::acceptCorrection(CorrectionStatus status)
 {
-    return;
+    incrementFaults();
+    _qmodel->valueUpdate(_lastState, _lastAct, PUNISHMENT);
+    _lastState = EMPTYSTATE;
 }
 
 bool QMoveAi::atTurn(int lastPlayer, int secondlastPlayer, ImmutableCard const* lastCard, int myIndex)
 {
-    return false;
+    if(_qmodel == nullptr)
+    {
+        return false;
+    }
+    incrementTurns();
+    // reward if last action was correct
+    if(EMPTYSTATE != _lastState){
+        _qmodel->valueUpdate(_lastState, _lastAct, REWARD);
+    }
+    _lastState = std::tuple<int, int, ImmutableCard>{lastPlayer, secondlastPlayer, *lastCard};
+    for(int i = 0; i < _numberOfPlayers; ++i){
+        _lastAct = i;
+        if(_qmodel->doAction(_lastState, _lastAct)){ // check if you could play the card
+            return i == myIndex;
+        }
+    }
+    // should never occur
+    return 0;
 }
