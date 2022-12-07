@@ -3,13 +3,13 @@
 //
 
 #include "QPlayTrainer.h"
-#include "../../data/FaultsToJson.h"
+#include "QPlayAI.h"
 
 
 QPlayTrainer::QPlayTrainer(double alpha){
-    _qPlayAI = new QPlayAI(alpha);
+    _playAi = new QPlayAI(alpha);
     MoveBot* mover = new MoveBot(nullptr);
-    _player = new Player(mover, _qPlayAI, new ActBot());
+    _player = new Player(mover, _playAi, new ActBot());
     mover->setPlayer(_player);
 }
 
@@ -17,13 +17,13 @@ QPlayTrainer::~QPlayTrainer(){
     delete _player->getMover();
     delete _player->getActor();
     delete _player;
-    delete _qPlayAI;
+    delete _playAi;
 }
 
 void QPlayTrainer::execute(int iterations) {
-    NeverFinishBot bot1 = NeverFinishBot();
-    NeverFinishBot bot2 = NeverFinishBot();
-    NeverFinishBot bot3 = NeverFinishBot();
+    auto bot1 = NeverFinishBot();
+    auto bot2 = NeverFinishBot();
+    auto bot3 = NeverFinishBot();
 
     for(unsigned int i = 1; i <= iterations; i++){
         // create a game and add the bots
@@ -35,13 +35,13 @@ void QPlayTrainer::execute(int iterations) {
 
         // play the game
         game.playGame();
-        _faultHist.push_back(_qPlayAI->faults());
+        _faultHist.push_back(_playAi->faults());
 
         // ask the AI how many mistakes were made
-        std::cout << "Game " << i << " | F: " << _qPlayAI->faults() << " | S: " << game.getGameStepCount() << std::endl;
+        // std::cout << "Game " << i << " | F: " << _playAi->faults() << " | S: " << game.getGameStepCount() << std::endl;
 
         // reset faults for next game
-        _qPlayAI->clean();
+        _playAi->clean();
     }
 
     faultVectorToJsonFile(_faultHist);

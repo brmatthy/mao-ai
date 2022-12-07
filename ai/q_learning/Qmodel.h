@@ -61,6 +61,14 @@ public:
     bool doAction(const S& state, const A& action) const;
 
     /**
+     * Get the value of the Q-model for a given state action pair
+     * @param state The state
+     * @param action The action
+     * @return The value for the given state action pair
+     */
+    double getValue(const S& state, const A& action) const;
+
+    /**
      * Update a value in the Q-table, while neglecting any future influence
      * @see <a href="https://en.wikipedia.org/wiki/Q-learning#Algorithm">Q-learning algorithm</a>
      * @param state The state
