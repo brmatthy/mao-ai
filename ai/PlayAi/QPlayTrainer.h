@@ -5,7 +5,6 @@
 #ifndef MAO_AI_QPLAYTRAINER_H
 #define MAO_AI_QPLAYTRAINER_H
 
-
 #include "../util/Algorithm.h"
 #include "../../player/Player.h"
 #include "PlayAi.h"
@@ -19,7 +18,6 @@ class QPlayTrainer : public Algorithm{
 private:
     Player* _player;
     PlayAi* _playAi;
-
 public:
     QPlayTrainer(double alpha);
     ~QPlayTrainer();

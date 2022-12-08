@@ -4,7 +4,7 @@ import numpy as np
 
 path = '../cmake-build-debug/faults.json'
 
-title = 'Combined_play_test_AI'
+title = 'Move_Q_AI'
 
 f = open(path)
 

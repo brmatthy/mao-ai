@@ -34,6 +34,10 @@ QMoveAi::~QMoveAi()
 void QMoveAi::acceptCorrection(CorrectionStatus status)
 {
     incrementFaults();
+    if(_qmodel == nullptr)
+    {
+        return;
+    }
     _qmodel->valueUpdate(_lastState, _lastAct, PUNISHMENT);
     _lastState = EMPTYSTATE;
 }
@@ -49,10 +53,10 @@ bool QMoveAi::atTurn(int lastPlayer, int secondlastPlayer, ImmutableCard const* 
     if(EMPTYSTATE != _lastState){
         _qmodel->valueUpdate(_lastState, _lastAct, REWARD);
     }
-    _lastState = std::tuple<int, int, ImmutableCard>{lastPlayer, secondlastPlayer, *lastCard};
+    _lastState = std::tuple<int, int, ImmutableCard>(lastPlayer, secondlastPlayer, *lastCard);
     for(int i = 0; i < _numberOfPlayers; ++i){
         _lastAct = i;
-        if(_qmodel->doAction(_lastState, _lastAct)){ // check if you could play the card
+        if(_qmodel->doAction(_lastState, _lastAct)){ // check if this players turn
             return i == myIndex;
         }
     }
