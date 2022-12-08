@@ -8,7 +8,7 @@ NeverFinishMoveBot::NeverFinishMoveBot(Player *player) : _player(player){
 
 }
 
-bool NeverFinishMoveBot::atTurn() {
+bool NeverFinishMoveBot::atTurn(int lastPlayer, int secondlastPlayer, ImmutableCard const* lastCard, int myIndex) {
     return _player->getGame()->isAtTurn(_player) && _player->cardCount() > 3;
 }
 

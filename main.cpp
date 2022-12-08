@@ -3,9 +3,10 @@
 #include <iostream>
 #include "ai/ActAi/QActTrainer.h"
 #include "ai/PlayAi/QPlayTrainer.h"
+#include "ai/MoveAi/QMoveTrainer.h"
 
 int main(){
-    auto trainer = QPlayTrainer(0.1);
-    trainer.execute(1000);
+    auto trainer = QMoveTrainer(0.1, 4);
+    trainer.execute(100);
 }
 

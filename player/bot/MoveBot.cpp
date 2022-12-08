@@ -4,7 +4,7 @@
 
 #include "MoveBot.h"
 
-bool MoveBot::atTurn() {
+bool MoveBot::atTurn(int lastPlayer, int secondlastPlayer, ImmutableCard const* lastCard, int myIndex) {
     return _player->getGame()->isAtTurn(_player);
 }
 

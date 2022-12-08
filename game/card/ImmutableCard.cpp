@@ -37,3 +37,8 @@ std::vector<ImmutableCard> ImmutableCard::getAllCards() {
     }
     return cards;
 }
+
+ImmutableCard ImmutableCard::getEmptyCard()
+{
+    return ImmutableCard(CardType::NONE, CardNumber::NONE);
+}
