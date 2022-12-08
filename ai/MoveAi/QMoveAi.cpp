@@ -10,6 +10,7 @@ QMoveAi::QMoveAi(double alpha, size_t numberOfPlayers)
     auto allStates = std::vector<std::tuple<int, int, ImmutableCard>>();
     auto allActions = std::vector<int>();
     auto allCards = ImmutableCard::getAllCards();
+    allCards.push_back(ImmutableCard::getEmptyCard());
     for (int player = 0; player < numberOfPlayers; ++player)
     {
         allActions.push_back(player);

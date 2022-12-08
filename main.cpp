@@ -7,6 +7,6 @@
 
 int main(){
     auto trainer = QMoveTrainer(0.1, 4);
-    trainer.execute(10000);
+    trainer.execute(100);
 }
 

@@ -112,11 +112,11 @@ void Game::shufflePile() {
 void Game::step() {
     for(int i = 0; i < _players.size(); i++){
         Player* p = _players.at(i);
-        Action const* lastAction = &_played.at(0);
+        Action const* lastAction = &_played.at(_played.size() - 1);
         Action const* secondlastAction = nullptr;
         if(_played.size() > 1)
         {
-            secondlastAction = &_played.at(1);
+            secondlastAction = &_played.at(_played.size() - 2);
         }
         if(_currentPlayer == i){ // player at turn
             // hand cards until player realizes it's his turn
@@ -240,3 +240,12 @@ int Game::getPlayerIndex(Player const* player) const
     return (int)(it - _players.begin());
 }
 
+int Game::getCurrentPlayerIndex() const
+{
+    return _currentPlayer;
+}
+
+int Game::getCurrentDirection() const
+{
+    return _direction;
+}

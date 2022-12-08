@@ -84,6 +84,10 @@ public:
     unsigned int getGameStepCount() const;
 
     int getPlayerIndex(Player const* player) const;
+
+    int getCurrentPlayerIndex() const;
+
+    int getCurrentDirection() const;
 };
 
 

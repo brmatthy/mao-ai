@@ -47,10 +47,15 @@ const std::unordered_set<Act> Player::act(const std::deque<Action> &played, cons
 }
 
 bool Player::myTurn(Action const* lastAction, Action const* secondLastAction) {
-    int lastPlayer = 0;
-    int secondlastPlayer = 0;
+    int lastPlayer = _game->getCurrentPlayerIndex();
+    int secondlastPlayer = _game->getCurrentPlayerIndex();
     int myIndex = _game->getPlayerIndex(this);
     ImmutableCard const* lastCard = lastAction->getCard();
+    if(lastCard == nullptr)
+    {
+        ImmutableCard empty = ImmutableCard::getEmptyCard();
+        lastCard = &empty;
+    }
     if (lastAction->getPlayer() != nullptr)
     {
         lastPlayer = _game->getPlayerIndex(lastAction->getPlayer());
