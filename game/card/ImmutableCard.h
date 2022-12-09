@@ -51,6 +51,8 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const ImmutableCard& ic);
 
     static std::vector<ImmutableCard> getAllCards();
+
+    static ImmutableCard getEmptyCard();
 };
 
 

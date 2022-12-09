@@ -1,11 +1,11 @@
 // Created by mats on 31/10/22.
 
 #include "GameLayCardSimulator.h"
-#include "../game/Game.h"
-#include "../player/bot/neverfinish/NeverFinishBot.h"
-#include "PlayAi/NeuralNetworkPlayAi.h"
-#include "../player/bot/MoveBot.h"
-#include "../player/bot/ActBot.h"
+#include "../../game/Game.h"
+#include "../../player/bot/neverfinish/NeverFinishBot.h"
+#include "NeuralNetworkPlayAi.h"
+#include "../../player/bot/MoveBot.h"
+#include "../../player/bot/ActBot.h"
 
 GameLayCardSimulator::GameLayCardSimulator(NeuralNetwork* network): NeuralNetworkSimulator(network) {}
 

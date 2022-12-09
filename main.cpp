@@ -2,17 +2,12 @@
 
 #include <iostream>
 #include "ai/ActAi/QActTrainer.h"
-#include "ai/playai/QPlayTrainer.h"
-
-#include "ai/StaticLayCardSimulator.h"
-#include "ai/util/GeneticAi.h"
-#include "ai/util/GeneticAlgorithm.h"
-#include "ai/util/NeuralNetwork.h"
-#include "ai/GameLayCardSimulator.h"
+#include "ai/PlayAi/QPlayTrainer.h"
+#include "ai/MoveAi/QMoveTrainer.h"
+#include "ai/ComboAi/QComboTrainer.h"
 
 int main(){
-    auto trainer = QPlayTrainer(0.1);
-    trainer.execute(50);
-    trainer.execute(1000);
+    auto trainer = QComboTrainer(0.1, 4);
+    trainer.execute(100);
 }
 

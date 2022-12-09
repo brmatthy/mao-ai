@@ -7,7 +7,7 @@
 #include "../../player/bot/PlayBot.h"
 #include "../../player/bot/neverfinish/NeverFinishBot.h"
 #include "../../data/FaultsToJson.h"
-#include "../playai/CombinedQPlayAI.h"
+#include "../PlayAi/CombinedQPlayAI.h"
 
 QActTrainer::QActTrainer(double alpha) {
     _qActAi = new QActAI(2,alpha);

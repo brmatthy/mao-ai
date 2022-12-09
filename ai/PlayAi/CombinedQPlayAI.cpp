@@ -2,7 +2,6 @@
 // Created by brent on 7/12/22.
 //
 
-
 #include "CombinedQPlayAI.h"
 
 void CombinedQPlayAI::generalUpdate(double reward) {

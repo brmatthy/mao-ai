@@ -21,6 +21,8 @@ int getTopCardReversedIndex(const std::deque<Action>& played);
 
 int getCardIndex(const ImmutableCard* card);
 
+int getActIndex(const Act* act);
+
 void gnarr(std::unordered_set<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard);
 
 void bong(std::unordered_set<Act>& acts, const std::deque<Action>& played, const ImmutableCard* newCard);

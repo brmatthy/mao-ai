@@ -15,13 +15,11 @@ private:
 public:
     MoveBot(Player* player);
 
-    bool atTurn() override;
+    bool atTurn(int lastPlayer, int secondlastPlayer, ImmutableCard const* lastCard, int myIndex) override;
 
     void acceptCorrection(CorrectionStatus status) override;
 
     void setPlayer(Player *player);
-
-
 };
 
 

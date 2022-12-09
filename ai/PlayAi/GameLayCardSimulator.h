@@ -2,8 +2,8 @@
 
 #pragma once
 
-#include "util/NeuralNetworkSimulator.h"
-#include "../player/interfaces/PlayInterface.h"
+#include "../util/NeuralNetworkSimulator.h"
+#include "../../player/interfaces/PlayInterface.h"
 
 class GameLayCardSimulator: public NeuralNetworkSimulator {
 public:

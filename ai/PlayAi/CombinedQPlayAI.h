@@ -5,7 +5,6 @@
 #ifndef MAO_AI_COMBINEDQPLAYAI_H
 #define MAO_AI_COMBINEDQPLAYAI_H
 
-
 #include "StateActPredictQPlayAI.h"
 
 class CombinedQPlayAI: public StateActPredictQPlayAI {
