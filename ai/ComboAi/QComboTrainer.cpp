@@ -1,31 +1,32 @@
-// Created by mats on 06/12/22.
+// Created by mats on 09/12/22.
 
-#include "QMoveTrainer.h"
-#include "../../player/bot/PlayBot.h"
-#include "../../player/bot/ActBot.h"
+#include "QComboTrainer.h"
 #include "../../player/bot/neverfinish/NeverFinishBot.h"
 #include "../../data/FaultsToJson.h"
 
-QMoveTrainer::QMoveTrainer(double alpha, size_t numberOfPlayers):
+QComboTrainer::QComboTrainer(double alpha, size_t numberOfPlayers):
     _moveai(new QMoveAi(alpha, numberOfPlayers)),
+    _playai(new QPlayAI(alpha)),
+    _actai(new QActAI(2, alpha)),
     _numberOfPlayers(numberOfPlayers)
 {
-    _player = new Player(_moveai, new PlayBot(), new ActBot());
+    _player = new Player(_moveai, _playai, _actai);
 }
 
-QMoveTrainer::~QMoveTrainer()
+QComboTrainer::~QComboTrainer()
 {
-    if(_player != nullptr)
-    {
-        delete _player->getCardPlayer();
-        delete _player->getActor();
-    }
     delete _player;
     delete _moveai;
+    delete _playai;
+    delete _actai;
 }
 
-void QMoveTrainer::execute(int iterations)
+void QComboTrainer::execute(int iterations)
 {
+    if(_moveai == nullptr || _playai == nullptr || _actai == nullptr)
+    {
+        return;
+    }
     auto bots = std::vector<NeverFinishBot*>();
     for (size_t i = 0; i < (_numberOfPlayers-1); ++i)
     {
@@ -44,12 +45,11 @@ void QMoveTrainer::execute(int iterations)
 
         // play the game
         game.playGame();
-        _faultHist.push_back(_moveai->faults());
-
-        // print state
-        //std::cout << "Game " << i << " | F: " << _playAi->faults() << " | T: " << _playAi->turns() << " | R: " << _playAi->relativeFaults() << std::endl;
+        _faultHist.push_back(_moveai->faults() + _playai->faults() + _actai->faults());
 
         _moveai->clean();
+        _playai->clean();
+        _actai->clean();
     }
 
     for (NeverFinishBot* bot : bots)

@@ -101,4 +101,4 @@ add_executable(mao_ai
         ai/PlayAi/CombinedQPlayAI.h
         ai/PlayAi/ActPredictQPlayAI.cpp
         ai/PlayAi/ActPredictQPlayAI.h
-        )
+        ai/ComboAi/QComboTrainer.h ai/ComboAi/QComboTrainer.cpp)

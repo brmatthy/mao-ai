@@ -34,13 +34,18 @@ QMoveAi::~QMoveAi()
 
 void QMoveAi::acceptCorrection(CorrectionStatus status)
 {
-    incrementFaults();
-    if(_qmodel == nullptr)
+    if (status == CorrectionStatus::DREW_CARD_OUT_OF_TURN ||
+        status == CorrectionStatus::NOT_PLAYED_AT_TURN ||
+        status == CorrectionStatus::PLAYED_OUT_OF_TURN)
     {
-        return;
+        incrementFaults();
+        if (_qmodel == nullptr)
+        {
+            return;
+        }
+        _qmodel->valueUpdate(_lastState, _lastAct, PUNISHMENT);
+        _lastState = EMPTYSTATE;
     }
-    _qmodel->valueUpdate(_lastState, _lastAct, PUNISHMENT);
-    _lastState = EMPTYSTATE;
 }
 
 bool QMoveAi::atTurn(int lastPlayer, int secondlastPlayer, ImmutableCard const* lastCard, int myIndex)

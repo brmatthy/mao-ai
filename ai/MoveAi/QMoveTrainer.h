@@ -9,7 +9,7 @@ class QMoveTrainer: public Algorithm
 {
 private:
     Player* _player = nullptr;
-    QMoveAi* _playAi = nullptr;
+    QMoveAi* _moveai = nullptr;
     size_t _numberOfPlayers = 0;
 public:
     QMoveTrainer(double alpha, size_t numberOfPlayers);
