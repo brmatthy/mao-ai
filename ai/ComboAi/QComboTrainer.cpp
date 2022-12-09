@@ -7,7 +7,7 @@
 QComboTrainer::QComboTrainer(double alpha, size_t numberOfPlayers):
     _moveai(new QMoveAi(alpha, numberOfPlayers)),
     _playai(new QPlayAI(alpha)),
-    _actai(new QActAI(2, alpha)),
+    _actai(new QActAI(4, alpha)),
     _numberOfPlayers(numberOfPlayers)
 {
     _player = new Player(_moveai, _playai, _actai);

@@ -8,6 +8,6 @@
 
 int main(){
     auto trainer = QComboTrainer(0.1, 4);
-    trainer.execute(1000);
+    trainer.execute(100);
 }
 

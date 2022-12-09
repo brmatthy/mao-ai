@@ -9,7 +9,6 @@ QPlayAI::QPlayAI(double alpha) : _qmodel(Qmodel<ImmutableCard, ImmutableCard>(Im
 
 
 void QPlayAI::acceptCorrection(CorrectionStatus status) {
-    if(status == )
     incrementFaults();
     _qmodel.valueUpdate(_lastState, _lastAct, -5);
     _lastState = ImmutableCard(CardType::NONE, CardNumber::NONE);
