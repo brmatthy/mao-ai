@@ -5,10 +5,11 @@
 #include "validation/PlayValidation.h"
 #include "validation/ActValidation.h"
 #include "../util/EnumToVector.h"
+#include "../util/Color.h"
 #include <algorithm>
 #include <random>
 
-Game::Game() {
+Game::Game(bool print) : _print(print){
     // create all the cards
     for(CardType type : EnumToVector::getCardTypeVector()){
         for(CardNumber number : EnumToVector::getCardNumberVector()){
@@ -19,6 +20,8 @@ Game::Game() {
     // shuffle them
     shufflePile();
 }
+
+Game::Game(): Game(false) {}
 
 Game::~Game() {
 
@@ -44,6 +47,9 @@ const ImmutableCard* Game::getTopCard() {
         flushActionsToPileAndShuffle();
         // if the pile is still empty, then all the cards are with the players: end the game
         if(_pile.empty()){
+            if(_print){
+                std::cout << "The game has ended due to a lack of cards" << std::endl << std::endl;
+            }
             _gameIsNotFinished = false;
         }
     }
@@ -79,6 +85,17 @@ void Game::actionActCorrection(Player *p, const ImmutableCard *card) {
         drawNewCard(p);
         p->acceptCorrection(faults);
     }
+    if(_print){
+        std::cout << action;
+        if(!faults.empty()){
+            std::cout << Color::red << " <- { ";
+            for (Act act: acts) {
+                std::cout << actToString(act) << " ";
+            }
+            std::cout << "}" << Color::def;
+        }
+        std::cout << std::endl;
+    }
     pushAction(action);
 }
 
@@ -110,6 +127,7 @@ void Game::shufflePile() {
 
 
 void Game::step() {
+
     for(int i = 0; i < _players.size(); i++){
         Player* p = _players.at(i);
         Action const* lastAction = &_played.at(_played.size() - 1);
@@ -124,6 +142,9 @@ void Game::step() {
             {
                 drawNewCard(p);
                 p->acceptCorrection({CorrectionStatus::NOT_PLAYED_AT_TURN});
+                if(_print){
+                    std::cout << p << ":" << Color::red << "Didn't play at turn" << Color::def << std::endl;
+                }
             }
             // now player wants to move
             bool hasActed = false;
@@ -143,10 +164,17 @@ void Game::step() {
                         }
                         // check if player has won the game
                         if(p->hasNoCards()){
+                            if(_print){
+                                std::cout << "The game was won by: " << p << std::endl << std::endl;
+                            }
+                            p->incrementGamesWon();
                             _gameIsNotFinished = false;
                         }
                         hasActed = true;
                     }else { // played a wrong card
+                        if(_print){
+                            std::cout << p << ":" << Color::red << " WRONG CARD " << *card << Color::def << std::endl;
+                        }
                         // give wrong card back to player
                         p->drawCard(card);
                         // punish with extra card
@@ -158,6 +186,9 @@ void Game::step() {
             }
         }else{ // player not at turn
             if(p->myTurn(lastAction, secondlastAction)){
+                if(_print){
+                    std::cout << p << ":" << Color::red << " MOVED OUT TURN" << Color::def << std::endl;
+                }
                 CorrectionStatus status;
                 if(p->wantsCard()){ // drew card out of turn
                     drawNewCard(p);
@@ -195,6 +226,9 @@ void Game::playLimitedGame(const int moves)
         // put 1 card on the _played stack
         auto action = Action(getTopCard(), {}, nullptr);
         pushAction(action);
+        if(_print){
+            std::cout << "Start card: " << *action.getCard() << std::endl;
+        }
 
         while (_gameIsNotFinished)
         {
@@ -205,10 +239,6 @@ void Game::playLimitedGame(const int moves)
                 _gameIsNotFinished = false;
             }
         }
-/*
-        for(Player* p : _players){
-            std::cout << p << ": cards left: " << p->cardCount() << std::endl;
-        }*/
 
         // get the cards back from the players
         for(Player* p : _players){
@@ -249,3 +279,8 @@ int Game::getCurrentDirection() const
 {
     return _direction;
 }
+
+void Game::setPrintState(bool print) {
+    _print = print;
+}
+

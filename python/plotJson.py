@@ -17,7 +17,7 @@ y = np.around(y, decimals=2)
 
 plt.plot(y)
 plt.title(title)
-plt.ylabel(f'Faults per game (mean: {percent})')
+plt.ylabel(f'Total Games won')
 # plt.yscale('symlog', base=2)
 plt.xlabel('# Games played')
 

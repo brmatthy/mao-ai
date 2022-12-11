@@ -31,6 +31,8 @@ class Player {
 private:
     std::vector<const ImmutableCard*> _cards;
     const Game* _game;
+    unsigned int _gamesWon = 0;
+
 protected:
     MoveInterface* _mover;
     PlayInterface* _cardPlayer;
@@ -128,6 +130,10 @@ public:
     PlayInterface *getCardPlayer() const;
 
     ActInterface *getActor() const;
+
+    void incrementGamesWon();
+
+    unsigned int getGamesWon() const;
 };
 
 #endif //MAO_AI_PLAYER_H
