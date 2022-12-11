@@ -16,8 +16,10 @@ private:
     QPlayAI* _playai = nullptr;
     QActAI* _actai = nullptr;
     size_t _numberOfPlayers = 0;
+    bool _print = false;
 public:
     QComboTrainer(double alpha, size_t numberOfPlayers);
     ~QComboTrainer();
     void execute(int iterations) override;
+    void setPrintState(bool print);
 };

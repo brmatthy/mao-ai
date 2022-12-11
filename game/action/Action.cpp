@@ -27,14 +27,15 @@ std::ostream &operator<<(std::ostream &os, const Action &action) {
     const ImmutableCard* card = action._card;
     os << action._player << ": ";
     if(card == nullptr){
-        os << "draw" << std::endl;
+        os << "draw";
     }else{
-        os << *card << ": { " << std::endl;
-        for(Act act : action._acts){
-            os << actToString(act) << " ";
-        }
-        os << "}" <<std::endl;
+        os << *card << "\t";
     }
+    os << ": { ";
+    for(Act act : action._acts){
+        os << actToString(act) << " ";
+    }
+    os << "}";
     return os;
 }
 

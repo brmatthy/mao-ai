@@ -104,10 +104,10 @@ void bong(std::unordered_set<Act>& acts, const std::deque<Action>& played, const
         }
     }
     switch (bongNumebr) {
-        case 1: acts.insert(Act::BONG);
-        case 2: acts.insert(Act::BONG_2);
-        case 3: acts.insert(Act::BONG_3);
-        case 4: acts.insert(Act::BONG_4);
+        case 1: acts.insert(Act::BONG); break;
+        case 2: acts.insert(Act::BONG_2); break;
+        case 3: acts.insert(Act::BONG_3); break;
+        case 4: acts.insert(Act::BONG_4); break;
         default: ;
     }
 }

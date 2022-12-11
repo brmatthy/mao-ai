@@ -29,6 +29,7 @@ private:
     int _direction = 1;
     bool _gameIsNotFinished = true;
     unsigned int _gameStepCount = 0;
+    bool _print = false;
 
     void drawNewCard(Player* player);
     const ImmutableCard* getTopCard();
@@ -48,6 +49,7 @@ private:
 public:
 
     Game();
+    Game(bool print);
     ~Game();
 
     /**
@@ -88,6 +90,8 @@ public:
     int getCurrentPlayerIndex() const;
 
     int getCurrentDirection() const;
+
+    void setPrintState(bool print);
 };
 
 

@@ -103,3 +103,11 @@ ActInterface *Player::getActor() const {
     return _actor;
 }
 
+void Player::incrementGamesWon() {
+    _gamesWon++;
+}
+
+unsigned int Player::getGamesWon() const {
+    return _gamesWon;
+}
+
