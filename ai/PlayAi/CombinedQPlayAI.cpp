@@ -4,6 +4,10 @@
 
 #include "CombinedQPlayAI.h"
 
+CombinedQPlayAI::CombinedQPlayAI(double alpha) :
+    StateActPredictQPlayAI(alpha),
+    _remberModel(Qmodel<ImmutableCard,ImmutableCard>(ImmutableCard::getAllCards(), ImmutableCard::getAllCards(), alpha)){}
+
 void CombinedQPlayAI::generalUpdate(double reward) {
 
     CardType actType = _lastAct.getCardType();
@@ -11,26 +15,25 @@ void CombinedQPlayAI::generalUpdate(double reward) {
 
     // update all acts with same type
     for(CardNumber an: EnumToVector::getCardNumberVector()){
-        ImmutableCard act = ImmutableCard(actType, an);
-        double value = _qmodel.getValue(_lastState, act);
-        if(inInterval(value, _dmax - 1, _dmax +1) && inInterval(value, _dmin - 1, _dmin +1)){
-            _qmodel.valueUpdate(_lastState, act, reward);
-        }
+        _qmodel.valueUpdate(_lastState, ImmutableCard(actType, an), reward);
     }
 
     // update all acts with same number
     for(CardType at: EnumToVector::getCardTypeVector()){
-        ImmutableCard act = ImmutableCard(at, actNumber);
-        double value = _qmodel.getValue(_lastState, act);
-        if(inInterval(value, _dmax - 1, _dmax +1) && inInterval(value, _dmin - 1, _dmin +1)){
-            _qmodel.valueUpdate(_lastState, act, reward);
-        }
+        _qmodel.valueUpdate(_lastState, ImmutableCard(at, actNumber), reward);
     }
 
-    // we know for shure this state act combination was correct or false, so save it
-    _qmodel.setValue(_lastState, _lastAct, reward);
+    // remember this exact pair
+    _remberModel.setValue(_lastState, _lastAct, reward > 0 ? 100.0 : -100.0);
+
 }
 
-CombinedQPlayAI::CombinedQPlayAI(double alpha) : StateActPredictQPlayAI(alpha) {
-
+bool CombinedQPlayAI::check(const ImmutableCard &state, const ImmutableCard &action) {
+    double remeber_val = _remberModel.getValue(state, action);
+    //std::cout << remeber_val << std::endl;
+    if(!inInterval(remeber_val, -10.0, 10.0)){
+        //std::cout << (remeber_val > 0 ? "True": "False") << std::endl;
+        return remeber_val >= 0;
+    }
+    return _qmodel.doAction(state, action);
 }
