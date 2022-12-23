@@ -4,20 +4,20 @@ import numpy as np
 
 path = '../cmake-build-debug/faults.json'
 
-title = 'Combo_Q_AI'
+title = 'Combined_QPlay'
 
 f = open(path)
 
 y = json.load(f)
 
-percent = np.around(np.mean(y), decimals=2)
+mean = np.around(np.mean(y), decimals=2)
 
 y = np.array(y)
 y = np.around(y, decimals=2)
 
-plt.plot(y)
+plt.scatter([i for i in range(len(y))], y , s=1)
 plt.title(title)
-plt.ylabel(f'Total Games won')
+plt.ylabel(f'Faults per game (mean: {mean})')
 # plt.yscale('symlog', base=2)
 plt.xlabel('# Games played')
 

@@ -6,7 +6,7 @@
 
 CombinedQPlayAI::CombinedQPlayAI(double alpha) :
     StateActPredictQPlayAI(alpha),
-    _remberModel(Qmodel<ImmutableCard,ImmutableCard>(ImmutableCard::getAllCards(), ImmutableCard::getAllCards(), alpha)){}
+    _remberModel(Qmodel<ImmutableCard,ImmutableCard>(ImmutableCard::getAllCards(), ImmutableCard::getAllCards(), 1)){}
 
 void CombinedQPlayAI::generalUpdate(double reward) {
 
@@ -31,9 +31,11 @@ void CombinedQPlayAI::generalUpdate(double reward) {
 bool CombinedQPlayAI::check(const ImmutableCard &state, const ImmutableCard &action) {
     double remeber_val = _remberModel.getValue(state, action);
     //std::cout << remeber_val << std::endl;
-    if(!inInterval(remeber_val, -10.0, 10.0)){
+    if(remeber_val != 0){
         //std::cout << (remeber_val > 0 ? "True": "False") << std::endl;
         return remeber_val >= 0;
     }
-    return _qmodel.doAction(state, action);
+    bool b = _qmodel.doAction(state, action);
+    //std::cout << (b ? "True: ": "False: ") << remeber_val<< std::endl;
+    return b;
 }

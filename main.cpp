@@ -8,7 +8,7 @@
 
 int main(){
     auto trainer = QPlayTrainer(0.1);
-    trainer.execute(10000);
+    trainer.execute(500);
 }
 
 
