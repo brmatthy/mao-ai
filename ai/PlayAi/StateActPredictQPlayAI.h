@@ -18,8 +18,8 @@ protected:
     ImmutableCard _lastState = ImmutableCard(CardType::NONE, CardNumber::NONE);
     ImmutableCard _lastAct = ImmutableCard(CardType::NONE, CardNumber::NONE);
 
-    void reward();
-    void punish();
+    virtual void reward();
+    virtual void punish();
 
 
     virtual void generalUpdate(double reward);

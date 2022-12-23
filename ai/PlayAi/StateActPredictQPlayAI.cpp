@@ -10,11 +10,11 @@ StateActPredictQPlayAI::StateActPredictQPlayAI(double alpha): _qmodel(Qmodel<Imm
 }
 
 void StateActPredictQPlayAI::reward() {
-    generalUpdate(5);
+    generalUpdate(1);
 }
 
 void StateActPredictQPlayAI::punish() {
-    generalUpdate(-1);
+    generalUpdate(-10);
 }
 
 void StateActPredictQPlayAI::generalUpdate(double reward) {

@@ -39,3 +39,11 @@ bool CombinedQPlayAI::check(const ImmutableCard &state, const ImmutableCard &act
     //std::cout << (b ? "True: ": "False: ") << remeber_val<< std::endl;
     return b;
 }
+
+void CombinedQPlayAI::reward() {
+    generalUpdate(5);
+}
+
+void CombinedQPlayAI::punish() {
+    generalUpdate(-1);
+}

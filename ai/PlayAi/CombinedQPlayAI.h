@@ -13,6 +13,8 @@ private:
 
 protected:
     void generalUpdate(double reward) override;
+    void reward() override;
+    void punish() override;
 public:
     CombinedQPlayAI(double alpha);
 
