@@ -18,8 +18,8 @@ protected:
     ImmutableCard _lastState = ImmutableCard(CardType::NONE, CardNumber::NONE);
     ImmutableCard _lastAct = ImmutableCard(CardType::NONE, CardNumber::NONE);
 
-    void reward();
-    void punish();
+    virtual void reward();
+    virtual void punish();
 
 
     virtual void generalUpdate(double reward);
@@ -28,9 +28,11 @@ public:
 
     void acceptCorrection(CorrectionStatus status) override;
 
-    int play(const std::deque<Action> &played, std::vector<const ImmutableCard *> &playerCards) override;
+    virtual int play(const std::deque<Action> &played, std::vector<const ImmutableCard *> &playerCards) override;
 
-    bool wantsCard(const std::deque<Action> &played, std::vector<const ImmutableCard *> &playerCards) override;
+    virtual bool wantsCard(const std::deque<Action> &played, std::vector<const ImmutableCard *> &playerCards) override;
+
+    virtual bool check(const ImmutableCard& state,const ImmutableCard& action);
 
 };
 

@@ -8,8 +8,13 @@
 
 int main(){
     auto trainer = QComboTrainer(0.1, 4);
+    trainer.setPrintState(true);
+    std::cout << "Playing an untrained game" << std::endl;
+    trainer.execute(1);
+    trainer.setPrintState(false);
 
-    std::cout << "Starting training on 10.000 games" << std::endl;
+
+    std::cout << std::endl << "Start training on 10.000 games" << std::endl;
     time_t start = time(nullptr);
 
 

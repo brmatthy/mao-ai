@@ -9,12 +9,16 @@
 
 class CombinedQPlayAI: public StateActPredictQPlayAI {
 private:
-    double _dmax = 1000;
-    double _dmin = -1000;
+    Qmodel<ImmutableCard, ImmutableCard> _remberModel;
+
 protected:
     void generalUpdate(double reward) override;
+    void reward() override;
+    void punish() override;
 public:
     CombinedQPlayAI(double alpha);
+
+    bool check(const ImmutableCard &state, const ImmutableCard &action) override;
 };
 
 
